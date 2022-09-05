@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    <h3>Müəllim kimi qeydiyyatdan kecmek ucun sorgu gonder</h3>
+    <hr>
+    <form action="" method="POST">{% csrf_token %}
+        {{form|crispy}}
+
+        <button type="submit" class="btn btn-danger">Göndər</button>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+.addcourse{
+    display: flex;
+}
+.addbranchbutton{
+    display: flex;
+    justify-content: end;
+    margin-top: 10px;
+}
+.navbar-nav a{
+    font-size: 13px;
+}

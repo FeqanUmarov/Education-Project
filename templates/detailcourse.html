@@ -1,0 +1,168 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <br><br><br><br><br>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">{{course_values.course_name}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            {% if request.user == course_values.user %}
+                <a class="nav-item nav-link active" href="{% url 'course:addbranch' course_values.id %}">Filial elave et</a>
+                <a class="nav-item nav-link" href="{% url 'course:updatecourse' course_values.id %}">Melumatlari yenile</a>
+                <a class="nav-item nav-link" href="{% url 'course:addphoto' course_values.id %}">Kurs haqqinda sekiller</a>
+                <a class="nav-item nav-link" href="{% url 'course:addexam' course_values.id %}">Imtahan elave et</a>
+                <a class="nav-item nav-link" href="{% url 'course:courseexam' course_values.id %}">Kursun imtahanlari</a>
+                <a class="nav-item nav-link" href="{% url 'course:gallery' course_values.id %}">Galareya</a>
+                <a class="nav-item nav-link" href="{% url 'course:coursenotification' course_values.id %}">Kursa gelen muracietler</a>
+                <a class="nav-item nav-link" data-toggle="modal" data-target="#deleteModal" href="">Kursu sil</a>
+
+            {% elif request.user.is_authenticated and user.is_student %}
+                <a class="nav-item nav-link active" href="">Sinaq imtahanlari</a>
+                <a class="nav-item nav-link" href="{% url 'course:gallery' course_values.id %}">Galareya</a>
+                <a class="nav-item nav-link" href="{% url 'course:courseapply' course_values.id %}">Kursa muraciet et</a>
+
+            {% endif %}
+          </div>
+        </div>
+    </nav>
+    <br><br><br><br>
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-4 mb-5 mb-lg-0 wow fadeIn">
+            <div class="card border-0 shadow">
+                {% if course_values.course_profile %}
+                    <img src="{{course_values.course_profile.url}}" alt="...">
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="ps-lg-1-6 ps-xl-5">
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="h1 mb-0 text-primary">Kurs Haqqinda</h2>
+                    </div>
+
+                    <h3>{{course_values.course_name}}</h3>
+                    <span>{{course_values.course_type}} kurslari</span>
+                    <p>{{course_values.course_slogan}}</p>
+                </div>
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="mb-0 text-primary">Filiallar</h2>
+                    </div>
+                    <div class="row mt-n4">
+                        {% for branch_value in course_branch %}
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="mydivouter card-body">
+                                    {% if request.user == course_values.user %}
+                                        <div class="overlay"></div>
+                                        <div class="button"><a href="{% url 'course:updatebranch' branch_value.id %}"> Yenile </a></div>
+                                    {% endif %}
+                                    <span class="material-icons">
+                                        room
+                                        </span>
+                                    <h3 class="h5 mb-3">{{branch_value.location}}</h3>
+                                    <p class="mb-0">{{branch_value.adress}}</p>
+                                    <span>{{branch_value.contact}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="mb-5 wow fadeIn">
+                    <div class="text-start mb-1-6 wow fadeIn">
+                        <h2 class="mb-0 text-primary">Imtahanlar</h2>
+                    </div>
+                    <div class="row mt-n4">
+                        {% for branch_value in course_branch %}
+                        <div class="col-sm-6 col-xl-4 mt-4">
+                            <div class="card text-center border-0 rounded-3">
+                                <div class="mydivouter card-body">
+                                    {% if request.user == course_values.user %}
+                                        <div class="overlay"></div>
+                                        <div class="button"><a href="{% url 'course:updatebranch' branch_value.id %}"> Yenile </a></div>
+                                    {% endif %}
+                                    <span class="material-icons">
+                                        room
+                                        </span>
+                                    <h3 class="h5 mb-3">{{branch_value.location}}</h3>
+                                    <p class="mb-0">{{branch_value.adress}}</p>
+                                    <span>{{branch_value.contact}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% if comments %}
+            {% for comment in comments %}
+            <div class="card">
+                <ul class="list-unstyled">
+                    <li class="media"> <span class="round pt-2"><img src="https://img.icons8.com/bubbles/100/000000/groups.png" class="align-self-start mr-3"></span>
+                        <div class="media-body">
+                            <div class="row d-flex">
+                                <h6 class="user pt-2">{{comment.comment_author}}</h6>
+
+                            </div>
+                            <p class="text-comment">{{comment.comment_content}}</p>
+                            <span>{{comment.comment_date}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="alert alert-info">
+                Bu kursla bagli her hansi rey yoxdur
+            </div>
+            {% endif %}
+            <form method="POST" action="{%url 'course:comment' course_values.id %}">
+                {% csrf_token %}
+                {% if courseapply.confirm == 1 %}
+                <div class="form-group">
+                    <label for="email" class="col-sm-2 control-label">Comment</label>
+                    <div class="col-sm-10">
+                        {{form.comment_content|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Rəy ver</button>
+                    </div>
+                </div>
+                {% endif %}
+            </form>
+
+            <br><br>
+
+        </div>
+            <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Kurs silinəcək. Əminsiniz?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">İmtina</button>
+                        <form action="{% url 'course:deletecourse' course_values.id %}" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                            <input class="btn btn-danger" type="submit"  value="Sil">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

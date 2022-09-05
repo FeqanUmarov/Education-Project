@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<br><br><br><br><br><br>
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Ad</th>
+                  <th scope="col">Soyad</th>
+                  <th scope="col">Basliq</th>
+                  <th scope="col">Movzu</th>
+                  <th scope="col">Telebenin emaili</th>
+                  <th scope="col">Elaqe</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Təsdiqləmə</th>
+                </tr>
+              </thead>
+
+
+              {% for notification_common in notification_commons %}
+              <tbody>
+                <tr>
+                  <th scope="row">{{notification_common.id}}</th>
+                  <td>{{notification_common.student_name}}</td>
+                  <td>{{notification_common.student_surname}}</td>
+                  <td>{{notification_common.apply_title}}</td>
+                  <td>{{notification_common.apply_content}}</td>
+
+                  {% if notification_common.pending == 1 %}
+                  <td>************</td>
+                  <td>************</td>
+                  <td>pending...</td>
+                  {% elif notification_common.confirm == 1 %}
+                  <td>{{notification_common.student_email}}</td>
+                  <td>{{notification_common.student_phone}}</td>
+                  <td>Təsdiqləndi</td>
+                  {% elif notification_common.cancel == 1 %}
+                  <td>************</td>
+                  <td>************</td>
+                  <td>Imtina edildi</td>
+                  {% endif %}
+                  <td>
+                    <a type="button" href="{% url 'course:confirm' notification_common.id %}" class="btn btn-info">Təsdiq</a>
+                    <a type="button" href="{% url 'course:cancel' notification_common.id %}" class="btn btn-info">İmtina</a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+
+
+          </table>
+    </div>
+</div>
+{% endblock %}

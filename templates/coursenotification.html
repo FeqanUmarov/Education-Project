@@ -1,0 +1,92 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<br><br><br><br><br><br>
+<div class="container">
+    <div class="row">
+        <table class="table table-striped">
+              {% if user.is_course %}
+              <thead>
+                <tr>
+                  <th scope="col">id</th>
+                  <th scope="col">Ad</th>
+                  <th scope="col">Soyad</th>
+                  <th scope="col">Basliq</th>
+                  <th scope="col">Movzu</th>
+                  <th scope="col">Telebenin emaili</th>
+                  <th scope="col">Elaqe</th>
+                  <th scope="col">Veziyyet</th>
+                  <th scope="col">Təsdiq</th>
+                  <th scope="col">İmtina</th>
+                  <th scope="col">Sil</th>
+                </tr>
+              </thead>
+
+
+              {% for student_info in student_infos %}
+              <tbody>
+                <tr>
+                  <th scope="row">{{student_info.id}}</th>
+                  <td>{{student_info.student_name}}</td>
+                  <td>{{student_info.student_surname}}</td>
+                  <td>{{student_info.apply_title}}</td>
+                  <td>{{student_info.apply_content}}</td>
+                  
+                  {% if student_info.pending == 1 %}
+                  <td>************</td>
+                  <td>************</td>
+                  <td>pending...</td>
+                  {% elif student_info.confirm == 1 %}
+                  <td>{{student_info.student_email}}</td>
+                  <td>{{student_info.student_phone}}</td>
+                  <td>Təsdiqləndi</td>
+                  {% elif student_info.cancel == 1 %}
+                  <td>************</td>
+                  <td>************</td>
+                  <td>Imtina edildi</td>
+                  {% endif %}
+                  <td>
+                    <a type="button" href="{% url 'course:confirm' student_info.id %}" class="btn btn-info">Təsdiq</a>
+                  </td>
+                  <td>
+                    <a type="button" href="{% url 'course:cancel' student_info.id %}" class="btn btn-info">İmtina</a>
+                  </td>
+                  <td>
+                    <a type="button" href="{% url 'course:delete' student_info.id %}" class="btn btn-info">Sil</a>
+                  </td>
+                </tr>
+
+                {% endfor %}
+                {% elif user.is_student %}
+                <thead>
+                  <tr>
+                    <th scope="col">Muraciet basligi</th>
+                    <th scope="col">Muraciet movzusu</th>
+                    <th scope="col">Muraciet tarixi</th>
+                    <th scope="col">Kursun adi</th>
+                    <th scope="col">Vəziyyət</th>
+                  </tr>
+                </thead>
+                {% for notification_common in notification_commons %}
+                <tr>
+                  <td>{{notification_common.apply_title}}</td>
+                  <td>{{notification_common.apply_content}}</td>
+                  <td>{{notification_common.apply_date}}</td>
+                  <td>{{notification_common.course}}</td>
+                  {% if notification_common.pending == 1 %}
+                  <td>pending...</td>
+                  {% elif notification_common.confirm == 1 %}
+                  <td>Təsdiqləndi</td>
+                  {% elif notification_common.cancel == 1 %}
+                  <td>Imtina edildi</td>
+                  {% endif %}
+                </tr>
+                {% endfor %}
+                {% endif %}
+
+            </tbody>
+          </table>
+    </div>
+</div>
+{% endblock %}

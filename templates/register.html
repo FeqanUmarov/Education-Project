@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    <h3>Tələbə hesabı yarat</h3>
+    <hr>
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        {{form|crispy}}
+
+        <button type="submit" class="btn btn-danger">Hesab Yarat</button>
+
+    </form>
+    <br><br><br>
+    <p>Kurs kimi qeydiyyatdan kecmek isteyirsiz?</p>
+    <a href="{% url 'inquiry:inquirys' %}">Kurs kimi qeydiyyatdan keç</a>
+    <a href="{% url 'inquiry:teacherquery' %}">Müəllim kimi qeydiyyatdan keç</a>
+</div>
+
+
+{% endblock %}

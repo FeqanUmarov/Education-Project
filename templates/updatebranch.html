@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <br><br><br><br><br>
+    <div class="row">
+		<input type="hidden" name="count" value="1" />
+        <div class="control-group" id="fields">
+            <label class="control-label" for="field1">Fiali yenile</label>
+            <div class="controls" id="profs">
+                <form method="POST" class="input-append">{% csrf_token %}
+                    <div id="field">{{form|crispy}}</div>
+                    <button type="submit" class="btn btn-danger">Yenile</button>
+                </form>
+            </div>
+        </div>
+	</div>
+
+</div>
+
+{% endblock %}
