@@ -5,10 +5,9 @@ from tkinter.messagebox import NO
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from course.models import CourseBoss, Branchs, CourseType,Comment,CoursePhoto, CourseApply, Exam, ExamApply
-from user.models import Course
-from user.models import User, Course, Student
-from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse
+from course.models import CourseBoss, Branchs, CourseType,Comment,CoursePhoto, CourseApply, Exam, ExamApply, LessonPlan, Trainer, TrainerApply, Event, EventApply
+from user.models import User
+from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateLessonPlan, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm
 # Create your views here.
 
 
@@ -21,12 +20,14 @@ def courses(request):
         return render(request,"courses.html",{"course_values":courses})
 
     value = CourseBoss.objects.all()
+    trainer_value = Trainer.objects.all()
 
 
 
 
     contex = {
-        "course_values":value
+        "course_values":value,
+        "trainer_values":trainer_value,
     }
 
     return render(request,"courses.html",contex)
@@ -34,7 +35,7 @@ def courses(request):
 
 @login_required(login_url='course/addcourse')
 def addcourse(request):
-    form = CourseInfo(request.POST or None,request.FILES or None,user=request.user)
+    form = CourseInfo(request.POST or None,request.FILES or None)
     if form.is_valid():
         course = form.save(commit=False)
         course.user= request.user
@@ -49,6 +50,24 @@ def addcourse(request):
     }
 
     return render(request,"addcourse.html", contex)
+
+@login_required(login_url='course/addtrainer')
+def addtrainer(request):
+    form = TrainerInfo(request.POST or None,request.FILES or None)
+    if form.is_valid():
+        trainer = form.save(commit=False)
+        trainer.user= request.user
+        form.save()
+        messages.success(request,"Treyner kimi qeydiyyatdan keçdiniz")
+
+        return redirect ("course:courses")
+
+
+    contex = {
+        "form": form,
+    }
+
+    return render(request,"addtrainer.html", contex)
 
 
 @login_required(login_url='course/addbranch')
@@ -109,9 +128,7 @@ def courseapply(request,id):
 
     if form.is_valid():
         apply = form.save(commit=False)
-        user_id = CourseBoss.objects.get(id=id).user_id
-        apply.current_student = request.user.id
-        apply.user = User.objects.filter(id=user_id).first()
+        apply.user = request.user
         apply.course = CourseBoss.objects.filter(id=id).first()
         apply.save()
 
@@ -124,31 +141,92 @@ def courseapply(request,id):
 
     return render(request,"courseapply.html", contex)
 
+def applytrainer(request,id):
+    form = AskTrainer(request.POST or None)
+    
+    if form.is_valid():
+        trainer_apply = form.save(commit=False)
+        trainer_apply.user = request.user
+        trainer_apply.trainer = Trainer.objects.filter(id=id).first()
+        trainer_apply.save()
+        
+        return redirect("course:detailtrainers",id=id)
+    
+    contex = {
+        "form": form,
+    }
+    
+    
+    return render(request, "applytrainer.html", contex)
+
+
+def trainernotification(request,id):
+    student_apply = TrainerApply.objects.filter(trainer=id)
+    
+    contex = {
+        "student_applys":student_apply, 
+    }
+    
+    
+    return render(request, "trainernotification.html", contex)
+    
+        
+def trainerapplynotification(request,id):
+    student_infos = TrainerApply.objects.filter(trainer=id)
+    
+    contex = {
+        "student_infos":student_infos
+       
+    }
+    
+    
+    return render(request, "trainerapplynotification.html", contex)
+        
+
+
+
+
 @login_required(login_url='course/coursenotification')
 def coursenotification(request,id):
 
     student_info = CourseApply.objects.filter(course_id=id)
-    notification_common = CourseApply.objects.all()
 
     contex = {
         "student_infos": student_info,
-        "notification_commons":notification_common
     }
 
 
     return render(request,"coursenotification.html",contex)
 
+
+def courseapplynotification(request,id):
+    
+    student_info = CourseApply.objects.filter(course_id=id)
+    
+    contex = {
+        "student_infos": student_info,
+        
+    }
+    
+    return render(request,"courseapplynotification.html",contex)
+    
+    
+    
+    
+    
+
 @login_required(login_url='course/commonnotification')
 def commonnotification(request):
 
 
-    notification_common = CourseApply.objects.all()
-    courses = CourseBoss.objects.all()
+    notification_courses = CourseApply.objects.all()
+    notification_trainers = TrainerApply.objects.all()
+    
 
     contex = {
 
-        "notification_commons":notification_common,
-        "courses":courses
+        "notification_courses":notification_courses,
+        "notification_trainers":notification_trainers
 
     }
 
@@ -174,27 +252,188 @@ def addphoto(request,id):
     }
 
     return render(request,"addphoto.html", contex)
+def addlessonplan(request, id):
+    form = CreateLessonPlan(request.POST or None)
+    if form.is_valid():
+        courseplan = form.save(commit=False)
+        courseplan.user = request.user
+        courseplan.course = CourseBoss.objects.filter(id=id).first()
+        courseplan.save()
+        return redirect("course:detailcourse",id=id)
+    
+    contex = {
+        "form":form,
+    }
+    
+    return render (request, "lessonplan.html", contex)
 
+
+def updatelessonplan(request, id):
+    lessonplan = get_object_or_404(LessonPlan,id=id)
+    courseid = LessonPlan.objects.get(id=id).course_id
+    form = CreateLessonPlan(request.POST or None, instance=lessonplan)
+    if form.is_valid():
+        plan = form.save(commit=False)
+        plan.user = request.user
+        plan.save()
+
+        messages.success(request,"Dərs planı uğurla yeniləndi")
+
+        return redirect ("course:detailcourse", id=courseid)
+    
+    contex = {
+        "form":form,
+
+    }
+    return render(request, "updatelessonplan.html",contex)
+
+def deletelessonplan(request,id):
+    
+    lessonplan = get_object_or_404(LessonPlan,id=id)
+    courseid=LessonPlan.objects.get(id=id).course_id
+    lessonplan.delete()
+    return redirect ("course:detailcourse", id=courseid)
+    
+    
+    
+    
 def detailcourse(request,id):
     course = CourseBoss.objects.filter(id=id).first()
     course_branch = Branchs.objects.filter(branch_id=id)
     course_apply = CourseApply.objects.filter(course_id = id)
     course_type = CourseType.objects.filter(id=id)
+    lesson_plan = LessonPlan.objects.filter(course_id=id)
     form = AddComment()
-    comments = course.comments.all()
+    
     contex = {
         "course_values":course,
         "course_branch":course_branch,
         "course_type":course_type,
-        "comments":comments,
         "courseapply":course_apply,
+        "lessonplans":lesson_plan,
         "form":form,
     }
     return render(request, "detailcourse.html",contex)
 
+
+
+def addevent(request,id):
+    form = CreateEvent(request.POST or None, request.FILES or None)
+    
+    if form.is_valid():
+        event = form.save(commit=False)
+        event.user = request.user
+        event.trainer = Trainer.objects.filter(id=id).first()
+        event.save()
+        
+        return redirect("course:detailtrainers",id=id)
+    
+    
+    contex ={
+        "form":form,
+    }
+    
+    return render (request, "addevent.html", contex)
+
+
+def eventdetails(request,id):
+    eventdetail = Event.objects.filter(trainer=id).first()
+    
+    contex = {
+        "eventdetail":eventdetail,
+        
+    }
+    
+    return render(request, "eventdetails.html", contex)
+
+
+
+
+
+
+
+
+def eventapplynotification(request,id):
+    eventapplyinfos = EventApply.objects.filter()
+    
+    contex = {
+        "eventapplyinfos":eventapplyinfos,
+        
+    }
+    
+    return render(request, "eventnotification.html", contex)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+def deleteevent(request,id):
+    event = get_object_or_404(Event,trainer=id)
+    event.delete()
+    return redirect("course:detailtrainers",id=id)
+
+
+def updateevent(request,id):
+    event = get_object_or_404(Event,trainer=id)
+    form = CreateEvent(request.POST or None, request.FILES or None , instance=event)
+    
+    if form.is_valid():
+        event = form.save(commit=False)
+        event.user = request.user
+        event.trainer = Trainer.objects.filter(id=id).first()
+        event.save()
+
+        messages.success(request,"Event ugurla yenilendi")
+
+        return redirect ("course:detailtrainers",id=id)
+
+    contex = {
+        "form":form,
+
+    }
+
+    return render(request, "updateevent.html",contex)
+
+
+def applyevent(request,id):
+    form = ApplyEventForm(request.POST or None)
+    if form.is_valid():
+        applyevent = form.save(commit=False)
+        applyevent.user = request.user
+        applyevent.trainer = Trainer.objects.get(id=id).user_id
+        applyevent.event = Event.objects.filter(trainer=id).first()
+        applyevent.save()
+        return redirect ("course:detailtrainers",id=id)
+    
+    contex = {
+        "form":form,
+
+    }
+
+    return render(request, "applyevent.html",contex)
+    
+    
+    
+
+
+
+def detailtrainers(request,id):
+    trainer = Trainer.objects.filter(id=id).first()
+    event = Event.objects.filter(trainer=id).first()
+    contex = {
+        "trainer":trainer,
+        "event":event
+        }
+    return render(request,"detailtrainers.html", contex)
+
 def updatecourse(request,id):
     course = get_object_or_404(CourseBoss,id=id)
-    form = CourseInfo(request.POST or None ,user=request.user, instance=course)
+    form = CourseInfo(request.POST or None, request.FILES or None , instance=course)
     if form.is_valid():
         course = form.save(commit=False)
         course.user = request.user
@@ -211,6 +450,26 @@ def updatecourse(request,id):
 
     return render(request, "updatecourse.html",contex)
 
+def updatetrainer(request,id):
+    trainer = get_object_or_404(Trainer,id=id)
+    form = TrainerInfo(request.POST or None, request.FILES or None , instance=trainer)
+    
+    if form.is_valid():
+        trainer = form.save(commit=False)
+        trainer.user = request.user
+        trainer.save()
+
+        messages.success(request,"Treyner melumatları yenilendi")
+
+        return redirect ("course:detailtrainers",id=id)
+
+    contex = {
+        "form":form,
+
+    }
+
+    return render(request, "updatetrainer.html",contex)
+
 def applyexam(request,id):
     apply_exam = ExamApply()
     exam_data = Exam()
@@ -221,11 +480,6 @@ def applyexam(request,id):
         apply_exam.student_email = request.user.email
         apply_exam.course = CourseBoss.objects.filter(id=id).first()
         apply_exam.exam = Exam.objects.get(course_id=id)
-        #exam_data.empyt_space = int((Exam.objects.get(course_id=id).empty_space))-1
-        #empty_data_last = int(empty_data)-1
-        #exam_data.empty_space = empty_data_last
-        #new_empty_data = Exam.objects.get(course_id=id).empty_space
-        #new_empty_data = empty_data_last
         exam_data.save()
         apply_exam.save()
 
@@ -249,14 +503,24 @@ def deletecourse(request,id):
     course.delete()
     return redirect("course:courses")
 
+
+def deletetrainer(request, id):
+    trainer = get_object_or_404(Trainer,id=id)
+    trainer.delete()
+    return redirect("course:courses")
+
+
+
+
 def updatebranch(request,id):
     branch = get_object_or_404(Branchs,id=id)
+    courseid = Branchs.objects.get(id=id).branch_id
     form = CourseBranch(request.POST or None, instance=branch)
     if form.is_valid():
         branch = form.save(commit=False)
         branch.save()
 
-        return redirect("course:courses")
+        return redirect("course:detailcourse", id=courseid)
 
 
     contex = {
@@ -266,6 +530,12 @@ def updatebranch(request,id):
     }
 
     return render(request, "updatebranch.html",contex)
+
+def deletebranch(request, id):
+    branch = get_object_or_404(Branchs,id=id)
+    courseid = Branchs.objects.get(id=id).branch_id
+    branch.delete()
+    return redirect("course:detailcourse", id=courseid)
 
 def comment(request,id):
     course = get_object_or_404(CourseBoss,id=id)
@@ -291,26 +561,43 @@ def gallery(request,id):
 
 def confirm(request, id):
     status = CourseApply.objects.filter(id=id).first()
+    courseid = CourseApply.objects.get(id=id).course_id
     status.confirm = 1
     status.pending = 0
     status.cancel = 0
     status.save()
-    return redirect("course:commonnotification")
+    return redirect("course:coursenotification",id=courseid)
+
+
+def confirmtrainer(request, id):
+    status = TrainerApply.objects.filter(id=id).first()
+    trainerid = TrainerApply.objects.get(id=id).trainer_id
+    status.confirm = 1
+    status.pending = 0
+    status.cancel = 0
+    status.save()
+    return redirect("course:trainernotification",id=trainerid)
+
+def canceltrainer(request, id):
+    status = TrainerApply.objects.filter(id=id).first()
+    status.confirm = 0
+    status.pending = 0
+    status.cancel = 1
+    status.save()
+    return redirect("course:trainernotification",id=id)
 
 def cancel(request,id):
+    courseid = CourseApply.objects.get(id=id).course_id
     status = CourseApply.objects.filter(id=id).first()
     status.confirm = 0
     status.pending = 0
     status.cancel = 1
     status.save()
-    return redirect("course:commonnotification")
+    return redirect("course:coursenotification",id=courseid)
 
 
 
-def delete(request,id):
-    status = get_object_or_404(CourseApply,id=id)
-    status.delete()
-    return redirect("course:courses")
+
 
 
 

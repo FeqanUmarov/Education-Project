@@ -1,3 +1,4 @@
+from msilib.schema import Class
 from multiprocessing.sharedctypes import Value
 from pyexpat import model
 from urllib import request
@@ -7,24 +8,38 @@ from .models import CourseBoss
 from django.forms import ModelForm
 from django import forms
 
-from course.models import CourseBoss, Branchs,Comment, CoursePhoto, Exam, CourseApply, ExamApply
+from course.models import CourseBoss, Branchs,Comment, CoursePhoto, Exam, CourseApply, ExamApply, LessonPlan, Trainer, TrainerApply, Event, EventApply
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, EmailInput
-from user.models import User, Course, Student
+from user.models import User
+import datetime
+
+
+
 
 class CourseInfo(forms.ModelForm):
 
-    course_name = forms.ModelChoiceField(queryset=Course.objects.all())
+    # course_name = forms.ModelChoiceField(queryset=Course.objects.all())
     class Meta:
         model = CourseBoss
-        fields = ["course_name","course_type","course_slogan","course_location","course_logo","course_profile"]
+        fields = ["course_name","course_type","course_phone","course_slogan","course_email","course_location","website","twitter","instagram","facebook","course_logo","course_profile"]
 
-    def __init__(self, *args,**kwargs):
-        user = kwargs.pop('user',None)
-        super(CourseInfo, self).__init__(*args,**kwargs)
-        self.fields['course_name'].queryset =Course.objects.filter(user=user)
+    # def __init__(self, *args,**kwargs):
+    #     user = kwargs.pop('user',None)
+    #     super(CourseInfo, self).__init__(*args,**kwargs)
+    #     self.fields['course_name'].queryset =Course.objects.filter(user=user)
 
-
+class CreateLessonPlan(forms.ModelForm):
+    class Meta:
+        model = LessonPlan
+        fields  =["lessonplan"]
+        
+        
+class TrainerInfo(forms.ModelForm):
+    class Meta:
+        model = Trainer
+        fields = ["study_field","experience","facebook","instagram","linkedin","study_plan","note","location"]
+        
 class CourseBranch(forms.ModelForm):
     class Meta:
         model = Branchs
@@ -34,9 +49,11 @@ class CourseBranch(forms.ModelForm):
             self.fields['location'].label = "Yerlesdiyi yer"
 
 class CourseGallery(forms.ModelForm):
+
     class Meta:
         model = CoursePhoto
         fields = ["title","content","photo","branch"]
+        
 
 
 
@@ -58,8 +75,29 @@ class AddComment(forms.ModelForm):
 class AskCourse(forms.ModelForm):
     class Meta:
         model = CourseApply
-        fields = ["student_name","student_surname","apply_title","apply_content",
-        "student_email","student_phone"]
+        fields = ["apply_title","apply_content"]
+        
+        
+class AskTrainer(forms.ModelForm):
+    class Meta:
+        model = TrainerApply
+        fields = ["apply_title","apply_content"]
+        
+        
+        
+class CreateEvent(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ["title","content","photo","start_date","end_date","event_day","event_location","event_adress"]
+        
+        
+class ApplyEventForm(forms.ModelForm):
+    class Meta:
+        model = EventApply
+        fields = ["apply_case"]
+        
+
+    
 
 
 

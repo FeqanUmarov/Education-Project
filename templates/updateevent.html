@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    <h3>Məlumatları Yenilə</h3>
+    <hr>
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div>
+            <div>
+                {{form.title|as_crispy_field}}
+                {{form.media}}
+                {{form.content|as_crispy_field}}
+                {{form.photo|as_crispy_field}}
+                {{form.start_date|as_crispy_field}}
+                {{form.end_date|as_crispy_field}}
+                {{form.event_day|as_crispy_field}}
+                {{form.event_location|as_crispy_field}}
+                {{form.event_adress|as_crispy_field}}
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-danger">Yenilə</button>
+    </form>
+</div>
+
+{% endblock %}

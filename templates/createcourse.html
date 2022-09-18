@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    <h3>Kurs Elave Et</h3>
+    <hr>
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+
+        <div class="row mt-2">
+            <div class="col-md-6">{{form.course_name|as_crispy_field}}</div>
+            <div class="col-md-6">{{form.course_email|as_crispy_field}}</div>
+            <div class="col-md-12">{{form.phone_number|as_crispy_field}}</div>
+        </div>
+
+        <div class="addbranchbutton">
+            <button type="submit" class="btn btn-danger">Kursu əlavə et</button>
+        </div>
+
+        
+    </form>
+</div>
+
+{% endblock %}

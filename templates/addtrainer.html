@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    <h3>Treyner qeydiyyatı</h3>
+    <hr>
+    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <div>
+            {{form.study_field|as_crispy_field}}
+            {{form.experience|as_crispy_field}}
+            {{form.facebook|as_crispy_field}}
+            {{form.instagram|as_crispy_field}}
+            {{form.linkedin|as_crispy_field}}
+            {{form.media}}
+            {{form.study_plan|as_crispy_field}}
+            {{form.note|as_crispy_field}}
+            {{form.location|as_crispy_field}}
+        </div>
+
+        
+        <div class="addbranchbutton">
+            <button type="submit" class="btn btn-danger">Treyner ol</button>
+        </div>
+
+        
+    </form>
+</div>
+
+{% endblock %}

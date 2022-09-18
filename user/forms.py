@@ -8,34 +8,13 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
-User = get_user_model()
-class CourseSignUp(UserCreationForm):
-    name = forms.CharField(max_length=30,required=True)
-    surname = forms.CharField(max_length=30,required=True)
-    username = forms.CharField(max_length=50,required=True)
-    email = forms.EmailField(max_length=254,required=True)
-    course_name = forms.CharField(required=True)
-    course_email = forms.CharField(required=True)
-    phone_number = forms.CharField(required=True)
 
 
 
-
+class UserSignUp(UserCreationForm):
     class Meta:
         model = User
-        fields = ["name","surname","username","email","user_profile"]
-
-
-
-
-
-
-class StudentSignUp(UserCreationForm):
-    university = forms.CharField(required=True)
-
-    class Meta:
-        model = User
-        fields = ["name","surname","username","email","user_profile"]
+        fields = ["name","surname","username","email","user_profile","phone"]
 
 class TutorSignUp(UserCreationForm):
     study_field = forms.CharField(required=True)
@@ -61,12 +40,13 @@ class LoginForm(forms.Form):
 class UserProfile(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["name","surname","username","email"]
+        fields = ["name","surname","username","email","user_profile","phone"]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'surname': forms.TextInput(attrs={'class': 'form-control'}),
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 

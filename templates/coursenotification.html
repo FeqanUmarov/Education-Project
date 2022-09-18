@@ -4,12 +4,14 @@
 {% load static %}
 <br><br><br><br><br><br>
 <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="row">
         <table class="table table-striped">
-              {% if user.is_course %}
+              {% if user %}
               <thead>
                 <tr>
-                  <th scope="col">id</th>
                   <th scope="col">Ad</th>
                   <th scope="col">Soyad</th>
                   <th scope="col">Basliq</th>
@@ -19,17 +21,16 @@
                   <th scope="col">Veziyyet</th>
                   <th scope="col">Təsdiq</th>
                   <th scope="col">İmtina</th>
-                  <th scope="col">Sil</th>
                 </tr>
               </thead>
 
 
               {% for student_info in student_infos %}
+              {% if student_info.pending == 1 or student_info.confirm == 1  %}
               <tbody>
                 <tr>
-                  <th scope="row">{{student_info.id}}</th>
-                  <td>{{student_info.student_name}}</td>
-                  <td>{{student_info.student_surname}}</td>
+                  <td>{{student_info.user.name}}</td>
+                  <td>{{student_info.user.surname}}</td>
                   <td>{{student_info.apply_title}}</td>
                   <td>{{student_info.apply_content}}</td>
                   
@@ -38,55 +39,52 @@
                   <td>************</td>
                   <td>pending...</td>
                   {% elif student_info.confirm == 1 %}
-                  <td>{{student_info.student_email}}</td>
-                  <td>{{student_info.student_phone}}</td>
+                  <td>{{student_info.user.email}}</td>
+                  <td>{{student_info.user.phone}}</td>
                   <td>Təsdiqləndi</td>
                   {% elif student_info.cancel == 1 %}
                   <td>************</td>
                   <td>************</td>
                   <td>Imtina edildi</td>
                   {% endif %}
+                  {% if student_info.confirm != 1 %}
                   <td>
                     <a type="button" href="{% url 'course:confirm' student_info.id %}" class="btn btn-info">Təsdiq</a>
                   </td>
-                  <td>
-                    <a type="button" href="{% url 'course:cancel' student_info.id %}" class="btn btn-info">İmtina</a>
-                  </td>
-                  <td>
-                    <a type="button" href="{% url 'course:delete' student_info.id %}" class="btn btn-info">Sil</a>
-                  </td>
-                </tr>
-
-                {% endfor %}
-                {% elif user.is_student %}
-                <thead>
-                  <tr>
-                    <th scope="col">Muraciet basligi</th>
-                    <th scope="col">Muraciet movzusu</th>
-                    <th scope="col">Muraciet tarixi</th>
-                    <th scope="col">Kursun adi</th>
-                    <th scope="col">Vəziyyət</th>
-                  </tr>
-                </thead>
-                {% for notification_common in notification_commons %}
-                <tr>
-                  <td>{{notification_common.apply_title}}</td>
-                  <td>{{notification_common.apply_content}}</td>
-                  <td>{{notification_common.apply_date}}</td>
-                  <td>{{notification_common.course}}</td>
-                  {% if notification_common.pending == 1 %}
-                  <td>pending...</td>
-                  {% elif notification_common.confirm == 1 %}
-                  <td>Təsdiqləndi</td>
-                  {% elif notification_common.cancel == 1 %}
-                  <td>Imtina edildi</td>
                   {% endif %}
+                  <td>
+                    <a type="button" data-toggle="modal" data-target="#deleteModal"  href="" class="btn btn-info">İmtina</a>
+                  </td>
                 </tr>
-                {% endfor %}
-                {% endif %}
-
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+ 
             </tbody>
+            
           </table>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Müraciətə imtina ediləcək. Əminsiniz?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-footer">
+                  {% for student_info in student_infos %}
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">İmtina</button>
+                  <form action="{% url 'course:cancel' student_info.id %}" enctype="multipart/form-data" method="POST">{% csrf_token %}
+                      <input class="btn btn-danger" type="submit"  value="Sil">
+                  </form>
+                  {% endfor %}
+              </div>
+          </div>
+      </div>
+    </div>
+    
 </div>
 {% endblock %}

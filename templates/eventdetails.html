@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    <h3 class="eventtitle">{{eventdetail.title}}</h3>
+    <br>
+    <hr>
+    <span>{{eventdetail.content|safe}}</span>
+   
+</div>
+
+{% endblock %}

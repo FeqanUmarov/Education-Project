@@ -2,29 +2,22 @@ import email
 from django import forms
 import django
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import StudentSignUp, LoginForm, UserProfile
+from .forms import UserSignUp, LoginForm, UserProfile
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.db import transaction
-from .models import Course, Student, User
-from course.models import CourseApply
+from .models import User
+from course.models import CourseApply, CourseBoss
 
 # Create your views here.
 @transaction.atomic
 def register(request):
 
-
-    form = StudentSignUp(request.POST or None, request.FILES or None)
+    form = UserSignUp(request.POST or None, request.FILES or None)
     if form.is_valid():
         user = form.save(commit=False)
-        user.is_student = True
         user.save()
-        student = Student.objects.create(user = user)
-        student.university = form.cleaned_data.get('university')
-
-        student.save()
-
         messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
 
         return redirect("index")
@@ -72,10 +65,9 @@ def logoutUser(request):
 
 def myprofile(request,id):
     profile = get_object_or_404(User,id=id)
-    if profile.is_course == True:
-        course_apply = CourseApply.objects.filter(user_id = id).first()
-    elif profile.is_student == True:
-        course_apply = CourseApply.objects.filter(current_student = id).first()
+
+    course_apply = CourseApply.objects.filter(user_id = id).first()
+   
     form = UserProfile(request.POST or None, request.FILES or None, instance=profile)
 
 
@@ -95,5 +87,8 @@ def myprofile(request,id):
     }
 
     return render(request, "myprofile.html", contex)
+
+
+
 
 
