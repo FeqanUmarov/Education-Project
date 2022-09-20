@@ -1,4 +1,4 @@
-from asyncio.windows_events import NULL
+# from asyncio.windows_events import NULL
 from cProfile import label
 from dataclasses import field
 import email
@@ -20,11 +20,11 @@ class TutorSignUp(UserCreationForm):
     study_field = forms.CharField(required=True)
     experience = forms.CharField(required=True)
     teacher_number = forms.CharField(required=True)
-    
+
     class Meta:
         model = User
         fields = ["name","surname","username","email","user_profile"]
-    
+
 
 
 class LoginForm(forms.Form):

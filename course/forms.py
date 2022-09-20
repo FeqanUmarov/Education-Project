@@ -1,4 +1,4 @@
-from msilib.schema import Class
+# from msilib.schema import Class
 from multiprocessing.sharedctypes import Value
 from pyexpat import model
 from urllib import request
@@ -24,22 +24,22 @@ class CourseInfo(forms.ModelForm):
         model = CourseBoss
         fields = ["course_name","course_type","course_phone","course_slogan","course_email","course_location","website","twitter","instagram","facebook","course_logo","course_profile"]
 
-    # def __init__(self, *args,**kwargs):
-    #     user = kwargs.pop('user',None)
-    #     super(CourseInfo, self).__init__(*args,**kwargs)
-    #     self.fields['course_name'].queryset =Course.objects.filter(user=user)
+        widgets = {
+            'course_name': forms.TextInput(attrs={'class': 'new-course'}),
+        }
+
 
 class CreateLessonPlan(forms.ModelForm):
     class Meta:
         model = LessonPlan
         fields  =["lessonplan"]
-        
-        
+
+
 class TrainerInfo(forms.ModelForm):
     class Meta:
         model = Trainer
         fields = ["study_field","experience","facebook","instagram","linkedin","study_plan","note","location"]
-        
+
 class CourseBranch(forms.ModelForm):
     class Meta:
         model = Branchs
@@ -53,7 +53,7 @@ class CourseGallery(forms.ModelForm):
     class Meta:
         model = CoursePhoto
         fields = ["title","content","photo","branch"]
-        
+
 
 
 
@@ -76,28 +76,28 @@ class AskCourse(forms.ModelForm):
     class Meta:
         model = CourseApply
         fields = ["apply_title","apply_content"]
-        
-        
+
+
 class AskTrainer(forms.ModelForm):
     class Meta:
         model = TrainerApply
         fields = ["apply_title","apply_content"]
-        
-        
-        
+
+
+
 class CreateEvent(forms.ModelForm):
     class Meta:
         model = Event
         fields = ["title","content","photo","start_date","end_date","event_day","event_location","event_adress"]
-        
-        
+
+
 class ApplyEventForm(forms.ModelForm):
     class Meta:
         model = EventApply
         fields = ["apply_case"]
-        
 
-    
+
+
 
 
 
