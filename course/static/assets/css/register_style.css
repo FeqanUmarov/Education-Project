@@ -22,7 +22,7 @@
 }
 
 .register__form {
-  padding: 5% 10%;
+  padding: 5%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -54,10 +54,7 @@
 }
 #div_id_user_profile label {
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
   border-radius: 2rem;
-  font-size: 14px;
   font-weight: 600;
   color: #fff;
   font-size: 14px;
@@ -90,4 +87,34 @@
   background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
   text-align: center;
   outline: none;
+}
+
+@media (max-width: 768px) {
+  .register__form input {
+    width: 100vw;
+  }
+}
+@media (max-width: 567px) {
+  #div_id_user_profile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  #div_id_user_profile label {
+    width: 50%;
+    text-align: center;
+  }
+  #div_id_user_profile label::before {
+    left: 30%;
+  }
+}
+
+@media (max-width: 356px) {
+  #div_id_user_profile label {
+    width: 100%;
+    text-align: center;
+  }
+  #div_id_user_profile label::before {
+    left: 10%;
+  }
 }
