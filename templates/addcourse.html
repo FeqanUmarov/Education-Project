@@ -1,34 +1,33 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-<div class="add-course__bg">
-    <div class="container">
-        <div class="add-course">
-            <h3>Kurs Elave Et</h3>
-            <hr>
-            <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-                <div>
-                    {{form.course_name|as_crispy_field}}
-                    {{form.course_type|as_crispy_field}}
-                    {{form.course_phone|as_crispy_field}}
-                    {{form.course_slogan|as_crispy_field}}
-                    {{form.course_email|as_crispy_field}}
-                    {{form.course_location|as_crispy_field}}
-                    {{form.website|as_crispy_field}}
-                    {{form.twitter|as_crispy_field}}
-                    {{form.instagram|as_crispy_field}}
-                    {{form.facebook|as_crispy_field}}
-                    {{form.course_logo|as_crispy_field}}
-                    {{form.course_profile|as_crispy_field}}
-                </div>
+<div class="row">
+    <div class="add-course__bg">
+        <div class="container">
+            <div class="add-course">
+                <h3>Kurs Elave Et</h3>
+                <form class="add-course__form" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="add-course__form-inner">
+                        {{form.course_name|as_crispy_field}}
+                        {{form.course_type|as_crispy_field}}
+                        {{form.course_phone|as_crispy_field}}
+                        {{form.course_slogan|as_crispy_field}}
+                        {{form.course_email|as_crispy_field}}
+                        {{form.course_location|as_crispy_field}}
+                        {{form.website|as_crispy_field}}
+                        {{form.twitter|as_crispy_field}}
+                        {{form.instagram|as_crispy_field}}
+                        {{form.facebook|as_crispy_field}}
+                        {{form.course_logo|as_crispy_field}}
+                        {{form.course_profile|as_crispy_field}}
+                    </div>
+                    <div class="add-course__form-submit">
+                        <button class="add-course__form-submit--btn" type="submit">Elave Et</button>
+                    </div>
 
 
-                <div class="addbranchbutton">
-                    <button type="submit" class="btn btn-danger">Elave Et</button>
-                </div>
-
-
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
