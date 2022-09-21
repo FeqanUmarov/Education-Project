@@ -5,8 +5,8 @@
   width: 100%;
 }
 .add-course {
-  background-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(5px);
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
   margin: 80px 40px;
   padding: 25px;
   border-radius: 10px;
@@ -81,4 +81,44 @@
   background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
   text-align: center;
   outline: none;
+}
+
+@media (max-width: 768px) {
+  .add-course__form-inner input,
+  .add-course__form-inner select {
+    width: 100vw;
+  }
+}
+@media (max-width: 567px) {
+  #div_id_course_logo,
+  #div_id_course_profile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  #div_id_course_logo label,
+  #div_id_course_profile label {
+    width: 50%;
+    text-align: center;
+  }
+  #div_id_course_logo label::before,
+  #div_id_course_profile label::before {
+    left: 30%;
+  }
+}
+
+@media (max-width: 460px) {
+  #div_id_course_logo label,
+  #div_id_course_profile label {
+    width: 100%;
+    text-align: center;
+  }
+  #div_id_course_logo label::before,
+  #div_id_course_profile label::before {
+    left: 10%;
+  }
+  .add-course__form-submit--btn {
+    width: 100%;
+    padding: 2.5%;
+  }
 }
