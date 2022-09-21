@@ -1,0 +1,73 @@
+.add-trainer__bg {
+  margin-top: 100px;
+  background-image: url(../images/client-bg.png);
+  background-size: cover;
+  width: 100%;
+}
+
+.add-trainer {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  margin: 80px 40px;
+  padding: 25px;
+  border-radius: 10px;
+  color: #fff;
+}
+.add-trainer h3 {
+  text-align: center;
+  margin: 25px 0 35px;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+}
+
+.add-trainer__form-inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.add-trainer__form-inner input,
+.add-trainer__form-inner select {
+  width: 35vw;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(40, 225, 253, 1);
+}
+.add-trainer__form-inner input:focus,
+.add-trainer__form-inner select:focus {
+  border-color: rgba(91, 104, 235, 1);
+}
+
+.add-trainer__form-submit {
+  margin: 8% 0 15px;
+  text-align: center;
+}
+.add-trainer__form-submit--btn {
+  width: 30%;
+  border-radius: 3rem;
+  padding: 1.5%;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  color: #fff;
+  background: rgb(19, 175, 240);
+  background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
+  text-align: center;
+  outline: none;
+}
+
+@media (max-width: 768px) {
+  .add-trainer__form-inner input,
+  .add-trainer__form-inner select {
+    width: 70vw;
+  }
+}
+@media (max-width: 567px) {
+  .add-trainer__form-inner input,
+  .add-trainer__form-inner select {
+    width: 100%;
+  }
+  .add-trainer__form-submit--btn {
+    width: 100%;
+  }
+}
