@@ -29,7 +29,11 @@
       {% for course_value in course_values%}
       <a href="{% url 'course:detailcourse' course_value.id %}">
         <div class="courses service-item first-service">
-          <div class="icon"></div>
+          {% if course_value.course_logo %}
+          <div class="icon">
+            <img src="{{course_value.course_logo.url}}" alt="{{course_value.course_name}}">
+          </div>
+          {% endif %}
           <h4>{{course_value.course_name}}</h4>
           <p>{{course_value.course_type}}</p>
           <p>Istifadeci: {{course_value.user}}</p>
@@ -56,7 +60,11 @@
       {% for trainer_value in trainer_values%}
       <a href="{% url 'course:detailtrainers' trainer_value.id %}">
         <div class=" service-item first-service">
-          <div class="icon"></div>
+          {% if trainer_value.user.user_profile %}
+          <div class="icon">
+            <img src="{{trainer_value.user.user_profile.url}}" alt="{{trainer_value.user.user_profile.url}}">
+          </div>
+          {% endif %}
           <h4>{{trainer_value.user.name}} {{trainer_value.user.surname}}</h4>
           <p>İxtisas sahəsi: {{trainer_value.study_field}}</p>
           <p>Təcrübəsi: {{trainer_value.experience}}</p>

@@ -38,8 +38,9 @@
 
               <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
               <li>
-                <div class="gradient-button"><a id="modal_trigger"
-                    href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
+                <div class="gradient-button">
+                  <a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a>
+                </div>
               </li>
 
               {% elif request.user.is_authenticated and user.is_teacher %}
