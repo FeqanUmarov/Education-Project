@@ -5,10 +5,10 @@
 <div class="row ">
   <div class="container common-notification">
     <div class="notification-table">
-      <h3>Kursalara edilən müraciətlər</h3>
-      <table class="table table-striped">
+      <h3 class="notification-table__title">Kursalara edilən müraciətlər</h3>
+      <table class="table">
         {% if notification_courses %}
-        <thead>
+        <thead class="notification-table__head">
           <tr>
             <th scope="col">Kursun adı</th>
             <th scope="col">Kursun emaili</th>
@@ -22,7 +22,7 @@
         {% for notification_course in notification_courses %}
         {% if notification_course.user_id == request.user.id %}
         <tbody>
-          <tr>
+          <tr class="notification-table__row">
             <td> <a
                 href="{% url 'course:detailcourse' notification_course.course_id %}">{{notification_course.course.course_name}}</a>
             </td>
@@ -49,10 +49,10 @@
     </div>
 
     <div class="notification-table">
-      <h3>Təlimçilərə edilən müraciətlər</h3>
-      <table class="table table-striped">
+      <h3 class="notification-table__title">Təlimçilərə edilən müraciətlər</h3>
+      <table class="table ">
         {% if notification_trainers %}
-        <thead>
+        <thead class="notification-table__head">
           <tr>
             <th scope="col">Təlimçinin adı</th>
             <th scope="col">Emaili</th>
@@ -68,7 +68,7 @@
         {% for notification_trainer in notification_trainers %}
         {% if notification_trainer.user_id == request.user.id %}
         <tbody>
-          <tr>
+          <tr class="notification-table__row">
             <td><a href="">{{notification_trainer.trainer.user.name}}</a></td>
             <td>{{notification_trainer.trainer.user.email}}</td>
             <td>{{notification_trainer.trainer.user.phone}}</td>

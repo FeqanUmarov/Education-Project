@@ -57,4 +57,23 @@
 }
 .notification-table {
   padding-top: 100px;
+  overflow: hidden;
+}
+
+.notification-table__title {
+  text-align: center;
+  margin-bottom: 3%;
+}
+.notification-table__head {
+  background-color: #869596;
+  color: #fff;
+}
+.notification-table tbody:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.08);
+  transition: 0.4s;
+}
+.notification-table tbody:hover {
+  background-color: rgb(224, 248, 252);
+  border-color: rgb(224, 248, 252);
+  transform: scale(1.02);
 }

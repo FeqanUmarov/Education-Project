@@ -1,28 +1,32 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-<div class="container">
-    <br><br><br><br><br><br><br>
-    <h3>Məlumatları Yenilə</h3>
-    <hr>
-    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-        <div>
-            <div>
-                {{form.study_field|as_crispy_field}}
-                {{form.experience|as_crispy_field}}
-                {{form.facebook|as_crispy_field}}
-                {{form.instagram|as_crispy_field}}
-                {{form.linkedin|as_crispy_field}}
-                {{form.media}}
-                {{form.study_plan|as_crispy_field}}
-                {{form.media}}
-                {{form.note|as_crispy_field}}
-                {{form.location|as_crispy_field}}
+<div class="row">
+    <div class="add-trainer__bg">
+        <div class="container">
+            <div class="add-trainer">
+                <h3>Məlumatları Yenilə</h3>
+                <form class="add-trainer__form" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="add-trainer__form-inner">
+                        {{form.study_field|as_crispy_field}}
+                        {{form.experience|as_crispy_field}}
+                        {{form.facebook|as_crispy_field}}
+                        {{form.instagram|as_crispy_field}}
+                        {{form.linkedin|as_crispy_field}}
+                        {{form.media}}
+                        {{form.study_plan|as_crispy_field}}
+                        {{form.media}}
+                        {{form.note|as_crispy_field}}
+                        {{form.location|as_crispy_field}}
+                    </div>
+                    <div class="add-trainer__form-submit">
+                        <button type="submit" class="add-trainer__form-submit--btn">Yenilə</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <br>
-        <button type="submit" class="btn btn-danger">Yenilə</button>
-    </form>
+    </div>
+
 </div>
 
 {% endblock %}

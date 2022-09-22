@@ -32,7 +32,7 @@
 
 .add-trainer__form-inner input,
 .add-trainer__form-inner select {
-  width: 35vw;
+  width: 30vw;
   background-color: rgba(255, 255, 255, 0.3);
   border-color: rgba(40, 225, 253, 1);
 }
@@ -40,6 +40,13 @@
 .add-trainer__form-inner select:focus {
   border-color: rgba(91, 104, 235, 1);
 }
+
+/* #div_id_photo {
+  width: 30vw;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+} */
 
 .add-trainer__form-submit {
   margin: 8% 0 15px;

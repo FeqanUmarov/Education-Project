@@ -6,8 +6,8 @@
   width: 100%;
 }
 .add-course {
-  background-color: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(15px);
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
   margin: 80px 40px;
   border-radius: 10px;
   overflow: hidden;
@@ -33,7 +33,7 @@
 .add-course__form-inner input,
 .add-course__form-inner select {
   width: 30vw;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.8);
   border-color: rgba(40, 225, 253, 1);
 }
 .add-course__form-inner input:focus,
@@ -42,14 +42,16 @@
 }
 
 #div_id_course_logo,
-#div_id_course_profile {
+#div_id_course_profile,
+#div_id_photo {
   width: 30vw;
   margin-bottom: 0;
   display: flex;
   align-items: center;
 }
 #div_id_course_logo label,
-#div_id_course_profile label {
+#div_id_course_profile label,
+#div_id_photo label {
   cursor: pointer;
   border-radius: 2rem;
   font-weight: 600;
@@ -61,7 +63,8 @@
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
 }
 #div_id_course_logo label::before,
-#div_id_course_profile label::before {
+#div_id_course_profile label::before,
+#div_id_photo label::before {
   content: "\21E9";
   position: absolute;
   left: 8px;
