@@ -50,7 +50,7 @@
             </span>
             <br><br>
             <span class="add-experience">
-                <a class="fa fa-plus" href="{% url 'course:commonnotification'%}">&nbsp; Müraciətlərim</a>
+                <a class="fa fa-envelope" href="{% url 'course:commonnotification'%}">&nbsp; Müraciətlərim</a>
             </span>
             {% if user.is_course and request.user.id == course_apply.user_id %}
             <a href="{% url 'course:commonnotification'%}">Kursa gelen bildirisler</a>

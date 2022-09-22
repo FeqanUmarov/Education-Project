@@ -1078,12 +1078,16 @@ Services Style
   position: relative;
   z-index: 1;
   padding: 30px;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: #fff;
+  background-image: url(../images/service-bg.jpg);
+  background-position: right top;
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 10px;
   border-top-right-radius: 50px;
   transition: background-image 0.8s ease-in-out;
-  width: 30vw;
+  width: 20vw;
+  color: #fff;
 }
 
 .service-item .icon {
@@ -1093,6 +1097,7 @@ Services Style
   width: 50px;
   height: 50px;
   transition: 0.3s;
+  color: #fff;
 }
 
 .service-item h4 {
@@ -1100,6 +1105,7 @@ Services Style
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 15px;
+  color: #fff;
 }
 
 .service-item p {
@@ -1107,6 +1113,10 @@ Services Style
   font-size: 15px;
   margin-bottom: 20px;
   transition: 0.3s;
+  color: #fff;
+}
+.service-item a {
+  color: #fff;
 }
 
 .service-item:hover h4,
@@ -1120,14 +1130,14 @@ Services Style
   transition: 0.3s;
 }
 
-.first-service:hover .icon {
+/* .first-service:hover .icon {
   background-image: url(../images/logomag.png);
-}
+} */
 
-.second-service .icon {
+/* .second-service .icon {
   background-image: url(../images/logo-40x40.png);
   transition: 0.3s;
-}
+} */
 
 .second-service:hover .icon {
   background-image: url(../images/logo-40x40.png);
@@ -1150,11 +1160,9 @@ Services Style
 }
 
 .service-item:hover {
-  background-image: url(../images/service-bg.jpg);
-  background-position: right top;
-  background-repeat: no-repeat;
-  background-size: cover;
   transition: 0.3s;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  transform: scale(1.02);
 }
 .courses-wrapper {
   margin-bottom: 50px;

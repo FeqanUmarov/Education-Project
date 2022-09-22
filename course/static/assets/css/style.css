@@ -60,14 +60,3 @@
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
-/*
-.register input[type="password"] {
-    border: 20px solid;
-}
-.register input {
-    width: 400px;
-}
-.register form {
-    display: flex;
-    flex-wrap: wrap;
-} */
