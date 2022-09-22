@@ -1,17 +1,20 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-<div class="container course-apply">
-    <div class="control-group" id="fields">
-        <h3 class="control-label" for="field1">Kursa muraciet et</h3>
-        <div class="controls" id="profs">
-            <form method="POST" class="input-append">{% csrf_token %}
-                <div id="field">{{form|crispy}}</div>
-                <button type="submit" class="btn btn-danger">Muraciet et</button>
-            </form>
+<div class="row">
+    <div class="container " id="fields">
+        <div class="control-group course-apply">
+            <h3 class="course-apply__title">Kursa muraciet et</h3>
+            <div class="controls" id="profs">
+                <form method="POST" class="input-append course-apply__form">{% csrf_token %}
+                    <div id="field">{{form|crispy}}</div>
+                    <div class="course-apply__submit">
+                        <button type="submit" class="course-apply__submit-btn">Muraciet et</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-
 </div>
 
 {% endblock %}
