@@ -349,6 +349,21 @@ body {
   color: #fff !important;
 }
 
+.nav-btn {
+  background: rgb(19, 175, 240);
+  background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
+  border-radius: 25px;
+  border: none;
+}
+.nav-btn:active,
+.nav-btn:focus {
+  color: #fff;
+}
+.nav-btn:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
+
 /*
 ---------------------------------------------
 header

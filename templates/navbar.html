@@ -1,51 +1,73 @@
 {% load static %}
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-        <div class="container">
-          <div class="row">
-            <div class="col-12">
-              <nav class="main-nav">
-                <!-- ***** Logo Start ***** -->
-                <a href="{% url 'index'%}" class="logo">
-                  <h3>Courseshub</h3>
-                </a>
-                <!-- ***** Logo End ***** -->
-                <!-- ***** Menu Start ***** -->
-                <ul class="nav">
-                  <li class="scroll-to-section"><a href="#top" class="active">Ana səhifə</a></li>
-                  <li class="scroll-to-section"><a href="#about">Haqqımızda</a></li>
-                  <li class="scroll-to-section"><a href="{% url 'course:courses'%}">Kurslar</a></li>
-                  {% if request.user.is_authenticated %}
-                    <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
-                    <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
-                    <li><div class="gradient-button"><a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div></li>
-                  {% elif request.user.is_authenticated %}
-                    <li class="scroll-to-section"><a href="{% url 'course:tests' %}">Sinaqlar</a></li>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a href="{% url 'index'%}" class="logo">
+            <h3>Courseshub</h3>
+          </a>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav">
+            <li class="scroll-to-section"><a href="#top" class="active">Ana səhifə</a></li>
+            <li class="scroll-to-section"><a href="#about">Haqqımızda</a></li>
+            <li class="scroll-to-section"><a href="{% url 'course:courses'%}">Kurslar</a></li>
+            {% if request.user.is_authenticated %}
+            <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
+            <!-- <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
+            <li>
+              <div class="gradient-button"><a id="modal_trigger"
+                  href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
+            </li> -->
+            <div class="dropdown show">
+              <a class="btn nav-btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{request.user.name}} {{request.user.surname}}
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="{% url 'user:myprofile' user.id %}">{{request.user.name}}
+                  {{request.user.surname}}</a>
+                <a class="dropdown-item" href="{% url 'user:logout' %}">Çıxış</a>
+              </div>
+              {% elif request.user.is_authenticated %}
+              <li class="scroll-to-section"><a href="{% url 'course:tests' %}">Sinaqlar</a></li>
+
+              <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
+              <li>
+                <div class="gradient-button"><a id="modal_trigger"
+                    href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
+              </li>
+
+              {% elif request.user.is_authenticated and user.is_teacher %}
+              <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
+              <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
+              <li>
+                <div class="gradient-button"><a id="modal_trigger"
+                    href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
+              </li>
 
 
-                    <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
-                    <li><div class="gradient-button"><a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div></li>
+              {% else %}
+              <li class="scroll-to-section"><a href="{% url 'user:login' %}">Kurs elave et</a></li>
+              <li class="scroll-to-section"><a href="{% url 'user:login' %}">Giris</a></li>
+              <li>
+                <div class="gradient-button"><a id="modal_trigger" href="{% url 'user:register' %}"><i
+                      class="fa fa-sign-in-alt"></i> Hesab Yarat</a></div>
+              </li>
+              {% endif %}
 
-                  {% elif request.user.is_authenticated and user.is_teacher %}
-                    <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
-                    <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
-                    <li><div class="gradient-button"><a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div></li>
-
-
-                  {% else %}
-                    <li class="scroll-to-section"><a href="{% url 'user:login' %}">Kurs elave et</a></li>
-                    <li class="scroll-to-section"><a href="{% url 'user:login' %}">Giris</a></li>
-                    <li><div class="gradient-button"><a id="modal_trigger" href="{% url 'user:register' %}"><i class="fa fa-sign-in-alt"></i> Hesab Yarat</a></div></li>
-                  {% endif %}
-
-                </ul>
-                <a class='menu-trigger'>
-                    <span>Menu</span>
-                </a>
-                <!-- ***** Menu End ***** -->
-              </nav>
-            </div>
-          </div>
-        </div>
-    </header>
-      <!-- ***** Header Area End ***** -->
+          </ul>
+          <a class='menu-trigger'>
+            <span>Menu</span>
+          </a>
+          <!-- ***** Menu End ***** -->
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- ***** Header Area End ***** -->
