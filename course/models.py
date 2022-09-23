@@ -78,8 +78,7 @@ class Branchs(models.Model):
 class CoursePhoto(models.Model):
     course = models.ForeignKey(CourseBoss,on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    content = models.CharField(max_length=50)
-    branch = models.ForeignKey(Branchs,on_delete=models.CASCADE)
+    content = RichTextField()
     photo = models.ImageField(max_length=30)
     def __str__(self):
         return '%s' % (self.title)

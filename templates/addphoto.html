@@ -5,12 +5,15 @@
     <br><br><br><br><br>
     
     
-    <h3>Sekil elave et</h3>
+    <h3>Blog yarat</h3>
     <hr>
            
     <form method="POST" class="input-append" enctype="multipart/form-data">{% csrf_token %}
-        <div id="field">{{form|crispy}}</div>
-         <button type="submit" class="btn btn-danger">Elave Et</button>
+        {{form.title|as_crispy_field}}
+        {{form.media}}
+        {{form.content|as_crispy_field}}
+        {{form.photo|as_crispy_field}}
+        <button type="submit" class="btn btn-danger">Əlavə Et</button>
     </form>
         
 

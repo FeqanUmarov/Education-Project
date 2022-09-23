@@ -69,7 +69,7 @@
         {% if notification_trainer.user_id == request.user.id %}
         <tbody>
           <tr class="notification-table__row">
-            <td><a href="">{{notification_trainer.trainer.user.name}}</a></td>
+            <td><a href="{% url 'course:detailtrainers' notification_trainer.trainer.id %}">{{notification_trainer.trainer.user.name}}</a></td>
             <td>{{notification_trainer.trainer.user.email}}</td>
             <td>{{notification_trainer.trainer.user.phone}}</td>
             <td>{{notification_trainer.apply_title}}</td>
