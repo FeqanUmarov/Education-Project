@@ -1,11 +1,16 @@
 .myprofile {
     padding-top: 100px;
 }
+.myprofile__upload-box {
+}
 
 .myprofile__upload-box #div_id_user_profile {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    left: -70%;
+    top: 75%;
 }
 .myprofile__upload-box #div_id_user_profile > div {
     font-size: 0;
@@ -13,6 +18,7 @@
     align-items: center;
     gap: 10px;
     margin-top: 20px;
+    display: none;
 }
 .myprofile__upload-box #div_id_user_profile input[type="checkbox"] {
     position: relative;
@@ -82,4 +88,10 @@
 }
 .add-experience:hover a {
     color: #fff;
+}
+
+@media (max-width: 1200px) {
+    .add-experience a {
+        width: 18vw;
+    }
 }

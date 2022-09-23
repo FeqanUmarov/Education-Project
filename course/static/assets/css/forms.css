@@ -75,5 +75,10 @@
 .notification-table tbody:hover {
   background-color: rgb(224, 248, 252);
   border-color: rgb(224, 248, 252);
-  transform: scale(1.02);
+}
+
+@media (max-width: 1024px) {
+  .notification-table {
+    overflow-x: scroll;
+  }
 }

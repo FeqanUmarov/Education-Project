@@ -1,22 +1,20 @@
-{% extends "layout.html" %}
-{% load crispy_forms_tags %}
-{% block body %}
-{% load static %}
+{% extends "layout.html" %} {% load crispy_forms_tags %} {% block body %}
+{%load static %}
 <div class="row myprofile">
     <div class="col-md-3 border-right">
         <div class="image-hover d-flex flex-column align-items-center text-center p-3 py-5">
             {% if userprofile.user_profile %}
-            <img class="rounded-circle mt-5 image" width="150px" src="{{userprofile.user_profile.url}}">
-            <div class="myprofile__upload-box">{{form.user_profile|as_crispy_field}}</div>
+            <img class="rounded-circle mt-5 image" width="150px" src="{{userprofile.user_profile.url}}" />
 
             {% endif %}
-            <br>
-            <span class="font-weight-bold">{{userprofile.name}} {{userprofile.surname}}</span><span
-                class="text-black-50">{{userprofile.email}}</span><span> </span>
+            <br />
+            <span class="font-weight-bold">{{userprofile.name}} {{userprofile.surname}}</span>
+            <span class="text-black-50">{{userprofile.email}}</span><span> </span>
         </div>
     </div>
     <div class="col-md-5 border-right">
-        <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="p-3 py-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">Şəxsi məlumatlar</h4>
@@ -28,27 +26,27 @@
                 <div class="row mt-3">
                     <div class="col-md-12">{{form.username|as_crispy_field}}</div>
                     <div class="col-md-12">{{form.email|as_crispy_field}}</div>
-
                     <div class="col-md-12">{{form.phone|as_crispy_field}}</div>
                 </div>
 
-                <div class="mt-5 text-center"><button class="myprofile__submit-btn" type="submit">Yenilə</button></div>
+                <div class="mt-5 text-center">
+                    <button class="myprofile__submit-btn" type="submit">Yenilə</button>
+                </div>
             </div>
+            <div class="myprofile__upload-box">{{form.user_profile|as_crispy_field}}</div>
         </form>
-
-
     </div>
     <div class="col-md-4">
         <div class="p-3 py-5">
             <span class="add-experience">
                 <a class="fa fa-plus" href="{% url 'course:addcourse'%}">&nbsp; Kurs Elave et</a>
             </span>
-            <br>
-            <br>
+            <br />
+            <br />
             <span class="add-experience">
                 <a class="fa fa-plus" href="{% url 'course:addtrainer'%}">&nbsp; Treyner ol</a>
             </span>
-            <br><br>
+            <br /><br />
             <span class="add-experience">
                 <a class="fa fa-envelope" href="{% url 'course:commonnotification'%}">&nbsp; Müraciətlərim</a>
             </span>
