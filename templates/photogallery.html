@@ -24,7 +24,7 @@
                                 <p class="card-text">
                                     {{photo_gallery.content|safe}}
                                 </p>
-                                <a href="#!" class="btn btn-primary">Ətraflı</a>
+                                <a href="{% url 'course:blogdetails' photo_gallery.id %}" class="btn btn-primary">Ətraflı</a>
                             </div>
                         </div>
                     </div>
