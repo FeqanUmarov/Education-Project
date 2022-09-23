@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    {% if blog.photo %}
+        <img src="{{blog.photo.url}}" alt="{{blog.photo}}" class="" width="50">
+    {% endif %}
+    <h3 class="eventtitle">{{blog.title}}</h3>
+    <br>
+    <hr>
+    <span>{{blog.content|safe}}</span>
+   
+</div>
+
+{% endblock %}

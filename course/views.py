@@ -250,8 +250,22 @@ def addphoto(request,id):
     contex = {
         "form": form,
     }
+    
 
     return render(request,"addphoto.html", contex)
+
+def blogdetails(request, id):
+    blog = CoursePhoto.objects.filter(id=id).first()
+    
+    contex = {
+        "blog": blog,
+    }
+    
+    return render (request, "blogdetails.html",contex)
+
+
+
+
 def addlessonplan(request, id):
     form = CreateLessonPlan(request.POST or None)
     if form.is_valid():

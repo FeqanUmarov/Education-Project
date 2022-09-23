@@ -20,6 +20,7 @@ urlpatterns = [
     path('deletebranch/<int:id>', views.deletebranch, name = "deletebranch"),
     path('comment/<int:id>', views.comment, name = "comment"),
     path('addphoto/<int:id>', views.addphoto, name = "addphoto"),
+    path('blogdetails/<int:id>', views.blogdetails, name = "blogdetails"),
     path('gallery/<int:id>', views.gallery, name = "gallery"),
     path('addexam/<int:id>', views.addexam, name = "addexam"),
     path('courseexam/<int:id>', views.courseexam, name = "courseexam"),

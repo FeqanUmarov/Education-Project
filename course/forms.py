@@ -52,7 +52,7 @@ class CourseGallery(forms.ModelForm):
 
     class Meta:
         model = CoursePhoto
-        fields = ["title","content","photo","branch"]
+        fields = ["title","content","photo"]
 
 
 
