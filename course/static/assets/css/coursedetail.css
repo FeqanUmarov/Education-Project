@@ -62,7 +62,7 @@ a:focus {
 
 .text-secondary,
 .text-secondary-hover:hover {
-    color: #59b73f !important;
+    color: rgb(16, 184, 210) !important;
 }
 .display-25 {
     font-size: 1.4rem;

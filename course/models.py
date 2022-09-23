@@ -20,8 +20,8 @@ class CourseType(models.Model):
 
     def __str__(self):
         return self.course_type_select
-    
-    
+
+
 class Location(models.Model):
     location_select = models.CharField(max_length=50)
 
@@ -49,7 +49,7 @@ class CourseBoss(models.Model):
 
     def __str__(self):
         return '%s' % (self.course_name)
-    
+
 class Trainer(models.Model):
     is_teacher = models.BooleanField(default=False)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
@@ -61,10 +61,10 @@ class Trainer(models.Model):
     study_plan = RichTextField()
     note = RichTextField()
     location = models.ForeignKey(Location,on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return '%s' % (self.study_field)
-    
+
 
 
 class Branchs(models.Model):
@@ -120,8 +120,8 @@ class CourseApply(models.Model):
     apply_title = models.CharField(max_length=30)
     apply_content = models.CharField(max_length=100)
     apply_date = models.DateTimeField(auto_now_add=True)
-    
-    
+
+
 class TrainerApply(models.Model):
     confirm = models.BooleanField(default=False)
     pending = models.BooleanField(default=True)
@@ -132,14 +132,14 @@ class TrainerApply(models.Model):
     apply_date = models.DateTimeField(auto_now_add=True)
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
 
-    
-    
+
+
 class LessonPlan(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseBoss, on_delete=models.CASCADE)
     lessonplan = RichTextField()
-    
-    
+
+
 class Event(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
@@ -151,7 +151,7 @@ class Event(models.Model):
     event_adress = models.CharField(max_length=200)
     trainer = models.ForeignKey(Trainer,on_delete=models.CASCADE)
     photo = models.ImageField(max_length=30)
-    
+
 
 class EventApply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

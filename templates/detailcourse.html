@@ -12,38 +12,43 @@
           <span class="navbar-toggler-icon"></span>
         </button> -->
         {% if request.user == course_values.user %}
-        <li class="detail-course__tab-item"><a href="{% url 'course:addbranch' course_values.id %}">Filial əlavə et</a>
+        <li>
+          <a class="detail-course__tab-item" href="{% url 'course:addbranch' course_values.id %}">Filial əlavə et</a>
         </li>
-        <li class="detail-course__tab-item"><a href="{% url 'course:updatecourse' course_values.id %}">Məlumatları
+        <li>
+          <a class="detail-course__tab-item" href="{% url 'course:updatecourse' course_values.id %}">Məlumatları
             yenilə</a>
         </li>
-        <li class="detail-course__tab-item">
-          <a href="{% url 'course:addphoto' course_values.id %}">Blog</a>
+        <li>
+          <a class="detail-course__tab-item" href="{% url 'course:addphoto' course_values.id %}">Blog</a>
         </li>
-        <li class="detail-course__tab-item">
-          <a href="{% url 'course:addexam' course_values.id %}">İmtahan əlavə et</a>
+        <li>
+          <a class="detail-course__tab-item" href="{% url 'course:addexam' course_values.id %}">İmtahan əlavə et</a>
         </li>
-        <li class="detail-course__tab-item">
-          <a href="{% url 'course:courseexam' course_values.id %}">Kursun
+        <li>
+          <a class="detail-course__tab-item" href="{% url 'course:courseexam' course_values.id %}">Kursun
             imtahanları</a>
         </li>
-        <li class="detail-course__tab-item">
-          <a href="{% url 'course:addlessonplan' course_values.id %}">Dərs proqramı</a>
+        <li>
+          <a class="detail-course__tab-item" href="{% url 'course:addlessonplan' course_values.id %}">Dərs proqramı</a>
         </li>
-        <li class="detail-course__tab-item">
-          <a href="{% url 'course:gallery' course_values.id %}">Galareya</a>
+        <li>
+          <a class="detail-course__tab-item" href="{% url 'course:gallery' course_values.id %}">Galareya</a>
         </li>
-        <li class="detail-course__tab-item">
-          <a href="{% url 'course:coursenotification' course_values.id %}">Müraciətlər</a>
+        <li>
+          <a class="detail-course__tab-item"
+            href="{% url 'course:coursenotification' course_values.id %}">Müraciətlər</a>
         </li>
-        <li class="detail-course__tab-item">
-          <a data-toggle="modal" data-target="#deleteModal" href="">Kursu sil</a>
+        <li>
+          <a class="detail-course__tab-item" data-toggle="modal" data-target="#deleteModal" href="">Kursu sil</a>
         </li>
         {% elif request.user.is_authenticated %}
-        <a class="nav-item nav-link active" href="">Sinaq imtahanlari</a>
-        <a class="nav-item nav-link" href="{% url 'course:gallery' course_values.id %}">Galareya</a>
-        <a class="nav-item nav-link" href="{% url 'course:courseapply' course_values.id %}">Kursa muraciet et</a>
-        <a class="nav-item nav-link"
+        <a class="nav-item nav-link active detail-course__tab-item" href="">Sinaq imtahanlari</a>
+        <a class="nav-item nav-link detail-course__tab-item"
+          href="{% url 'course:gallery' course_values.id %}">Galareya</a>
+        <a class="nav-item nav-link detail-course__tab-item"
+          href="{% url 'course:courseapply' course_values.id %}">Kursa muraciet et</a>
+        <a class="nav-item nav-link detail-course__tab-item"
           href="{% url 'course:courseapplynotification' course_values.id %}">Müraciətlərim</a>
 
         {% endif %}
@@ -64,7 +69,7 @@
                 <p class="text-secondary mb-1">{{course_values.course_type}}</p>
                 <p class="text-muted font-size-sm">{{course_values.course_slogan}}</p>
                 {% if request.user == course_values.user %}
-                <button class="btn btn-primary">Follow</button>
+                <!-- <button class="btn btn-primary">Follow</button> -->
                 {% endif %}
               </div>
             </div>

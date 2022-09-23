@@ -2307,15 +2307,32 @@ Course Detail Page
   background-color: #e9ecef;
   border-radius: 0.25rem;
 }
+
 .detail-course__tab-item {
-  margin-bottom: 20px;
-}
-.detail-course__tab-item a {
+  display: inline-block;
   padding: 7px 12px;
   background-color: #fff;
   border-radius: 15px;
   margin-right: 10px;
+  margin-bottom: 20px;
 }
-.detail-course__tab-item a:hover {
+.detail-course__tab-item:hover {
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.detail-course__sosial {
+  display: flex;
+  justify-content: space-between;
+}
+.detail-course__sosial-item {
+  font-size: 22px;
+  background: -webkit-linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: 0.4s;
+}
+.detail-course__sosial-item:hover {
+  transform: scale(1.05);
+}
+.detail-course__sosial-item i {
+  margin-right: 10px;
 }
