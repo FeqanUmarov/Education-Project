@@ -47,6 +47,7 @@ class UserProfile(forms.ModelForm):
             'username': forms.TextInput(attrs={'class': 'form-control'}),
             'email': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'user_profile': forms.TextInput(attrs={'accept': 'image/*'}),
         }
 
 

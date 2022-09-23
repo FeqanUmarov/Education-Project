@@ -77,6 +77,14 @@
   border-color: rgb(224, 248, 252);
 }
 
+.upload-preview {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+  margin-top: 5px;
+  border-radius: 8px;
+}
+
 @media (max-width: 1024px) {
   .notification-table {
     overflow-x: scroll;
