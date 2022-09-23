@@ -83,6 +83,7 @@
   object-fit: cover;
   margin-top: 5px;
   border-radius: 8px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 1024px) {
