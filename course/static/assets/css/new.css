@@ -2345,6 +2345,9 @@ Course Detail Page
 .accordion-item {
   margin-bottom: 10px;
 }
+.accordion-body p {
+  color: #111;
+}
 .accordion-button {
   width: 100%;
   border: none;
