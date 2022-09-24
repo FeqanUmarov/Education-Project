@@ -2336,3 +2336,95 @@ Course Detail Page
 .detail-course__sosial-item i {
   margin-right: 10px;
 }
+.accordion {
+  width: 100%;
+}
+.accordion-item {
+  margin-bottom: 10px;
+}
+.accordion-button {
+  width: 100%;
+  border: none;
+  background: rgb(19, 175, 240);
+  background: linear-gradient(105deg, rgb(209, 212, 250) 0%, rgb(189, 242, 250) 100%);
+  text-align: left;
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  outline: none;
+  border-radius: 10px;
+}
+.accordion-button:focus {
+  outline: none;
+}
+.accordion-button i {
+  color: rgba(91, 104, 235, 1);
+  font-size: 28px;
+}
+.fa-solid.fa-chevron-down {
+  transition: 0.4s;
+}
+.fa-solid.fa-chevron-down.show-accordion {
+  transform: rotate(180deg);
+}
+.detail-course__event {
+  width: 100%;
+}
+.detail-course__event-title {
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+  font-size: 42px;
+  color: #333;
+  margin-bottom: 25px;
+}
+.detail-course__event-card img {
+  height: 70vh;
+  object-fit: cover;
+  object-position: center;
+}
+
+.detail-course__event-card .card-location {
+  display: inline-block;
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 25px;
+  color: rgb(19, 175, 240);
+  border-color: rgb(19, 175, 240);
+}
+.detail-course__event-card .card-location:hover {
+  color: rgba(91, 104, 235, 1);
+  border-color: rgba(91, 104, 235, 1);
+}
+.detail-course__event-btns {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+.detail-course__event-btns a {
+  border-radius: 25px;
+  background: rgb(19, 175, 240);
+  background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
+  padding: 10px 20px;
+  color: #fff;
+  transition: 0.4s;
+  margin-right: 20px;
+}
+.detail-course__event-btns a:hover {
+  box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #0ba9ca, 0 0 10px #0ba9ca, 0 0 20px #0ba9ca;
+}
+.detail-course__event-btns--delete {
+  background: #ff3838 !important;
+  background: linear-gradient(105deg, #ff3838 0%, #ff4d4d 100%) !important;
+}
+.detail-course__event-btns--delete:hover {
+  box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #ff3838, 0 0 10px #ff3838, 0 0 20px #ff3838 !important;
+}
+
+/*
+---------------------------------------------
+Course Detail Page
+---------------------------------------------
+*/

@@ -19,3 +19,17 @@ const onChangeImage = (input, img) => {
 onChangeImage(courseLogoUpload, courseLogoImg);
 onChangeImage(courseProfileUpload, courseProfileImg);
 onChangeImage(eventImgUpload, eventImg);
+
+// accordion
+const openIcon1 = document.getElementById("accordion-open1");
+const accordionBtn1 = document.querySelector("#accordion-button1");
+const openIcon2 = document.getElementById("accordion-open2");
+const accordionBtn2 = document.querySelector("#accordion-button2");
+
+accordionBtn1.addEventListener("click", () => {
+  openIcon1.classList.toggle("show-accordion");
+});
+accordionBtn2.addEventListener("click", () => {
+  openIcon2.classList.toggle("show-accordion");
+  console.log(openIcon2);
+});
