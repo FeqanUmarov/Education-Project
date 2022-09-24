@@ -6,7 +6,7 @@
         <div class="container">
             <div class="add-trainer">
                 <h3>Treyner qeydiyyatı</h3>
-                <form class="add-trainer__form" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <form class="add-trainer__form" method="POST" enctype="multipart/form-data">{% csrf_token %}
                     <div class="add-trainer__form-inner">
                         {{form.study_field|as_crispy_field}}
                         {{form.experience|as_crispy_field}}

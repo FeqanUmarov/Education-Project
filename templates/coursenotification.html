@@ -50,11 +50,13 @@
             {% endif %}
             {% if student_info.confirm != 1 %}
             <td>
-              <a type="button" href="{% url 'course:confirm' student_info.id %}" class="btn btn-info">Təsdiq</a>
+              <a type="button" href="{% url 'course:confirm' student_info.id %}"
+                class="common-notification__btn">Təsdiq</a>
             </td>
             {% endif %}
             <td>
-              <a type="button" data-toggle="modal" data-target="#deleteModal" href="" class="btn btn-info">İmtina</a>
+              <a type="button" data-toggle="modal" data-target="#deleteModal" href=""
+                class="common-notification__btn">İmtina</a>
             </td>
           </tr>
           {% endif %}

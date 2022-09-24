@@ -55,9 +55,23 @@
 .common-notification {
   margin-top: 50px;
 }
+
 .notification-table {
   padding-top: 100px;
   overflow: hidden;
+}
+.common-notification__btn {
+  border-radius: 25px;
+  background: rgb(19, 175, 240);
+  background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
+  padding: 10px 20px;
+  color: #fff;
+  transition: 0.4s;
+  margin-right: 20px;
+}
+.common-notification__btn:hover {
+  box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #0ba9ca, 0 0 10px #0ba9ca, 0 0 20px #0ba9ca;
+  color: #fff;
 }
 
 .notification-table__title {
