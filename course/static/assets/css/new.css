@@ -2307,6 +2307,9 @@ Course Detail Page
   background-color: #e9ecef;
   border-radius: 0.25rem;
 }
+.detail-course__right {
+  /* width: 100%; */
+}
 
 .detail-course__tab-item {
   display: inline-block;
@@ -2356,13 +2359,15 @@ Course Detail Page
   font-family: "Roboto", sans-serif;
   outline: none;
   border-radius: 10px;
+  font-size: 26px;
 }
 .accordion-button:focus {
   outline: none;
 }
 .accordion-button i {
   color: rgba(91, 104, 235, 1);
-  font-size: 28px;
+
+  margin-right: 15px;
 }
 .fa-solid.fa-chevron-down {
   transition: 0.4s;
@@ -2370,9 +2375,11 @@ Course Detail Page
 .fa-solid.fa-chevron-down.show-accordion {
   transform: rotate(180deg);
 }
-.detail-course__event {
-  width: 100%;
+.card-img-top {
+  height: 280px;
+  object-fit: cover;
 }
+
 .detail-course__event-title {
   font-family: "Roboto", sans-serif;
   text-align: center;

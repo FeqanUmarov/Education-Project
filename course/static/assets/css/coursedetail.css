@@ -81,3 +81,22 @@ p {
 .my-1-6 {
     margin-bottom: 1.6rem;
 }
+
+.event-detail {
+    margin-top: 150px;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+}
+.event-detail__title {
+    text-align: center;
+    font-size: 48px;
+    width: 60%;
+    margin: 0 auto 25px;
+}
+.event-detail__content p {
+    font-size: 18px;
+    color: #111;
+    line-height: 35px;
+    text-align: justify;
+}
