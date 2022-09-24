@@ -66,6 +66,13 @@
   outline: none;
 }
 
+.add-trainer__form-inner #div_id_photo label {
+  width: 180px;
+}
+.add-trainer__form-inner #div_id_photo > div {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .add-trainer__form-inner input,
   .add-trainer__form-inner select {
