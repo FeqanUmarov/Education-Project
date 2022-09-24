@@ -234,8 +234,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">İmtina</button>
             <form action="{% url 'course:deletecourse' course_values.id %}" enctype="multipart/form-data" method="POST">
-              {%
-              csrf_token %}
+              {%csrf_token %}
               <input class="btn btn-danger" type="submit" value="Sil">
             </form>
           </div>
