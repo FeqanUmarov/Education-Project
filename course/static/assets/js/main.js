@@ -6,6 +6,16 @@ const eventImgUpload = document.querySelector("#id_photo");
 const eventImg = document.querySelector("#id_event_img");
 const eventNewImgUpload = document.querySelector("#div_id_photo #id_photo");
 const eventNewImg = document.querySelector("#id_event_new_img");
+const updateCourseLogoUpload = document.querySelector(
+  "#div_id_course_logo #id_course_logo"
+);
+const updateCourseLogoImg = document.querySelector("#updatecourse_new_logo");
+console.log(updateCourseLogoImg);
+const updateCourseProfileUpload = document.querySelector(
+  "#div_id_course_profile #id_course_profile"
+);
+const updateCourseProfileImg = document.querySelector("#updatecourse_new_img");
+console.log(updateCourseLogoImg);
 
 const onChangeImage = (input, img) => {
   if (input && img) {
@@ -22,6 +32,8 @@ onChangeImage(courseLogoUpload, courseLogoImg);
 onChangeImage(courseProfileUpload, courseProfileImg);
 onChangeImage(eventImgUpload, eventImg);
 onChangeImage(eventNewImgUpload, eventNewImg);
+onChangeImage(updateCourseLogoUpload, updateCourseLogoImg);
+onChangeImage(updateCourseProfileUpload, updateCourseProfileImg);
 
 // accordion
 const openIcon1 = document.getElementById("accordion-open1");

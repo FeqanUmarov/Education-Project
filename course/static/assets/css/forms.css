@@ -80,7 +80,7 @@
 .upload-preview {
   width: 180px;
   height: 220px;
-  object-fit: cover;
+  object-fit: contain;
   margin-top: 5px;
   border-radius: 8px;
   margin-bottom: 10px;

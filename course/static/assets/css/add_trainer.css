@@ -66,10 +66,14 @@
   outline: none;
 }
 
-.add-trainer__form-inner #div_id_photo label {
+.add-trainer__form-inner #div_id_photo label,
+.add-trainer__form-inner #div_id_course_logo label,
+.add-trainer__form-inner #div_id_course_profile label {
   width: 180px;
 }
-.add-trainer__form-inner #div_id_photo > div {
+.add-trainer__form-inner #div_id_photo > div,
+.add-trainer__form-inner #div_id_course_logo > div,
+.add-trainer__form-inner #div_id_course_profile > div {
   display: none;
 }
 

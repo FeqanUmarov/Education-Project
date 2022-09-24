@@ -39,16 +39,25 @@
     <div class="col-md-4">
         <div class="p-3 py-5">
             <span class="add-experience">
-                <a class="fa fa-plus" href="{% url 'course:addcourse'%}">&nbsp; Kurs Elave et</a>
+                <a href="{% url 'course:addcourse'%}">
+                    <i class="fa fa-plus"></i>
+                    Kurs Elave et
+                </a>
             </span>
             <br />
             <br />
             <span class="add-experience">
-                <a class="fa fa-plus" href="{% url 'course:addtrainer'%}">&nbsp; Treyner ol</a>
+                <a href="{% url 'course:addtrainer'%}">
+                    <i class="fa fa-plus"></i>
+                    Treyner ol
+                </a>
             </span>
             <br /><br />
             <span class="add-experience">
-                <a class="fa fa-envelope" href="{% url 'course:commonnotification'%}">&nbsp; Müraciətlərim</a>
+                <a href="{% url 'course:commonnotification'%}">
+                    <i class="fa fa-envelope"></i>
+                    Müraciətlərim
+                </a>
             </span>
             {% if user.is_course and request.user.id == course_apply.user_id %}
             <a href="{% url 'course:commonnotification'%}">Kursa gelen bildirisler</a>

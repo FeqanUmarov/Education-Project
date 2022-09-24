@@ -8,7 +8,7 @@
     flex-direction: column;
     position: absolute;
     left: -70%;
-    top: 75%;
+    top: 85%;
 }
 .myprofile__upload-box #div_id_user_profile > div {
     font-size: 0;
@@ -71,10 +71,16 @@
     padding: 10px 20px;
     border-radius: 20px;
     transition: 0.3s;
+    font-family: "Roboto", sans-serif;
 }
 .add-experience a {
+    display: inline-block;
     margin-bottom: 20px;
     width: 15vw;
+    font-family: "Roboto", sans-serif;
+}
+.add-experience a i {
+    margin-right: 10px;
 }
 
 .add-experience:hover {
