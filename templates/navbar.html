@@ -29,8 +29,7 @@
               </a>
 
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{% url 'user:myprofile' user.id %}">{{request.user.name}}
-                  {{request.user.surname}}</a>
+                <a class="dropdown-item" href="{% url 'user:myprofile' user.id %}">Profilim</a>
                 <a class="dropdown-item" href="{% url 'user:logout' %}">Çıxış</a>
               </div>
               {% elif request.user.is_authenticated %}
@@ -39,7 +38,8 @@
               <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
               <li>
                 <div class="gradient-button">
-                  <a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a>
+                  <a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}}
+                    {{request.user.surname}}</a>
                 </div>
               </li>
 
