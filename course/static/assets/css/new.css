@@ -973,7 +973,7 @@ Banner Style
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
-  padding: 250px 120px 150px 120px;
+  padding: 250px 0% 150px 0%;
   position: relative;
   overflow: hidden;
   z-index: 1;
@@ -990,6 +990,10 @@ Banner Style
   width: 100%;
   height: 100%;
   z-index: 1;
+}
+.hero h2,
+.hero p {
+  color: #fff !important;
 }
 
 .main-banner .left-content {
@@ -1252,15 +1256,16 @@ About Us
 
 .about-us:after {
   background-image: url(../images/about-bg.jpg);
-  width: 777px;
-  height: 1132px;
+  width: 50%;
+  height: 100%;
   content: "";
   position: absolute;
   background-repeat: no-repeat;
+  background-size: cover;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 0;
+  z-index: 1;
 }
 
 /*
