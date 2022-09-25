@@ -2336,6 +2336,7 @@ Course Detail Page
 .detail-course__sosial-item:hover {
   transform: scale(1.05);
 }
+
 .detail-course__sosial-item i {
   margin-right: 10px;
 }
@@ -2379,7 +2380,10 @@ Course Detail Page
   transform: rotate(180deg);
 }
 .card-img-top {
-  height: 280px;
+  /* height: 100%; */
+  min-height: 250px;
+  width: 250px;
+  min-width: 250px;
   object-fit: cover;
 }
 
@@ -2414,6 +2418,7 @@ Course Detail Page
   padding-top: 20px;
 }
 .detail-course__event-btns a {
+  display: inline-block;
   border-radius: 25px;
   background: rgb(19, 175, 240);
   background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
@@ -2421,6 +2426,7 @@ Course Detail Page
   color: #fff;
   transition: 0.4s;
   margin-right: 20px;
+  margin-bottom: 10px;
 }
 .detail-course__event-btns a:hover {
   box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #0ba9ca, 0 0 10px #0ba9ca, 0 0 20px #0ba9ca;
@@ -2431,6 +2437,46 @@ Course Detail Page
 }
 .detail-course__event-btns--delete:hover {
   box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #ff3838, 0 0 10px #ff3838, 0 0 20px #ff3838 !important;
+}
+.detail-course__branches-title {
+  width: 100%;
+  background: rgb(19, 175, 240);
+  background: linear-gradient(105deg, rgb(209, 212, 250) 0%, rgb(189, 242, 250) 100%);
+  text-align: left;
+  padding: 10px 20px;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: center; */
+  color: #333;
+  font-family: "Roboto", sans-serif;
+  border-radius: 10px;
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.detail-course__branches-title i {
+  color: rgba(91, 104, 235, 1);
+  margin-right: 15px;
+}
+.detail-course__branches-inner {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.detail-course__branches-item {
+  border: 1px solid rgba(40, 225, 253, 0.5);
+  padding: 20px;
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+}
+.detail-course__branches-item--address {
+  display: inline-block;
+  margin-bottom: 10px;
 }
 
 /*
