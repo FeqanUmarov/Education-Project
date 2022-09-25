@@ -2,15 +2,16 @@
 {% load crispy_forms_tags %}
 {% block body %}
 {% load static %}
-<div class="container">
-    {% if blog.photo %}
-    <img src="{{blog.photo.url}}" alt="{{blog.photo}}" class="" width="50">
-    {% endif %}
-    <h3 class="eventtitle">{{blog.title}}</h3>
-    <br>
-    <hr>
-    <span>{{blog.content|safe}}</span>
-
+<div class="blog-details">
+    <div class="container">
+        <div class="blog-details__inner">
+            {% if blog.photo %}
+            <img class="blog-details__img" src="{{blog.photo.url}}" alt="{{blog.photo}}">
+            {% endif %}
+            <h3 class="blog-details__title">{{blog.title}}</h3>
+            <div class="blog-details__content">{{blog.content|safe}}</div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

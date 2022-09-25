@@ -2541,6 +2541,36 @@ Course Detail Page
   box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #0ba9ca, 0 0 10px #0ba9ca, 0 0 20px #0ba9ca;
   color: #fff;
 }
+.blog-details {
+  padding-top: 150px;
+}
+.blog-details__inner {
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.blog-details__title {
+  margin: 25px 0;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 400;
+}
+.blog-details__content {
+  padding: 0 15px 15px;
+}
+.blog-details__content p {
+  color: #111;
+  text-align: justify;
+  font-size: 18px;
+  line-height: 38px;
+}
+.blog-details__content a {
+  color: #0ba9ca;
+  transition: 0.4s;
+}
+.blog-details__content a:hover {
+  color: #3b5998;
+}
 /*
 ---------------------------------------------
 Course Detail Page
