@@ -2397,6 +2397,7 @@ Course Detail Page
   margin-bottom: 25px;
 }
 .detail-course__event-card img {
+  width: 100%;
   height: 70vh;
   object-fit: cover;
   object-position: center;
@@ -2487,6 +2488,59 @@ Course Detail Page
   }
 }
 
+.articles__wrapper {
+  padding-top: 150px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.articles__item {
+  width: 48%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+@media (max-width: 768px) {
+  .articles__item {
+    width: 100%;
+  }
+}
+.articles__item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.articles__item-img--wrapper {
+  width: 100%;
+  height: 40vh;
+  margin-bottom: 20px;
+}
+.articles__item-body p {
+  color: #111;
+}
+.articles__item-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 26px;
+}
+.articles__item-btn {
+  align-self: center;
+  margin: 20px 0;
+  border-radius: 25px;
+  background: rgb(19, 175, 240);
+  background: linear-gradient(105deg, rgba(91, 104, 235, 1) 0%, rgba(40, 225, 253, 1) 100%);
+  padding: 10px 20px;
+  color: #fff;
+  transition: 0.4s;
+  margin-right: 20px;
+}
+.articles__item-btn:hover {
+  box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #0ba9ca, 0 0 10px #0ba9ca, 0 0 20px #0ba9ca;
+  color: #fff;
+}
 /*
 ---------------------------------------------
 Course Detail Page
