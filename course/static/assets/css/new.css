@@ -2325,6 +2325,7 @@ Course Detail Page
 .detail-course__sosial {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .detail-course__sosial-item {
   font-size: 22px;
@@ -2332,6 +2333,7 @@ Course Detail Page
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: 0.4s;
+  margin-bottom: 10px;
 }
 .detail-course__sosial-item:hover {
   transform: scale(1.05);
@@ -2478,6 +2480,11 @@ Course Detail Page
   display: flex;
   margin-bottom: 10px;
   gap: 15px;
+}
+@media (max-width: 567px) {
+  .detail-course__branches-item {
+    width: 100%;
+  }
 }
 
 /*
