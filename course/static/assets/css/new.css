@@ -1186,21 +1186,20 @@ Services Style
   transform: scale(1.02);
 }
 .service-item__icon {
-  width: 100%;
-  height: 120px;
+  width: 40%;
+  height: 80px;
   margin-bottom: 20px;
   border-radius: 10px;
   overflow: hidden;
-  padding: 10px;
   background-color: #fff;
 }
 .service-item__trainer-icon {
-  width: 80%;
-  height: 160px;
+  width: 40%;
+  height: 80px;
   border-radius: 50%;
   overflow: hidden;
   background-color: #fff;
-  margin: 0 auto 20px;
+  margin-bottom: 20px;
 }
 
 .service-item__icon img,
@@ -1246,6 +1245,14 @@ About Us
   background-color: #fff;
   border-radius: 40px;
   margin-bottom: 30px;
+  border: 1px solid #0ba9ca;
+  height: 80%;
+  transition: 0.4s;
+}
+
+.about-us .box-item:hover {
+  box-shadow: 0 0 3px #fff, 0 0 10px #fff, 0 0 20px #fff, 0 0 20px #9ee0ee, 0 0 10px #9ee0ee, 0 0 20px #9ee0ee;
+  color: #fff;
 }
 
 .about-us .box-item h4 a {
@@ -1314,10 +1321,68 @@ The Clients
   margin-right: 18%;
 }
 
-.the-clients .naccs {
+.the-clients .reviews-bg {
   position: relative;
+  background-image: url(https://img.freepik.com/free-vector/people-with-thumbs-up-symbol_53876-43139.jpg?w=740&t=st=1664192137~exp=1664192737~hmac=dba0cc1ed295678df12e2b4a10c006688c0c6f54608ad47d002f0f2d5fa1685f);
+  background-attachment: fixed;
+  padding: 50px 0;
+}
+.the-clients .reviews-bg__overlay {
 }
 
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  padding: 5%;
+  /* background: #fff; */
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.the-clients .naccs {
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 15px;
+  height: auto;
+}
+.reviews__item-img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: visible;
+  margin-right: 20px;
+}
+.reviews__item-text {
+  color: #111;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-align: justify;
+  font-style: italic;
+}
+.reviews__item-author {
+  text-align: right;
+  color: #3b5998;
+  font-size: 22px;
+  font-weight: 600;
+}
 .menu .thumb h4 {
   margin-bottom: 0px;
   font-size: 20px;
