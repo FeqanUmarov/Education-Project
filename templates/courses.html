@@ -7,7 +7,7 @@
       <div class="col-lg-8 offset-lg-2">
         <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
           <h4>Bütün kurslar bir platformada</h4>
-          <img src="assets/images/heading-line-dec.png" alt="">
+          <!-- <img src="assets/images/heading-line-dec.png" alt="">
           <p>Bütün kursları sizin ayağınıza gətirdik. Sizə lazım olan kursu seçin və öyrənməyə başlayın!</p>
           <br><br><br>
           <form action="">
@@ -16,7 +16,7 @@
               <button class="btn-search"><i class="fas fa-search"></i></button>
               <input type="text" name="keyword" class="input-search" placeholder="Kursun adini daxil edin...">
             </div>
-          </form>
+          </form> -->
 
         </div>
       </div>
@@ -30,7 +30,7 @@
       <a href="{% url 'course:detailcourse' course_value.id %}">
         <div class="courses service-item first-service">
           {% if course_value.course_logo %}
-          <div class="icon">
+          <div class="service-item__icon">
             <img src="{{course_value.course_logo.url}}" alt="{{course_value.course_name}}">
           </div>
           {% endif %}
@@ -61,7 +61,7 @@
       <a href="{% url 'course:detailtrainers' trainer_value.id %}">
         <div class=" service-item first-service">
           {% if trainer_value.user.user_profile %}
-          <div class="icon">
+          <div class="service-item__trainer-icon">
             <img src="{{trainer_value.user.user_profile.url}}" alt="{{trainer_value.user.user_profile.url}}">
           </div>
           {% endif %}

@@ -1096,7 +1096,7 @@ Services Style
 .service-item {
   position: relative;
   z-index: 1;
-  padding: 30px;
+  padding: 20px;
   background-color: #fff;
   background-image: url(../images/service-bg.jpg);
   background-position: right top;
@@ -1184,6 +1184,31 @@ Services Style
   transition: 0.3s;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   transform: scale(1.02);
+}
+.service-item__icon {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 10px;
+  background-color: #fff;
+}
+.service-item__trainer-icon {
+  width: 80%;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #fff;
+  margin: 0 auto 20px;
+}
+
+.service-item__icon img,
+.service-item__trainer-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
 }
 .courses-wrapper {
   margin-bottom: 50px;
