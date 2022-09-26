@@ -463,6 +463,7 @@ header
   transition: all 0.3s ease 0s;
   position: relative;
   z-index: 999;
+  /* right: 30px; */
 }
 
 .header-area .main-nav .nav li {
@@ -777,7 +778,7 @@ header
     padding: 0px;
   }
   .header-area .logo {
-    margin-left: 30px;
+    /* margin-left: 30px; */
   }
   .header-area .menu-trigger {
     display: block !important;
@@ -1354,6 +1355,21 @@ The Clients
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
+}
+@media (max-width: 567px) {
+  .swiper-slide {
+    flex-direction: column;
+  }
+  .reviews__item-img {
+    margin-bottom: 20px;
+  }
+  .reviews__item-text {
+    margin-bottom: 20px;
+    font-size: 16px !important;
+  }
+  .reviews__item-author {
+    margin-bottom: 20px;
+  }
 }
 
 .the-clients .naccs {
