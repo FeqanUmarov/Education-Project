@@ -51,5 +51,16 @@ accordionBtn1?.addEventListener("click", () => {
 });
 accordionBtn2?.addEventListener("click", () => {
   openIcon2.classList.toggle("show-accordion");
-  console.log(openIcon2);
+});
+
+//show password
+const loginInput = document.querySelector(" #id_password");
+const loginIcon = document.querySelector(" #togglePassword");
+console.log(loginIcon);
+
+loginIcon.addEventListener("click", () => {
+  const type =
+    loginInput.getAttribute("type") === "password" ? "text" : "password";
+  loginInput.setAttribute("type", type);
+  loginIcon.classList.toggle("fa-eye");
 });

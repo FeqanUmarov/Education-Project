@@ -36,6 +36,17 @@
   color: rgba(91, 104, 235, 1);
 }
 
+.login__form-inner .password-box {
+  position: relative;
+}
+.login__form-inner .password-box i {
+  position: absolute;
+  top: 46%;
+  right: 5%;
+  cursor: pointer;
+  color: rgba(91, 104, 235, 1);
+}
+
 .login-form-2 {
   padding: 5%;
   background: #0062cc;

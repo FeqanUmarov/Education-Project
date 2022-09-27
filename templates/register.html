@@ -10,6 +10,7 @@
             <form class="register__form" action="" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form|crispy}}
+                <i class="fa-solid fa-eye-slash" id="togglePassword"></i>
                 <div class="register__submit">
                     <button type="submit" class="register__submit-btn">Hesab Yarat</button>
                 </div>
