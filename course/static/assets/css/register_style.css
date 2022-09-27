@@ -98,6 +98,15 @@
   .register__form input {
     width: 100vw;
   }
+  #div_id_user_profile {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  #div_id_user_profile label {
+    width: 50%;
+    text-align: center;
+  }
 }
 @media (max-width: 567px) {
   #div_id_user_profile {
@@ -116,7 +125,7 @@
 
 @media (max-width: 356px) {
   #div_id_user_profile label {
-    width: 100%;
+    width: 90%;
     text-align: center;
   }
   #div_id_user_profile label::before {
