@@ -19,7 +19,6 @@ const updateCourseProfileImg = document.querySelector("#updatecourse_new_img");
 
 const updateBlogImg = document.querySelector("#div_id_photo #id_photo");
 const updateBlogImgPrev = document.querySelector("#blog_img_preview");
-console.log(updateBlogImg);
 
 const onChangeImage = (input, img) => {
   if (input && img) {
@@ -56,11 +55,20 @@ accordionBtn2?.addEventListener("click", () => {
 //show password
 const loginInput = document.querySelector(" #id_password");
 const loginIcon = document.querySelector(" #togglePassword");
-console.log(loginIcon);
 
-loginIcon.addEventListener("click", () => {
+loginIcon?.addEventListener("click", () => {
   const type =
-    loginInput.getAttribute("type") === "password" ? "text" : "password";
+    loginInput?.getAttribute("type") === "password" ? "text" : "password";
   loginInput.setAttribute("type", type);
   loginIcon.classList.toggle("fa-eye");
 });
+
+// my profile file input
+
+const myProfileInput = document.querySelector(
+  ".myprofile__upload-box #div_id_user_profile #id_user_profile"
+);
+const type = myProfileInput.getAttribute("type") === "text" ? "file" : "file";
+myProfileInput.setAttribute("type", type);
+
+console.log(myInput);
