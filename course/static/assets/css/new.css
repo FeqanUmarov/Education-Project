@@ -794,6 +794,8 @@ header
     -o-transition: all 0s ease 0s;
     transition: all 0s ease 0s;
     margin-left: 0px;
+    height: 55vh;
+    background-color: #fff;
   }
   .background-header .nav {
     margin-top: 80px;
