@@ -2544,6 +2544,18 @@ Course Detail Page
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
+  flex-wrap: wrap;
+}
+@media (max-width: 600px) {
+  .detail-course__event-btns div {
+    width: 100%;
+  }
+  .detail-course__event-btns a {
+    width: 100%;
+  }
+  .detail-course__event-card img {
+    height: 50vh;
+  }
 }
 .detail-course__event-btns a {
   display: inline-block;
