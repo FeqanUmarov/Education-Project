@@ -1,21 +1,23 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-<div class="container">
-    <br><br><br><br><br>
-		<input type="hidden" name="count" value="1" />
-        <div class="control-group" id="fields">
-           <h3>Dərs planını yeilə</h3>
-            <hr>
-            <div class="controls" id="profs">
-                <form method="POST" class="input-append">{% csrf_token %}
-                    {{form.media}}
-                    {{form|crispy}}
-                    <button type="submit" class="btn btn-danger">Yenilə</button>
+<div class="row">
+    <div class="add-trainer__bg">
+        <div class="container">
+            <div class="add-trainer">
+                <h3>Dərs planını yeilə</h3>
+                <form method="POST" class="add-trainer__form">{% csrf_token %}
+                    <div class="add-trainer__form-inner">
+                        {{form.media}}
+                        {{form|crispy}}
+                    </div>
+                    <div class="add-trainer__form-submit">
+                        <button type="submit" class="add-trainer__form-submit--btn">Yenilə</button>
+                    </div>
                 </form>
             </div>
         </div>
-	
+    </div>
 
 </div>
 

@@ -3,33 +3,25 @@
 {% block body %}
 {% load static %}
 
-<br><br><br><br><br><br>
-<div class="carousel-inner py-4">
-    <div class="carousel-item active">
-        <div class="container">
-
-                <div class="row ">
-                    {% for photo_gallery in photo_gallerys %}
-                    <div class="col-lg-4">
-                        <div class="card">
-                            {% if photo_gallery.photo %}
-                                <img
-                                src="{{photo_gallery.photo.url}}"
-                                class="card-img-top"
-                                alt="Waterfall"
-                                />
-                            {% endif %}
-                            <div class="card-body">
-                                <h5 class="card-title">{{photo_gallery.title}}</h5>
-                                <p class="card-text">
-                                    {{photo_gallery.content}}
-                                </p>
-                                <a href="#!" class="btn btn-primary">Etrafli</a>
-                            </div>
-                        </div>
+<div class="articles">
+    <div class="container">
+        <div class="row articles__wrapper">
+            {% for photo_gallery in photo_gallerys %}
+            <div class="articles__item">
+                <div class="articles__item-body">
+                    {% if photo_gallery.photo %}
+                    <div class="articles__item-img--wrapper">
+                        <img src="{{photo_gallery.photo.url}}" class="articles__item-img" alt="Waterfall" />
                     </div>
-                    {% endfor %}
+                    {% endif %}
+                    <h5 class="articles__item-title">{{photo_gallery.title}}</h5>
+                    <p>
+                        {{photo_gallery.content|safe}}
+                    </p>
                 </div>
+                <a href="{% url 'course:blogdetails' photo_gallery.id %}" class="articles__item-btn">Ətraflı</a>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

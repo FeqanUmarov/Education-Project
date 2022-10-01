@@ -1,15 +1,22 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-<div class="container">
-    <br><br><br><br><br><br><br>
-    <h3>Hesab yarat</h3>
-    <hr>
-    <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
-        {{form|crispy}}
-        <button type="submit" class="btn btn-danger">Hesab Yarat</button>
+<div class="row">
+    <div class="container">
+        <div class="register">
+            <div class="register__title">
+                <h3>Hesab yarat</h3>
+            </div>
+            <form class="register__form" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="register__submit">
+                    <button type="submit" class="register__submit-btn">Hesab Yarat</button>
+                </div>
 
-    </form>
+            </form>
+        </div>
+    </div>
 </div>
 
 

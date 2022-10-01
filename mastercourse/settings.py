@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'multiselectfield',
     'django_cleanup',
+    'django_filters'
 ]
 
 MIDDLEWARE = [

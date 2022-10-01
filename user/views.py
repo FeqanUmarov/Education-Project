@@ -59,7 +59,7 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
-    messages.success(request, "Ugurla cixis etdiniz")
+    messages.success(request, "Uğurla çıxış etdiniz")
     return redirect("index")
 
 

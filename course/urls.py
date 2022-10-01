@@ -8,6 +8,7 @@ app_name = "course"
 
 urlpatterns = [
     path('courses', views.courses, name = "courses"),
+    path('aboutus', views.aboutus, name = "aboutus"),
     path('addcourse', views.addcourse, name = "addcourse"),
     path('addtrainer', views.addtrainer, name = "addtrainer"),
     path('addbranch/<int:id>', views.addbranch, name = "addbranch"),
@@ -20,6 +21,7 @@ urlpatterns = [
     path('deletebranch/<int:id>', views.deletebranch, name = "deletebranch"),
     path('comment/<int:id>', views.comment, name = "comment"),
     path('addphoto/<int:id>', views.addphoto, name = "addphoto"),
+    path('blogdetails/<int:id>', views.blogdetails, name = "blogdetails"),
     path('gallery/<int:id>', views.gallery, name = "gallery"),
     path('addexam/<int:id>', views.addexam, name = "addexam"),
     path('courseexam/<int:id>', views.courseexam, name = "courseexam"),
@@ -46,4 +48,5 @@ urlpatterns = [
     path('updateevent/<int:id>',views.updateevent, name="updateevent"),
     path('applyevent/<int:id>',views.applyevent, name="applyevent"),
     path('eventapplynotification/<int:id>',views.eventapplynotification, name="eventapplynotification"),
+    
 ]

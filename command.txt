@@ -1,0 +1,7 @@
+python manage.py runserver
+source e-course/bin/activate
+ pip install -r requirement.txt
+pip install django-ckeditor
+
+samir@gmail.com
+qafqaz123

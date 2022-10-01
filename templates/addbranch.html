@@ -1,24 +1,25 @@
 {% extends "layout.html" %}
 {% load crispy_forms_tags %}
 {% block body %}
-<div class="container">
-    <br><br><br><br><br>
-    <h3>Filial elave et</h3>
-    <hr>
-    
-    <form method="POST" class="input-append">{% csrf_token %}
-        <div>
-            {{form.location|as_crispy_field}}
-            {{form.adress|as_crispy_field}}
-            {{form.contact|as_crispy_field}}
+<div class="row">
+    <div class="add-trainer__bg">
+        <div class="container">
+            <div class="add-trainer">
+                <h3>Filial elave et</h3>
+                <form class="add-trainer__form" method="POST" class="input-append">{% csrf_token %}
+                    <div class="add-trainer__form-inner">
+                        {{form.location|as_crispy_field}}
+                        {{form.adress|as_crispy_field}}
+                        {{form.contact|as_crispy_field}}
+                    </div>
+                    <div class="add-trainer__form-submit">
+                        <button type="submit" class="add-trainer__form-submit--btn">Elave Et</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="addbranchbutton">
-            <button type="submit" class="btn btn-danger">Elave Et</button>
-        </div>       
-        
-    </form>
-        
-
+    </div>
 </div>
+
 
 {% endblock %}

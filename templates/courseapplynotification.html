@@ -2,44 +2,42 @@
 {% load crispy_forms_tags %}
 {% block body %}
 {% load static %}
-<br><br><br><br><br><br>
-<div class="container">
-    <div class="row">
-        <table class="table table-striped">
-              {% if user %}
-              <thead>
-                <tr>
-                  <th scope="col">Basliq</th>
-                  <th scope="col">Movzu</th>
-                  <th scope="col">Müraciət tarixi</th>
-                  <th scope="col">Veziyyet</th>
-                </tr>
-              </thead>
+<div class="row">
+  <div class="container common-notification">
+    <div class="notification-table">
+      <table class="table">
+        {% if user %}
+        <thead class="notification-table__head">
+          <tr>
+            <th scope="col">Basliq</th>
+            <th scope="col">Movzu</th>
+            <th scope="col">Müraciət tarixi</th>
+            <th scope="col">Veziyyet</th>
+          </tr>
+        </thead>
+        {% for student_info in student_infos %}
+        {% if student_info.user_id == request.user.id %}
+        <tbody>
+          <tr>
+            <td>{{student_info.apply_title}}</td>
+            <td>{{student_info.apply_content}}</td>
+            <td>{{student_info.apply_date}}</td>
 
+            {% if student_info.pending == 1 %}
+            <td>pending...</td>
+            {% elif student_info.confirm == 1 %}
+            <td>Təsdiqləndi</td>
+            {% elif student_info.cancel == 1 %}
+            <td>Imtina edildi</td>
+            {% endif %}
+          </tr>
+          {% endif %}
 
-              {% for student_info in student_infos %}
-              {% if student_info.user_id == request.user.id %}
-              <tbody>
-                <tr>
-                  <td>{{student_info.apply_title}}</td>
-                  <td>{{student_info.apply_content}}</td>
-                  <td>{{student_info.apply_date}}</td>
-                  
-                  {% if student_info.pending == 1 %}
-                  <td>pending...</td>
-                  {% elif student_info.confirm == 1 %}
-                  <td>Təsdiqləndi</td>
-                  {% elif student_info.cancel == 1 %}
-                  <td>Imtina edildi</td>
-                  {% endif %}
-                </tr>
-                {% endif %}
-
-              {% endfor %}
-              {% endif %}
- 
-            </tbody>
-          </table>
+          {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 {% endblock %}

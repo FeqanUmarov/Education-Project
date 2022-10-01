@@ -1,4 +1,3 @@
-body{margin-top:20px;}
 .icon-box.medium {
     font-size: 20px;
     width: 50px;
@@ -44,7 +43,9 @@ body{margin-top:20px;}
     margin-right: 5px;
 }
 
-a, a:active, a:focus {
+a,
+a:active,
+a:focus {
     color: #616161;
     text-decoration: none;
     transition-timing-function: ease-in-out;
@@ -52,21 +53,23 @@ a, a:active, a:focus {
     -moz-transition-timing-function: ease-in-out;
     -webkit-transition-timing-function: ease-in-out;
     -o-transition-timing-function: ease-in-out;
-    transition-duration: .2s;
-    -ms-transition-duration: .2s;
-    -moz-transition-duration: .2s;
-    -webkit-transition-duration: .2s;
-    -o-transition-duration: .2s;
+    transition-duration: 0.2s;
+    -ms-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    -webkit-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
 }
 
-.text-secondary, .text-secondary-hover:hover {
-    color: #59b73f !important;
+.text-secondary,
+.text-secondary-hover:hover {
+    color: rgb(16, 184, 210) !important;
 }
 .display-25 {
     font-size: 1.4rem;
 }
 
-.text-primary, .text-primary-hover:hover {
+.text-primary,
+.text-primary-hover:hover {
     color: #ff712a !important;
 }
 
@@ -74,6 +77,26 @@ p {
     margin: 0 0 20px;
 }
 
-.mb-1-6, .my-1-6 {
+.mb-1-6,
+.my-1-6 {
     margin-bottom: 1.6rem;
+}
+
+.event-detail {
+    margin-top: 150px;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+}
+.event-detail__title {
+    text-align: center;
+    font-size: 48px;
+    width: 60%;
+    margin: 0 auto 25px;
+}
+.event-detail__content p {
+    font-size: 18px;
+    color: #111;
+    line-height: 35px;
+    text-align: justify;
 }
