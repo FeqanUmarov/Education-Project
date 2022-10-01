@@ -8,6 +8,7 @@ app_name = "course"
 
 urlpatterns = [
     path('courses', views.courses, name = "courses"),
+    path('aboutus', views.aboutus, name = "aboutus"),
     path('addcourse', views.addcourse, name = "addcourse"),
     path('addtrainer', views.addtrainer, name = "addtrainer"),
     path('addbranch/<int:id>', views.addbranch, name = "addbranch"),
@@ -47,4 +48,5 @@ urlpatterns = [
     path('updateevent/<int:id>',views.updateevent, name="updateevent"),
     path('applyevent/<int:id>',views.applyevent, name="applyevent"),
     path('eventapplynotification/<int:id>',views.eventapplynotification, name="eventapplynotification"),
+    
 ]

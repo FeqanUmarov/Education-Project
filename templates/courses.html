@@ -7,7 +7,7 @@
       <div class="col-lg-8 offset-lg-2">
         <div class="section-heading  wow fadeInDown" data-wow-duration="1s" data-wow-delay="0.5s">
           <h4>Bütün kurslar bir platformada</h4>
-          <!-- <img src="assets/images/heading-line-dec.png" alt="">
+          <img src="assets/images/heading-line-dec.png" alt="">
           <p>Bütün kursları sizin ayağınıza gətirdik. Sizə lazım olan kursu seçin və öyrənməyə başlayın!</p>
           <br><br><br>
           <form action="">
@@ -16,7 +16,7 @@
               <button class="btn-search"><i class="fas fa-search"></i></button>
               <input type="text" name="keyword" class="input-search" placeholder="Kursun adini daxil edin...">
             </div>
-          </form> -->
+          </form>
 
         </div>
       </div>
@@ -27,7 +27,9 @@
     <hr>
     <div class="row courses-wrapper">
       {% for course_value in course_values%}
+      {% if course_value.is_course %}
       <a href="{% url 'course:detailcourse' course_value.id %}">
+      {% endif  %}
         <div class="courses service-item first-service">
           {% if course_value.course_logo %}
           <div class="service-item__icon">
@@ -58,7 +60,9 @@
     <hr>
     <div class="row courses-wrapper">
       {% for trainer_value in trainer_values%}
+      {% if trainer_value.is_teacher %}
       <a href="{% url 'course:detailtrainers' trainer_value.id %}">
+      {% endif %}
         <div class=" service-item first-service">
           {% if trainer_value.user.user_profile %}
           <div class="service-item__trainer-icon">
@@ -82,13 +86,6 @@
       {% endfor %}
     </div>
 
-
-
-
-    {% else %}
-    <div class="alert alert-danger">
-      Bele bir kurs yoxdur
-    </div>
     {% endif %}
 
 

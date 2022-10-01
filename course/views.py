@@ -2,12 +2,16 @@ from email import message
 from email.policy import default
 from pyexpat.errors import messages
 from tkinter.messagebox import NO
+from urllib import request, response
+import datetime
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from course.models import CourseBoss, Branchs, CourseType,Comment,CoursePhoto, CourseApply, Exam, ExamApply, LessonPlan, Trainer, TrainerApply, Event, EventApply
 from user.models import User
-from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateLessonPlan, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm
+from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateLessonPlan, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm, ApplyEventForm
+
 # Create your views here.
 
 
@@ -32,6 +36,9 @@ def courses(request):
 
     return render(request,"courses.html",contex)
 
+def aboutus(request):
+    return render(request,"aboutus.html")
+
 
 @login_required(login_url='course/addcourse')
 def addcourse(request):
@@ -40,7 +47,7 @@ def addcourse(request):
         course = form.save(commit=False)
         course.user= request.user
         form.save()
-        messages.success(request,"Kurs ugurla elave edildi")
+        messages.success(request,"Kurs uğurla əlavə edildi")
 
         return redirect ("course:courses")
 
@@ -58,7 +65,7 @@ def addtrainer(request):
         trainer = form.save(commit=False)
         trainer.user= request.user
         form.save()
-        messages.success(request,"Treyner kimi qeydiyyatdan keçdiniz")
+        messages.success(request,"Treyner olaraq qeydiyyatdan keçdiniz")
 
         return redirect ("course:courses")
 
@@ -106,7 +113,7 @@ def addexam(request,id):
 
     return render(request,"addexam.html", contex)
 
-
+@login_required(login_url='course/courseexam')
 def courseexam(request,id):
     course_exam = Exam.objects.filter(course=id)
     contex={
@@ -141,6 +148,7 @@ def courseapply(request,id):
 
     return render(request,"courseapply.html", contex)
 
+@login_required(login_url='course/applytrainer')
 def applytrainer(request,id):
     form = AskTrainer(request.POST or None)
     
@@ -159,7 +167,7 @@ def applytrainer(request,id):
     
     return render(request, "applytrainer.html", contex)
 
-
+@login_required(login_url='course/trainernotification')
 def trainernotification(request,id):
     student_apply = TrainerApply.objects.filter(trainer=id)
     
@@ -170,7 +178,8 @@ def trainernotification(request,id):
     
     return render(request, "trainernotification.html", contex)
     
-        
+    
+@login_required(login_url='course/trainerapplynotification')       
 def trainerapplynotification(request,id):
     student_infos = TrainerApply.objects.filter(trainer=id)
     
@@ -199,6 +208,7 @@ def coursenotification(request,id):
     return render(request,"coursenotification.html",contex)
 
 
+@login_required(login_url='course/courseapplynotification')
 def courseapplynotification(request,id):
     
     student_info = CourseApply.objects.filter(course_id=id)
@@ -254,6 +264,7 @@ def addphoto(request,id):
 
     return render(request,"addphoto.html", contex)
 
+@login_required(login_url='course/blogdetails')
 def blogdetails(request, id):
     blog = CoursePhoto.objects.filter(id=id).first()
     
@@ -265,7 +276,7 @@ def blogdetails(request, id):
 
 
 
-
+@login_required(login_url='course/addlessonplan')
 def addlessonplan(request, id):
     form = CreateLessonPlan(request.POST or None)
     if form.is_valid():
@@ -281,7 +292,7 @@ def addlessonplan(request, id):
     
     return render (request, "lessonplan.html", contex)
 
-
+@login_required(login_url='course/updatelessonplan')
 def updatelessonplan(request, id):
     lessonplan = get_object_or_404(LessonPlan,id=id)
     courseid = LessonPlan.objects.get(id=id).course_id
@@ -301,6 +312,8 @@ def updatelessonplan(request, id):
     }
     return render(request, "updatelessonplan.html",contex)
 
+
+@login_required(login_url='course/deletelessonplan')
 def deletelessonplan(request,id):
     
     lessonplan = get_object_or_404(LessonPlan,id=id)
@@ -309,8 +322,7 @@ def deletelessonplan(request,id):
     return redirect ("course:detailcourse", id=courseid)
     
     
-    
-    
+
 def detailcourse(request,id):
     course = CourseBoss.objects.filter(id=id).first()
     course_branch = Branchs.objects.filter(branch_id=id)
@@ -330,7 +342,7 @@ def detailcourse(request,id):
     return render(request, "detailcourse.html",contex)
 
 
-
+@login_required(login_url='course/addevent') 
 def addevent(request,id):
     form = CreateEvent(request.POST or None, request.FILES or None)
     
@@ -349,7 +361,7 @@ def addevent(request,id):
     
     return render (request, "addevent.html", contex)
 
-
+@login_required(login_url='course/eventdetails') 
 def eventdetails(request,id):
     eventdetail = Event.objects.filter(trainer=id).first()
     
@@ -366,12 +378,21 @@ def eventdetails(request,id):
 
 
 
-
+@login_required(login_url='course/eventapplynotification') 
 def eventapplynotification(request,id):
     eventapplyinfos = EventApply.objects.filter()
     
+    keyword = request.GET.get("name")
+    if keyword:
+        eventapplyinfos = User.objects.filter(name__contains = keyword)
+        return render(request,"eventnotification.html",{"eventapplyinfos":eventapplyinfos})
+        
+    
+    
+    
     contex = {
         "eventapplyinfos":eventapplyinfos,
+      
         
     }
     
@@ -385,13 +406,15 @@ def eventapplynotification(request,id):
     
     
     
-
+@login_required(login_url='course/deleteevent') 
 def deleteevent(request,id):
     event = get_object_or_404(Event,trainer=id)
     event.delete()
     return redirect("course:detailtrainers",id=id)
 
 
+
+@login_required(login_url='course/updateevent') 
 def updateevent(request,id):
     event = get_object_or_404(Event,trainer=id)
     form = CreateEvent(request.POST or None, request.FILES or None , instance=event)
@@ -414,6 +437,8 @@ def updateevent(request,id):
     return render(request, "updateevent.html",contex)
 
 
+
+@login_required(login_url='course/applyevent') 
 def applyevent(request,id):
     form = ApplyEventForm(request.POST or None)
     if form.is_valid():
@@ -445,6 +470,8 @@ def detailtrainers(request,id):
         }
     return render(request,"detailtrainers.html", contex)
 
+
+@login_required(login_url='course/updatecourse')
 def updatecourse(request,id):
     course = get_object_or_404(CourseBoss,id=id)
     form = CourseInfo(request.POST or None, request.FILES or None , instance=course)
@@ -464,6 +491,9 @@ def updatecourse(request,id):
 
     return render(request, "updatecourse.html",contex)
 
+
+
+@login_required(login_url='course/updatetrainer')
 def updatetrainer(request,id):
     trainer = get_object_or_404(Trainer,id=id)
     form = TrainerInfo(request.POST or None, request.FILES or None , instance=trainer)
@@ -484,6 +514,8 @@ def updatetrainer(request,id):
 
     return render(request, "updatetrainer.html",contex)
 
+
+@login_required(login_url='course/applyexam')
 def applyexam(request,id):
     apply_exam = ExamApply()
     exam_data = Exam()
@@ -511,13 +543,15 @@ def applyexam(request,id):
 
 
 
-
+@login_required(login_url='course/deletecourse')
 def deletecourse(request,id):
     course = get_object_or_404(CourseBoss,id=id)
     course.delete()
     return redirect("course:courses")
 
 
+
+@login_required(login_url='course/deletetrainer')
 def deletetrainer(request, id):
     trainer = get_object_or_404(Trainer,id=id)
     trainer.delete()
@@ -525,7 +559,7 @@ def deletetrainer(request, id):
 
 
 
-
+@login_required(login_url='course/updatebranch')
 def updatebranch(request,id):
     branch = get_object_or_404(Branchs,id=id)
     courseid = Branchs.objects.get(id=id).branch_id
@@ -545,12 +579,16 @@ def updatebranch(request,id):
 
     return render(request, "updatebranch.html",contex)
 
+
+@login_required(login_url='course/deletebranch')
 def deletebranch(request, id):
     branch = get_object_or_404(Branchs,id=id)
     courseid = Branchs.objects.get(id=id).branch_id
     branch.delete()
     return redirect("course:detailcourse", id=courseid)
 
+
+@login_required(login_url='course/comment')
 def comment(request,id):
     course = get_object_or_404(CourseBoss,id=id)
 
@@ -564,6 +602,8 @@ def comment(request,id):
 
         return redirect("course:detailcourse",id=id)
 
+
+@login_required(login_url='course/gallery')
 def gallery(request,id):
     photo = CoursePhoto.objects.filter(course_id=id)
 
@@ -573,6 +613,8 @@ def gallery(request,id):
 
     return render (request,"photogallery.html",contex)
 
+
+@login_required(login_url='course/confirm')
 def confirm(request, id):
     status = CourseApply.objects.filter(id=id).first()
     courseid = CourseApply.objects.get(id=id).course_id
@@ -583,6 +625,7 @@ def confirm(request, id):
     return redirect("course:coursenotification",id=courseid)
 
 
+@login_required(login_url='course/confirmtrainer')
 def confirmtrainer(request, id):
     status = TrainerApply.objects.filter(id=id).first()
     trainerid = TrainerApply.objects.get(id=id).trainer_id
@@ -592,6 +635,8 @@ def confirmtrainer(request, id):
     status.save()
     return redirect("course:trainernotification",id=trainerid)
 
+
+@login_required(login_url='course/canceltrainer')
 def canceltrainer(request, id):
     status = TrainerApply.objects.filter(id=id).first()
     status.confirm = 0
@@ -600,6 +645,8 @@ def canceltrainer(request, id):
     status.save()
     return redirect("course:trainernotification",id=id)
 
+
+@login_required(login_url='course/cancel')
 def cancel(request,id):
     courseid = CourseApply.objects.get(id=id).course_id
     status = CourseApply.objects.filter(id=id).first()
@@ -608,6 +655,11 @@ def cancel(request,id):
     status.cancel = 1
     status.save()
     return redirect("course:coursenotification",id=courseid)
+
+
+
+
+
 
 
 

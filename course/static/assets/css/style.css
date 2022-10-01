@@ -1,6 +1,9 @@
 .addcourse {
     display: flex;
 }
+.aboutimg{
+    object-fit: cover;
+}
 .addbranchbutton {
     display: flex;
     justify-content: end;

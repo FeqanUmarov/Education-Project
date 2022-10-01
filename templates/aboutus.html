@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<br><br><br><br><br><br><br><br>
+<div class="container">
+    <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Layihənin Back-end developer - i | <span class="text-muted">Fəqan Umarov</span></h2>
+          <hr>
+          <p class="lead">Kurshub layihəsi 4 aya başa gəlmişdir. Layihənin əsas məqsədi
+            kursları və təlimçiləri bir araya yığmaqla yanaşı, elmi bir mühit yaratmaqdır.
+            Bu platfmada istifadəçi eyni zamanda 3 formada çıxış edə bilir. Yəni istifadəçi, həm adi istifadəçi, həm kurs və həm də təlimçi ola bilər.
+            Burada istifadəçi öz məqalələrini paylaşa bilər və özbilgilərini başqalarıyla paylaşa bilər.
+          </p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-fluid mx-auto aboutimg" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="{% static 'assets/images/IMG_0045.png' %}" data-holder-rendered="true">
+        </div>
+    </div>
+    <br><br><br><br><br><br>
+    <hr>
+    <br><br><br>
+
+    <div class="row featurette">
+        <div class="col-md-7 order-md-2">
+          <h2 class="featurette-heading">Layihənin front-end developeri | <span class="text-muted">Elvin Yekayev</span></h2>
+          <p class="lead">2021-ci ildə BNB group-da front-end developer kimi çalışır. Bir çox layihələrdə iştirak etmişdir. </p>
+        </div>
+        <div class="col-md-5 order-md-1">
+          <img class="featurette-image img-fluid mx-auto aboutimg" data-src="holder.js/500x500/auto" alt="500x500" src="{% static 'assets/images/elvin.jpg' %}" data-holder-rendered="true" style="width: 500px; height: 500px;">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

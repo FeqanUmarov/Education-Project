@@ -5,6 +5,12 @@
 <br><br><br><br><br><br>
 <div class="container">
     <div class="row">
+        <form action="">
+          {% csrf_token %}
+          
+          <input type="text" name="name" placeholder="Telebenin adini daxil edin...">
+          <button class="btn btn-primary" type="submit">Axtar</button>
+        </form>
         <table class="table table-striped">
             {% if user %}
               <thead>
