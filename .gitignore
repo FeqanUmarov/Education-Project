@@ -1,5 +1,7 @@
-media/*
-media
+# env
+e-course/
+
+media/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
