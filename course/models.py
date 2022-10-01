@@ -1,17 +1,8 @@
-from pyexpat import model
-from statistics import mode
-from tkinter import CASCADE
-from tokenize import blank_re
-from urllib import request
-from django.db import DatabaseError, models
-from user.models import User
-from django.contrib.auth.models import AbstractUser
-from django.conf import settings
-from datetime import datetime
-from django.db import models
+
+
 from ckeditor.fields import RichTextField
-
-
+from django.db import models
+from user.models import User
 
 
 # Create your models here.

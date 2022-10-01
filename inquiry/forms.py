@@ -1,5 +1,4 @@
 from .models import UserQuery, TutorQuery
-from django.forms import ModelForm
 from django import forms
 
 class QueryForm(forms.ModelForm):
