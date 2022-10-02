@@ -153,11 +153,13 @@ if USE_S3:
 
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
-    STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+    STATIC_URL = 'https://%s/%s/static' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+
 
     STATICFILES_STORAGE = 'mastercourse.storage_backends.StaticStorage'
 
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    MEDIA_URL = 'https://%s/%s/media' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+    
     MEDIA_ROOT = MEDIA_URL
 
     DEFAULT_FILE_STORAGE = 'mastercourse.storage_backends.PublicMediaStorage'
