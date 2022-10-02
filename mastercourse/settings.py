@@ -143,17 +143,19 @@ USE_TZ = True
 
 USE_S3 = True
 
+STATICFILES_DIRS = [BASE_DIR / 'static']
+
 if USE_S3:
-    AWS_ACCESS_KEY_ID = 'DO00UFUPUG4DPRFJURJ4'
-    AWS_SECRET_ACCESS_KEY = 'wSrLnFkHDfqHpIINkQ15SgZOweJbC3UuyqiMGlJEuY'
+    AWS_ACCESS_KEY_ID = 'DO00KBWAJ7QXCA47AVJP'
+    AWS_SECRET_ACCESS_KEY = 'XZWizK9Tn/2QInAPJiiVi9g/QX26A+BQu3vXnZBdhz8'
     AWS_STORAGE_BUCKET_NAME = 'kurshub'
     AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
+    AWS_S3_OBJECT_PARAMETERS = {
+        'CacheControl': 'max-age=86400',
+    }
     AWS_LOCATION = 'static'
 
-
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-
-    STATIC_URL = 'https://%s/%s/static' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 
 
     STATICFILES_STORAGE = 'mastercourse.storage_backends.StaticStorage'
@@ -170,7 +172,7 @@ else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
-STATICFILES_DIRS = [BASE_DIR / 'static']
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
