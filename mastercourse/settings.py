@@ -144,8 +144,8 @@ USE_TZ = True
 USE_S3 = True
 
 if USE_S3:
-    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+    AWS_ACCESS_KEY_ID = 'DO00UFUPUG4DPRFJURJ4'
+    AWS_SECRET_ACCESS_KEY = 'wSrLnFkHDfqHpIINkQ15SgZOweJbC3UuyqiMGlJEuY'
     AWS_STORAGE_BUCKET_NAME = 'kurshub'
     AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
     AWS_LOCATION = 'static'
