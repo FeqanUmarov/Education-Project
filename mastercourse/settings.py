@@ -93,22 +93,11 @@ WSGI_APPLICATION = 'mastercourse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'HOST': env('POSTGRES_HOST', 'localhost'),
-#         'PORT': env('POSTGRES_PORT', '5432'),
-#         'NAME': env('POSTGRES_NAME'),
-#         'USER': env('POSTGRES_USER'),
-#         'PASSWORD': env('POSTGRES_PASSWORD'),
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'HOST': env('POSTGRES_HOST', 'localhost'),
-        'PORT': env('POSTGRES_PORT', '5432'),
+        'HOST': env('POSTGRES_HOST'),
+        'PORT': env('POSTGRES_PORT'),
         'NAME': env('POSTGRES_NAME'),
         'USER': env('POSTGRES_USER'),
         'PASSWORD': env('POSTGRES_PASSWORD'),
