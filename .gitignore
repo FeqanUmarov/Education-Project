@@ -2,6 +2,7 @@
 e-course/
 
 media/
+staticfiles/
 
 *.sqlite3
 
