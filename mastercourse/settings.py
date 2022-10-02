@@ -147,13 +147,13 @@ if USE_S3:
     AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = 'kurshub'
-    AWS_S3_CUSTOM_DOMAIN = f'fra1.digitaloceanspaces.com/{AWS_STORAGE_BUCKET_NAME}'
+    AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
     AWS_LOCATION = 'static'
 
 
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+    STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
 
     STATICFILES_STORAGE = 'mastercourse.storage_backends.StaticStorage'
 
