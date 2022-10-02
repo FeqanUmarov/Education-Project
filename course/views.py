@@ -1,9 +1,14 @@
-from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from course.models import CourseBoss, Branchs, CourseType, CoursePhoto, CourseApply, Exam, ExamApply, LessonPlan, Trainer, TrainerApply, Event, EventApply
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, redirect, render
 from user.models import User
-from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateLessonPlan, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm, ApplyEventForm
+
+from course.forms import (AddComment, ApplyEventForm, AskCourse, AskTrainer,
+                          CourseBranch, CourseExam, CourseGallery, CourseInfo,
+                          CreateEvent, CreateLessonPlan, TrainerInfo)
+from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
+                           CourseType, Event, EventApply, Exam, ExamApply,
+                           LessonPlan, Trainer, TrainerApply)
 
 # Create your views here.
 

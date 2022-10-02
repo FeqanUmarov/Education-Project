@@ -93,7 +93,17 @@ WSGI_APPLICATION = 'mastercourse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-print(os.getenv('POSTGRES_PASSWORD'))
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+#         'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+#         'NAME': os.environ.get('POSTGRES_NAME'),
+#         'USER': os.environ.get('POSTGRES_USER'),
+#         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -105,6 +115,12 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -136,14 +152,32 @@ USE_I18N = True
 
 USE_TZ = True
 
+USE_S3 = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.0/howto/static-files/
+if USE_S3:
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'kurshub'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.fra1.digitaloceanspaces.com'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '/staticfiles/')
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+
+    STATICFILES_STORAGE = 'testedWeb.storage_backends.StaticStorage'
+
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    MEDIA_ROOT = MEDIA_URL
+
+    DEFAULT_FILE_STORAGE = 'mastercourse.storage_backends.PublicMediaStorage'
+else:
+    STATIC_URL = '/static/'
+    STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = BASE_DIR / 'media'
+
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

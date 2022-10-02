@@ -54,6 +54,9 @@ class CourseExam(forms.ModelForm):
         model = Exam
         fields = ["exam_title", "exam_content",
                   "exam_date", "branch", "empty_space"]
+        widgets = {
+            'exam_date': forms.DateInput(attrs={'type':'date'})
+        }
 
 
 class AddComment(forms.ModelForm):
@@ -84,6 +87,12 @@ class CreateEvent(forms.ModelForm):
         model = Event
         fields = ["title", "content", "photo", "start_date",
                   "end_date", "event_day", "event_location", "event_adress"]
+        
+        widgets = {
+            'start_date': forms.DateInput(attrs={'type':'date'}),
+            'end_date': forms.DateInput(attrs={'type':'date'}),
+            'event_day': forms.DateInput(attrs={'type':'date'}),
+        }
 
 
 class ApplyEventForm(forms.ModelForm):
