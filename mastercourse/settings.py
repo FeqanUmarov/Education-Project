@@ -159,6 +159,8 @@ if USE_S3:
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = 'kurshub'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.fra1.digitaloceanspaces.com'
+    AWS_LOCATION = 'static'
+
 
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
