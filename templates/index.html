@@ -47,27 +47,14 @@
         <div class="row ">
           <div class="col-lg-6 ">
             <div class="box-item">
-              <h4><a href="{% url 'course:courses'%}">Tech academy</a></h4>
-              <p>Proqramlaşdırma</p>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="box-item">
-              <h4><a href="{% url 'course:courses'%}">Magistraturaaz</a></h4>
-              <p>Magistr kursu</p>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="box-item">
               <h4><a href="{% url 'course:courses'%}">Fəqan Umarov</a></h4>
-              <p>CİS kursu</p>
-              <span>Coğrafi İnformasiya Sistemləri üzrə mütəxəssis</span>
+              <p>Coğrafi İnformasiya Sistemləri üzrə mütəxəssis</p>
             </div>
           </div>
           <div class="col-lg-6">
             <div class="box-item">
-              <h4><a href="{% url 'course:courses'%}">Edu Company</a></h4>
-              <p>Magistr kursu</p>
+              <h4><a href="{% url 'course:courses'%}">İlyas Zeynaddin</a></h4>
+              <span>Python proqramlaşdırma dili üzrə mütəxəssis</span>
             </div>
           </div>
           <div class="col-lg-12">
@@ -91,9 +78,9 @@
   <div class="container">
     <div class="col-lg-8 offset-lg-2">
       <div class="section-heading">
-        <h4>Tələbələrimizin kurslar haqqında rəylər</h4>
+        <h4>Təlimçilərimizin rəyləri</h4>
         <img src="assets/images/heading-line-dec.png" alt="">
-        <p>Kurslar və müəllimlər haqqında tələbələrin rəylərini dəyərləndirərək daha yaxşı seçim edə bilərsiniz</p>
+        <p>Təlimçilərimizin rəylərini oxuyaraq daha yaxşı seçim edə bilərisiniz</p>
       </div>
     </div>
   </div>
@@ -107,35 +94,24 @@
               <!-- Slides -->
               <div class="swiper-slide reviews__item">
                 <img class="reviews__item-img"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU"
-                  alt="Samir">
+                  src="{% static 'assets/images/feqan.png' %}"
+                  alt="Fəqan">
                 <div class="reviews__item-content">
-                  <p class="reviews__item-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At laboriosam
-                    eveniet itaque modi temporibus earum quisquam iste cumque voluptas quas nemo ab unde dolores,
-                    quibusdam impedit deserunt velit molestiae quis?</p>
-                  <p class="reviews__item-author">Samir Velizade</p>
+                  <p class="reviews__item-text">CİS və proqramlaşdırma təlimlərinə qoşularaq standart CİS desktop proqramlarından başqa, sıfırdan "GİS Web Application"-ların
+                    necə hazırlandığını öyrənə bilərsiniz. 
+                  </p>
+                  <p class="reviews__item-author">Fəqan Umarov</p>
                 </div>
               </div>
               <div class="swiper-slide">
                 <img class="reviews__item-img"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU"
-                  alt="Samir">
+                  src="{% static 'assets/images/ilyas.jpg' %}"
+                  alt="İlyas">
                 <div class="reviews__item-content">
-                  <p class="reviews__item-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At laboriosam
-                    eveniet itaque modi temporibus earum quisquam iste cumque voluptas quas nemo ab unde dolores,
-                    quibusdam impedit deserunt velit molestiae quis?</p>
-                  <p class="reviews__item-author">Samir Velizade</p>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <img class="reviews__item-img"
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQEZrATmgHOi5ls0YCCQBTkocia_atSw0X-Q&usqp=CAU"
-                  alt="Samir">
-                <div class="reviews__item-content">
-                  <p class="reviews__item-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. At laboriosam
-                    eveniet itaque modi temporibus earum quisquam iste cumque voluptas quas nemo ab unde dolores,
-                    quibusdam impedit deserunt velit molestiae quis?</p>
-                  <p class="reviews__item-author">Samir Velizade</p>
+                  <p class="reviews__item-text">Bir çox nəhəng platformaların hazırlanmasında istifadə olunmuş Python proqramlaşdırma  dilinin 
+                    CİS (Coğrafi informasiya Sistemləri) sahəsində tətbiqini öyrənin.
+                  </p>
+                  <p class="reviews__item-author">İlyas Zeynaddin</p>
                 </div>
               </div>
             </div>

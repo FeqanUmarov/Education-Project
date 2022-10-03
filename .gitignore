@@ -1,5 +1,10 @@
-media/*
-media
+# env
+e-course/
+
+media/
+staticfiles/
+
+*.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
