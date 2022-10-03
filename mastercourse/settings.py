@@ -149,19 +149,15 @@ if USE_S3:
     AWS_ACCESS_KEY_ID = 'DO00KBWAJ7QXCA47AVJP'
     AWS_SECRET_ACCESS_KEY = 'XZWizK9Tn/2QInAPJiiVi9g/QX26A+BQu3vXnZBdhz8'
     AWS_STORAGE_BUCKET_NAME = 'kurshub'
-    AWS_S3_ENDPOINT_URL = 'https://fra1.digitaloceanspaces.com'
-    AWS_S3_OBJECT_PARAMETERS = {
-        'CacheControl': 'max-age=86400',
-    }
-    AWS_LOCATION = 'static'
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.fra1.digitaloceanspaces.com'
 
-    STATIC_URL = 'https://%s/%s/' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
     STATICFILES_STORAGE = 'mastercourse.storage_backends.StaticStorage'
 
-    MEDIA_URL = 'https://%s/%s/media' % (AWS_S3_ENDPOINT_URL, AWS_LOCATION)
-    
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     MEDIA_ROOT = MEDIA_URL
 
     DEFAULT_FILE_STORAGE = 'mastercourse.storage_backends.PublicMediaStorage'
