@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="container">
+        <div class="register">
+            <div class="register__title">
+                <h3>Hesab yarat</h3>
+            </div>
+            <form class="register__form" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                <div class="register__submit">
+                    <button type="submit" class="register__submit-btn">Hesab Yarat</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

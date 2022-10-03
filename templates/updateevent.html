@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="add-trainer__bg">
+        <div class="container">
+            <div class="add-trainer">
+                <h3>Məlumatları Yenilə</h3>
+                <form class="add-trainer__form" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="add-trainer__form-inner">
+                        {{form.title|as_crispy_field}}
+                        {{form.media}}
+                        {{form.content|as_crispy_field}}
+                        <div>
+                            {{form.photo|as_crispy_field}}
+                            <img id="id_event_new_img" class="upload-preview"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQYAAADACAMAAADRLT0TAAAAMFBMVEXp7vG6vsHk6ey3u77n7O/N0tXs8fTDx8rLz9LU2dzAxMfd4uXh5unX3N+9wcTJzdA+JIQDAAAC+0lEQVR4nO3c63KqMBRA4UgkQa7v/7bVgA6XBAXiwZ2zvn+dTjNmSRAQqhQAAAAAAAAAAAAAAAAAAAAAAAAAAABwChPb2RPawagqL+LKm0xaCdO0Wl/i0loXZ89rG1PEbjCUaK9nT20Dk3+nwl179tw2qL9W4aJzMfsHUzxfc1TDoGfP7nNt/4KLPKqyT1udPbtPXXX/emMfNri6+nb29D41ZMgiD2tsn0HKzoEMDhkcMjieDMZkdaaOTUB8BlMX7f0g4mKbI8OKz5A/j310We+fhPQMdnRsfT+a2Dus7Aymm5xh6HrvsLIzNLPzrHLvNGRnaOfniHtPCkRnqBYn3d3OeUjOYG7Law+r8wh/lIjOsLwcp1f+1NS6CE1TdobFxrCSwVT3X4c6iM6wvCypw5t95X4f6CA5g2cXaYNbfTV08ncQnUEtNobQPMzrSq6/g+gMy1UR+rPR9WxvB9EZ5sdPugms/MlVfV8H4RmySYXA9wxmtg/xdBCeQWXla4qhScwr+DpIz6DUre2/cOkCx4jPz4jVDvIzGFU3t1t1DX1GeCosO8jP8BC+TWO5Irwd0sgQFKow75B2hnCF+xjjk/KkM6xVmHZIOcN6hcm6SCnD7KYd/2eEv0NKGUo7/ul9hdG6SCiD1XrU4d2KmHZIJ8PjqFq/rjd8VuHVIZkMw207Q4dPK1yGc/NUMpTPd9etiw0VksowOs+02yqklGHyha7dVCGhDHYybW03REgoQ7nlzU82w7EKqWQo12f5n2Q4WiGNDAdXRCIZjldIIMP18IpIIUOcx43csLIzRKhABjKQgQxkIEPyGboYj2C6YSVnUE2MRzDdSKIzRPk3Dv1AojNEQwaHDA4ZHFPKyjDcH9xlcfVPZuhDDzH+S2b4EiLGEcPY5Ssb2ffMnzKLKXj//e8xMS68+e1/fvEE2fv57KwgZwf5kEW4HO2JELr9/meZxrax95BlHrrb+IcZdY1LHfzHBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAO+AMrVC/xvMZ+8wAAAABJRU5ErkJggg=="
+                                alt="">
+                        </div>
+                        {{form.start_date|as_crispy_field}}
+                        {{form.end_date|as_crispy_field}}
+                        {{form.event_day|as_crispy_field}}
+                        {{form.event_location|as_crispy_field}}
+                        {{form.event_adress|as_crispy_field}}
+                    </div>
+
+                    <div class="add-trainer__form-submit">
+                        <button type="submit" class="add-trainer__form-submit--btn">Yenilə</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

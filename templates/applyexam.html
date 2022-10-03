@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="container">
+    <br><br><br><br><br><br><br>
+    <h3>Imtahana muraciet et</h3>
+    <hr>
+    <form action="" method="POST">{% csrf_token %}
+        <div class="form-group">
+            <select class="form-control form-control-sm">
+                <option>Visa</option>
+                <option>MasterCard</option>
+            </select>
+            <label for="exampleInputEmail1">Kart nomresi</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Kart nomresi">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">il (**/**)</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Kartin bitme tarixi">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">cvv (***)</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="CVV">
+          </div>
+          <button type="submit" class="btn btn-danger">Muraciet et</button>
+        </div>
+
+
+    </form>
+</div>
+
+{% endblock %}

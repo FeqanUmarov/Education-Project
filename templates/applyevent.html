@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="container">
+        <div class="control-group course-apply" id="fields">
+            <h3 class="course-apply__title">Təlimə müraciət et</h3>
+            <div class="controls" id="profs">
+                <form method="POST" class="input-append course-apply__form">{% csrf_token %}
+                    <div id="field">{{form|crispy}}</div>
+                    <div class="course-apply__submit">
+                        <button type="submit" class="course-apply__submit-btn">Muraciet et</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
