@@ -36,7 +36,7 @@
             {% elif request.user.is_authenticated %}
             <li class="scroll-to-section"><a href="{% url 'course:tests' %}">Sinaqlar</a></li>
   
-            <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
+            <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Çıxış</a></li>
             <li>
               <div class="gradient-button">
                 <a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}}
