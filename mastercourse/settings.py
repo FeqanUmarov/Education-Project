@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-p@lkj5sl=e8tjb473kdswo8s4+p$1d6&b9o62+@5p(%#0n)=i_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(env('DEBUG'))
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', '139.59.31.199']
 
 AUTH_USER_MODEL = 'user.User'
 
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'multiselectfield',
     'django_cleanup',
-    'django_filters'
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -143,13 +143,12 @@ USE_TZ = True
 
 USE_S3 = 0
 
-STATICFILES_DIRS = [BASE_DIR / 'static']
-
 if USE_S3:
-    AWS_ACCESS_KEY_ID = 'DO00KBWAJ7QXCA47AVJP'
-    AWS_SECRET_ACCESS_KEY = 'XZWizK9Tn/2QInAPJiiVi9g/QX26A+BQu3vXnZBdhz8'
-    AWS_STORAGE_BUCKET_NAME = 'kurshub'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.fra1.digitaloceanspaces.com'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get(
+        'AWS_STORAGE_BUCKET_NAME', 'kurshub')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
@@ -162,12 +161,13 @@ if USE_S3:
 
     DEFAULT_FILE_STORAGE = 'mastercourse.storage_backends.PublicMediaStorage'
 else:
-    print("salam")
     STATIC_URL = '/static/'
     STATIC_ROOT = BASE_DIR / 'staticfiles'
 
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
+
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
 
