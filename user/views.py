@@ -42,7 +42,7 @@ def loginUser(request):
             user = authenticate(
                 username=user.first().username, password=password)
 
-        if not user.exists():
+        elif not user.exists():
             messages.success(request, "İstifadəçi mövcud deyil")
 
             return render(request, "login.html", context)
