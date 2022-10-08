@@ -6,11 +6,11 @@ from django.utils.translation import gettext_lazy as _
 
 
 class User(AbstractUser):
-    name = models.CharField(max_length=30, verbose_name=_("Full name"))
-    surname = models.CharField(max_length=30, verbose_name="Surname")
+    name = models.CharField(max_length=30, verbose_name=_("Adı"))
+    surname = models.CharField(max_length=30, verbose_name=_("Soyad"))
     username = models.CharField(
-        max_length=50, unique=True, verbose_name="Username")
-    email = models.EmailField(max_length=254, verbose_name="Email")
+        max_length=50, unique=True, verbose_name=_("Istifadəçi adı"))
+    email = models.EmailField(max_length=254, verbose_name=_("Email"))
     user_profile = models.ImageField(
-        null=True, blank=True, verbose_name="Profil picture")
-    phone = models.CharField(max_length=50, verbose_name="Phone number")
+        null=True, blank=True, verbose_name=_("User şəkili"))
+    phone = models.CharField(max_length=50, verbose_name=_("Telefon"))

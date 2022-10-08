@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import LoginForm, UserProfile, UserSignUp
 from .models import User
+from course.models import CourseApply
 
 
 # Create your views here.
