@@ -604,3 +604,6 @@ def cancel(request, id):
     status.cancel = 1
     status.save()
     return redirect("course:coursenotification", id=courseid)
+
+def faq(request):
+    return render (request,"faq.html")
