@@ -29,5 +29,5 @@ urlpatterns = [
     path('inquiry/', include("inquiry.urls")),
 ] 
 
-if not settings.DEBUG:
+if not settings.USE_S3:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
