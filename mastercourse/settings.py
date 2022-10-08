@@ -147,21 +147,20 @@ if USE_S3:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get(
-        'AWS_STORAGE_BUCKET_NAME', 'testedweb-api')
+        'AWS_STORAGE_BUCKET_NAME', 'kurshub')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
-    STATICFILES_STORAGE = 'testedWeb.storage_backends.StaticStorage'
+    STATICFILES_STORAGE = 'mastercourse.storage_backends.StaticStorage'
 
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     MEDIA_ROOT = MEDIA_URL
 
-    DEFAULT_FILE_STORAGE = 'testedWeb.storage_backends.PublicMediaStorage'
+    DEFAULT_FILE_STORAGE = 'mastercourse.storage_backends.PublicMediaStorage'
 else:
-    print("salam")
     STATIC_URL = '/static/'
     STATIC_ROOT = BASE_DIR / 'staticfiles'
 
