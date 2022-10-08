@@ -359,7 +359,7 @@ def eventapplynotification(request, id):
 
     keyword = request.GET.get("name")
     if keyword:
-        eventapplyinfos = User.objects.filter(name__contains=keyword)
+        eventapplyinfos = EventApply.objects.filter(user__name__contains=keyword)
         return render(request, "eventnotification.html", {"eventapplyinfos": eventapplyinfos})
 
     contex = {

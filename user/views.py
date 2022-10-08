@@ -37,11 +37,12 @@ def loginUser(request):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
 
-        user = User.objects.get(email=email).username
+        user = User.objects.filter(email=email)
+        if user.exists():
+            user = authenticate(
+                username=user.first().username, password=password)
 
-        user = authenticate(username=user, password=password)
-
-        if user is None:
+        if not user.exists():
             messages.success(request, "İstifadəçi mövcud deyil")
 
             return render(request, "login.html", context)
