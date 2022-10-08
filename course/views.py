@@ -402,7 +402,7 @@ def updateevent(request, id):
     return render(request, "updateevent.html", contex)
 
 
-@login_required(login_url='course/applyevent')
+@login_required(login_url='/user/login')
 def applyevent(request, id):
     form = ApplyEventForm(request.POST or None)
     if form.is_valid():
