@@ -5,91 +5,29 @@
 
 <br><br><br><br><br>
 <div class="container">
-        <!-- accordion -->
+
     <div class="accordion" id="accordionExample">
         <div class="accordion-item">
-        <h2 class="accordion-header" id="headingOne">
+          <h2 class="accordion-header" id="headingOne">
             <button id="accordion-button1" class="accordion-button" type="button" data-bs-toggle="collapse"
-            data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            <span>
+              data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              <span>
                 <i class="fa-solid fa-circle-info"></i>
-                Platforma haqqında
-            </span>
-            <i id="accordion-open1" class="fa-solid fa-chevron-down"></i>
+                Müəllim
+                haqqında
+              </span>
+              <i id="accordion-open1" class="fa-solid fa-chevron-down"></i>
             </button>
-        </h2>
-        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+          </h2>
+          <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-            Bu platformanın yaradılmasında məqsəd elmi bir mühitin yaradılmasıdır. Burada fərqli sahələrdə xidmət göstərən kurslar
-            və təlimçilər var. Siz eyni zamanda öz sahənizə uyğun məqalələr paylaşa bilərsiniz.
+              {{trainer.note|safe}}
             </div>
-        </div>
-        </div>
-        <div id="accordion-item" class="accordion-item">
-        <h2 class="accordion-header" id="headingTwo">
-            <button id="accordion-button2" class="accordion-button collapsed" type="button"
-            data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-            aria-controls="collapseTwo">
-            <span>
-                <i class="fa-solid fa-circle-info"></i>
-                İstifadəçi rolları
-            </span>
-            <i id="accordion-open2" class="fa-solid fa-chevron-down"></i>
-            </button>
-        </h2>
-        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-            data-bs-parent="#accordionExample">
-            <div class="accordion-body">
-            Platformada "istifadəçi" eyni zamanda 3 formada çıxış edə bilir. Yəni bir user həm adi user kimi, həm təlimçi kimi,
-            həm də kurs kimi çıxış edə bilir.
-            </div>
-        </div>
-        </div>
-
-        <div id="accordion-item" class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button id="accordion-button2" class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                aria-controls="collapseTwo">
-                <span>
-                    <i class="fa-solid fa-circle-info"></i>
-                    Təlimçilər
-                </span>
-                <i id="accordion-open2" class="fa-solid fa-chevron-down"></i>
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                Təlimçi profili yaratdıqda təlimçi dərs planı və özü haqqında ətraflı məlumatları daxil edə bilər. Eyni zamanda
-                təlimçi tədbir başlata bilər. Gələcək funksionallıqlarda premium təlimçi əlavə ediləcək.
-                </div>
-            </div>
-        </div>
-
-        <div id="accordion-item" class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button id="accordion-button2" class="accordion-button collapsed" type="button"
-                data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
-                aria-controls="collapseTwo">
-                <span>
-                    <i class="fa-solid fa-circle-info"></i>
-                    Kurslar
-                </span>
-                <i id="accordion-open2" class="fa-solid fa-chevron-down"></i>
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                Kurs profili yaratdıqda kurs dərs planını və filiallarını daxil edə bilər. Eyni zamanda
-                kurslar imtahanlarını əlavə edə bilirlər. Gələcək funksionallıqlarda premium kurs əlavə ediləcək.
-                </div>
-            </div>
+          </div>
         </div>
     </div>
-    <!-- accordion -->
+    
 </div>
 
 
