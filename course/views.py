@@ -643,7 +643,7 @@ def articles(request):
 
 def commonarticledetails(request,id):
     
-    article = CreateBlog.objects.filter(user=id)
+    article = CreateBlog.objects.filter(user_id=id)
     
     contex = {
         "article": article,
