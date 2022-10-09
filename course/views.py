@@ -623,7 +623,7 @@ def createblog(request):
 
         messages.success(request, "Məqaləniz əlavə edildi")
 
-        return redirect("course:index")
+        return redirect("course:articles")
 
     contex = {
         "form": form,
@@ -640,3 +640,14 @@ def articles(request):
 
     }
     return render (request,"articles.html", contex)
+
+def commonarticledetails(request,id):
+    
+    article = CreateBlog.objects.filter(user_id=id)
+    
+    contex = {
+        "article": article,
+
+    }
+    return render (request,"commonblogdetail.html", contex)
+    

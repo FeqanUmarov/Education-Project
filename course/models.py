@@ -157,3 +157,4 @@ class CreateBlog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog_title = models.CharField(max_length=200,verbose_name =_("Məqalə başlığı"))
     blog_content = RichTextField(verbose_name =_("Məqalə Mövzusu"))
+    photo = models.ImageField(max_length=50, verbose_name =_("Şəkil"))
