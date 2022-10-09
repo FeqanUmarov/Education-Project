@@ -15,6 +15,7 @@
             <li class="scroll-to-section"><a href="{% url 'index'%}" class="active">Ana səhifə</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:aboutus' %}">Haqqımızda</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:courses'%}">Kurslar</a></li>
+            <li class="scroll-to-section"><a href="{% url 'course:faq' %}">FAQ</a></li>
             {% if request.user.is_authenticated %}
             <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
             <!-- <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
@@ -33,29 +34,9 @@
                 <a class="dropdown-item" href="{% url 'user:logout' %}">Çıxış</a>
               </div>
             </div>
-            {% elif request.user.is_authenticated %}
-            <li class="scroll-to-section"><a href="{% url 'course:tests' %}">Sinaqlar</a></li>
-  
-            <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Çıxış</a></li>
-            <li>
-              <div class="gradient-button">
-                <a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}}
-                  {{request.user.surname}}</a>
-              </div>
-            </li>
-  
-            {% elif request.user.is_authenticated and user.is_teacher %}
-            <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
-            <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
-            <li>
-              <div class="gradient-button"><a id="modal_trigger"
-                  href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
-            </li>
-  
-  
+
             {% else %}
             <li class="scroll-to-section"><a href="{% url 'user:login' %}">Kurs elave et</a></li>
-            <li class="scroll-to-section"><a href="{% url 'course:faq' %}">FAQ</a></li>
             <li class="scroll-to-section"><a href="{% url 'user:login' %}">Giriş et</a></li>
             <li>
               <div class="gradient-button"><a id="modal_trigger" href="{% url 'user:register' %}"><i
