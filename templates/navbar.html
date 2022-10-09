@@ -15,7 +15,7 @@
             <li class="scroll-to-section"><a href="{% url 'index'%}" class="active">Ana səhifə</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:aboutus' %}">Haqqımızda</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:courses'%}">Kurslar</a></li>
-            <li class="scroll-to-section"><a href="{% url 'course:createblog'%}">Məqalələr</a></li>
+            <li class="scroll-to-section"><a href="{% url 'course:articles'%}">Məqalələr</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:faq' %}">FAQ</a></li>
             {% if request.user.is_authenticated %}
             <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
