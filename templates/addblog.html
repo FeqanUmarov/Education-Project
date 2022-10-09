@@ -6,7 +6,7 @@
         <div class="control-group course-apply" id="fields">
             <h3 class="course-apply__title">Məqaləni paylaş</h3>
             <div class="controls" id="profs">
-                <form method="POST" class="input-append course-apply__form">{% csrf_token %}
+                <form method="POST" class="input-append course-apply__form" enctype="multipart/form-data">{% csrf_token %}
                     <div id="field">
                         {{form.blog_title|as_crispy_field}}
                         {{form.media}}
