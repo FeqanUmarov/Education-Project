@@ -612,7 +612,7 @@ def faq(request):
 
 
 def createblog(request):
-    form = CreateBlog(request.POST or None,
+    form = AddBlog(request.POST or None,
                        request.FILES or None)
 
     if form.is_valid():
