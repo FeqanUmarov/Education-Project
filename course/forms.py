@@ -103,4 +103,4 @@ class ApplyEventForm(forms.ModelForm):
 class AddBlog(forms.ModelForm):
     class Meta:
         model = CreateBlog
-        fields = ["blog_title","blog_content"]
+        fields = ["blog_title","blog_content","photo"]

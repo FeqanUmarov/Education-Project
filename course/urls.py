@@ -54,6 +54,7 @@ urlpatterns = [
     path('applyevent/<int:id>', views.applyevent, name="applyevent"),
     path('faq', views.faq, name="faq"),
     path('createblog', views.createblog, name="createblog"),
+    path('commonarticledetails', views.commonarticledetails, name="commonarticledetails"),
     path('eventapplynotification/<int:id>',
          views.eventapplynotification, name="eventapplynotification"),
 
