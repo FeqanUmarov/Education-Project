@@ -15,6 +15,7 @@
             <li class="scroll-to-section"><a href="{% url 'index'%}" class="active">Ana səhifə</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:aboutus' %}">Haqqımızda</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:courses'%}">Kurslar</a></li>
+            <li class="scroll-to-section"><a href="{% url 'course:articles'%}">Məqalələr</a></li>
             {% if request.user.is_authenticated %}
             <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
             <!-- <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
@@ -55,7 +56,7 @@
   
             {% else %}
             <li class="scroll-to-section"><a href="{% url 'user:login' %}">Kurs elave et</a></li>
-            <li class="scroll-to-section"><a href="{% url 'user:login' %}">Giris</a></li>
+            <li class="scroll-to-section"><a href="{% url 'user:login' %}">Giriş</a></li>
             <li>
               <div class="gradient-button"><a id="modal_trigger" href="{% url 'user:register' %}"><i
                     class="fa fa-sign-in-alt"></i> Hesab Yarat</a></div>
