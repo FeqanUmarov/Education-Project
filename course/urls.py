@@ -53,6 +53,7 @@ urlpatterns = [
     path('updateevent/<int:id>', views.updateevent, name="updateevent"),
     path('applyevent/<int:id>', views.applyevent, name="applyevent"),
     path('faq', views.faq, name="faq"),
+    path('createblog', views.createblog, name="createblog"),
     path('eventapplynotification/<int:id>',
          views.eventapplynotification, name="eventapplynotification"),
 

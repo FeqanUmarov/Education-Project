@@ -5,10 +5,10 @@ from user.models import User
 
 from course.forms import (AddComment, ApplyEventForm, AskCourse, AskTrainer,
                           CourseBranch, CourseExam, CourseGallery, CourseInfo,
-                          CreateEvent, CreateLessonPlan, TrainerInfo)
+                          CreateEvent, CreateLessonPlan, TrainerInfo, AddBlog)
 from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
                            CourseType, Event, EventApply, Exam, ExamApply,
-                           LessonPlan, Trainer, TrainerApply)
+                           LessonPlan, Trainer, TrainerApply, CreateBlog)
 
 # Create your views here.
 
@@ -609,3 +609,24 @@ def cancel(request, id):
 
 def faq(request):
     return render (request,"faq.html")
+
+
+def createblog(request):
+    form = CreateBlog(request.POST or None,
+                       request.FILES or None)
+
+    if form.is_valid():
+        blog = form.save(commit=False)
+        blog.user = request.user
+        blog.save()
+
+        messages.success(request, "Məqaləniz əlavə edildi")
+
+        return redirect("mastercourse:index")
+
+    contex = {
+        "form": form,
+
+    }
+
+    return render(request, "addblog.html", contex)

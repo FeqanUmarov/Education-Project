@@ -151,3 +151,9 @@ class EventApply(models.Model):
     trainer = models.IntegerField()
     apply_case = models.CharField(max_length=200)
     date = models.DateTimeField(auto_now_add=True)
+    
+    
+class CreateBlog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog_title = models.CharField(max_length=200,verbose_name =_("Məqalə başlığı"))
+    blog_content = RichTextField(verbose_name =_("Məqalə Mövzusu"))

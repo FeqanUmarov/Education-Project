@@ -1,7 +1,7 @@
 from django import forms
 from course.models import (Branchs, Comment, CourseApply, CourseBoss,
                            CoursePhoto, Event, EventApply, Exam,
-                           LessonPlan, Trainer, TrainerApply)
+                           LessonPlan, Trainer, TrainerApply, CreateBlog)
 
 from .models import CourseBoss
 
@@ -99,3 +99,8 @@ class ApplyEventForm(forms.ModelForm):
     class Meta:
         model = EventApply
         fields = ["apply_case"]
+        
+class AddBlog(forms.ModelForm):
+    class Meta:
+        model = CreateBlog
+        fields = ["blog_title","blog_content"]
