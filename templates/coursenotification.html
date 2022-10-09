@@ -81,8 +81,7 @@
           <div class="modal-footer">
             {% for student_info in student_infos %}
             <button type="button" class="btn btn-secondary" data-dismiss="modal">İmtina</button>
-            <form action="{% url 'course:cancel' student_info.id %}" enctype="multipart/form-data" method="POST">{%
-              csrf_token %}
+            <form action="{% url 'course:cancel' student_info.id %}" enctype="multipart/form-data" method="POST">{% csrf_token %}
               <input class="btn btn-danger" type="submit" value="Sil">
             </form>
             {% endfor %}
