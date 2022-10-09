@@ -59,11 +59,6 @@
                     Müraciətlərim
                 </a>
             </span>
-            {% if user.is_course and request.user.id == course_apply.user_id %}
-            <a href="{% url 'course:commonnotification'%}">Kursa gelen bildirisler</a>
-            {% elif user.is_student %}
-            <a href="{% url 'course:coursenotification' course_apply.current_student %}">Muracietlerim</a>
-            {% endif %}
         </div>
     </div>
 </div>
