@@ -612,6 +612,7 @@ def faq(request):
 
 
 def createblog(request):
+    
     form = AddBlog(request.POST or None,
                        request.FILES or None)
 
@@ -622,7 +623,7 @@ def createblog(request):
 
         messages.success(request, "Məqaləniz əlavə edildi")
 
-        return redirect("mastercourse:index")
+        return redirect("course:index")
 
     contex = {
         "form": form,
@@ -630,3 +631,12 @@ def createblog(request):
     }
 
     return render(request, "addblog.html", contex)
+
+def articles(request):
+    article = CreateBlog.objects.all()
+    
+    contex = {
+        "articles": article,
+
+    }
+    return render (request,"articles.html", contex)
