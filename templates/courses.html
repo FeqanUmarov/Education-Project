@@ -69,11 +69,6 @@
             <img src="{{trainer_value.user.user_profile.url}}" alt="{{trainer_value.user.user_profile.url}}">
           </div>
           {% endif %}
-          {% for events_value in events_values %}
-          {% if events_value.user == request.user.id %}
-          <p>salam</p>
-          {% endif %}
-          {% endfor %}
           <h4>{{trainer_value.user.name}} {{trainer_value.user.surname}}</h4>
           <p>İxtisas sahəsi: {{trainer_value.study_field}}</p>
           <p>Təcrübəsi: {{trainer_value.experience}}</p>
