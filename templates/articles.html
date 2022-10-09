@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+
+<div class="articles">
+    <div class="container">
+        <div class="row articles__wrapper">
+            {% for article in articles %}
+            <div class="articles__item">
+                <div class="articles__item-body">
+                    <h5 class="articles__item-title">{{article.blog_title}}</h5>
+                </div>
+                <a href="{% url 'course:blogdetails' photo_gallery.id %}" class="articles__item-btn">Ətraflı</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
