@@ -23,10 +23,12 @@ def courses(request):
 
     value = CourseBoss.objects.all()
     trainer_value = Trainer.objects.all()
+    events = Event.objects.all()
 
     contex = {
         "course_values": value,
         "trainer_values": trainer_value,
+        "events_values":events,
     }
 
     return render(request, "courses.html", contex)
