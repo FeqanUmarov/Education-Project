@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="add-trainer__bg">
+        <div class="container">
+            <div class="add-trainer">
+                <h3>Təlim başlat</h3>
+                <form class="add-trainer__form" action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                    <div class="add-trainer__form-inner">
+                        {{form.blog_title|as_crispy_field}}
+                        {{form.media}}
+                        {{form.blog_content|as_crispy_field}}
+                    <div class="add-trainer__form-submit">
+                        <button type="submit" class="add-trainer__form-submit--btn">Əlavə Et</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
