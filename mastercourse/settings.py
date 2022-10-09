@@ -51,7 +51,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'course',
     'user',
-    'mastercourse'
+    'mastercourse',
     'inquiry',
     'crispy_forms',
     'multiselectfield',
