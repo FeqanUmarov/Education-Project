@@ -45,7 +45,7 @@ def addcourse(request):
         course = form.save(commit=False)
         course.user = request.user
         form.save()
-        messages.success(request, "Kurs uğurla əlavə edildi")
+        messages.success(request, "Kurs uğurla əlavə edildi. Gün ərzində yoxlanılıb təsdiq ediləcək")
 
         return redirect("course:courses")
 
@@ -63,7 +63,7 @@ def addtrainer(request):
         trainer = form.save(commit=False)
         trainer.user = request.user
         form.save()
-        messages.success(request, "Treyner olaraq qeydiyyatdan keçdiniz")
+        messages.success(request, "Treyner olaraq qeydiyyatdan keçdiniz. Gün ərzində yoxlanılıb təsdiq ediləcək")
 
         return redirect("course:courses")
 
@@ -82,6 +82,7 @@ def addbranch(request, id):
         branchs = form.save(commit=False)
         branchs.branch = CourseBoss.objects.filter(id=id).first()
         branchs.save()
+        messages.success(request, "Filial əlavə edildi")
 
         return redirect("course:detailcourse", id=id)
 
@@ -137,6 +138,7 @@ def courseapply(request, id):
         apply.user = request.user
         apply.course = CourseBoss.objects.filter(id=id).first()
         apply.save()
+        messages.success(request, "Müraciətiniz göndərildi")
 
         return redirect("course:detailcourse", id=id)
 
@@ -156,6 +158,7 @@ def applytrainer(request, id):
         trainer_apply.user = request.user
         trainer_apply.trainer = Trainer.objects.filter(id=id).first()
         trainer_apply.save()
+        messages.success(request, "Müraciətiniz göndərildi")
 
         return redirect("course:detailtrainers", id=id)
 
@@ -266,6 +269,7 @@ def addlessonplan(request, id):
         courseplan.user = request.user
         courseplan.course = CourseBoss.objects.filter(id=id).first()
         courseplan.save()
+        messages.success(request, "Dərs planı əlavə edildi")
         return redirect("course:detailcourse", id=id)
 
     contex = {
@@ -302,6 +306,7 @@ def deletelessonplan(request, id):
     lessonplan = get_object_or_404(LessonPlan, id=id)
     courseid = LessonPlan.objects.get(id=id).course_id
     lessonplan.delete()
+    messages.success(request, "Dərs planı silindi")
     return redirect("course:detailcourse", id=courseid)
 
 
@@ -333,6 +338,7 @@ def addevent(request, id):
         event.user = request.user
         event.trainer = Trainer.objects.filter(id=id).first()
         event.save()
+        messages.success(request, "Event əlavə edildi")
 
         return redirect("course:detailtrainers", id=id)
 
@@ -377,6 +383,7 @@ def eventapplynotification(request, id):
 def deleteevent(request, id):
     event = get_object_or_404(Event, trainer=id)
     event.delete()
+    messages.success(request, "Event silindi")
     return redirect("course:detailtrainers", id=id)
 
 
@@ -413,6 +420,7 @@ def applyevent(request, id):
         applyevent.trainer = Trainer.objects.get(id=id).user_id
         applyevent.event = Event.objects.filter(trainer=id).first()
         applyevent.save()
+        messages.success(request, "Müraciət edildi")
         return redirect("course:detailtrainers", id=id)
 
     contex = {
@@ -501,6 +509,7 @@ def applyexam(request, id):
 def deletecourse(request, id):
     course = get_object_or_404(CourseBoss, id=id)
     course.delete()
+    messages.success(request, "Kurs silindi")
     return redirect("course:courses")
 
 
@@ -508,6 +517,7 @@ def deletecourse(request, id):
 def deletetrainer(request, id):
     trainer = get_object_or_404(Trainer, id=id)
     trainer.delete()
+    messages.success(request, "Təlimçi silindi")
     return redirect("course:courses")
 
 
@@ -519,6 +529,7 @@ def updatebranch(request, id):
     if form.is_valid():
         branch = form.save(commit=False)
         branch.save()
+        messages.success(request, "Filial yeniləndi")
 
         return redirect("course:detailcourse", id=courseid)
 
@@ -536,6 +547,7 @@ def deletebranch(request, id):
     branch = get_object_or_404(Branchs, id=id)
     courseid = Branchs.objects.get(id=id).branch_id
     branch.delete()
+    messages.success(request, "Filial silindi")
     return redirect("course:detailcourse", id=courseid)
 
 
@@ -573,6 +585,7 @@ def confirm(request, id):
     status.pending = 0
     status.cancel = 0
     status.save()
+    messages.success(request, "Müraciət təsdiqləndi")
     return redirect("course:coursenotification", id=courseid)
 
 
@@ -584,6 +597,7 @@ def confirmtrainer(request, id):
     status.pending = 0
     status.cancel = 0
     status.save()
+    messages.success(request, "Müraciət təsdiqləndi")
     return redirect("course:trainernotification", id=trainerid)
 
 
@@ -594,6 +608,7 @@ def canceltrainer(request, id):
     status.pending = 0
     status.cancel = 1
     status.save()
+    messages.success(request, "Müraciətdən imtina edildi")
     return redirect("course:trainernotification", id=id)
 
 
@@ -605,6 +620,7 @@ def cancel(request, id):
     status.pending = 0
     status.cancel = 1
     status.save()
+    messages.success(request, "Müraciətdən imtina edildi")
     return redirect("course:coursenotification", id=courseid)
 
 def faq(request):
