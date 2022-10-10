@@ -10,7 +10,7 @@ from course.forms import (AddComment, ApplyEventForm, AskCourse, AskTrainer,
 from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
                            CourseType, Event, EventApply, Exam, ExamApply,
                            LessonPlan, Trainer, TrainerApply, CreateBlog)
-from django.core.mail import EmailMessage
+
 
 # Create your views here.
 
@@ -160,17 +160,6 @@ def applytrainer(request, id):
         trainer_apply.user = request.user
         trainer_apply.trainer = Trainer.objects.filter(id=id).first()
         trainer_apply.save()
-        userid=Trainer.objects.get(id=id).user_id
-        email = User.objects.get(id=userid).email
-        trainer_apply.save()
-        email = EmailMessage(
-        'Müraciət',
-        'Yeni bir tələbə müraciət etdi',
-        settings.EMAIL_HOST_USER,
-        [str(email)]   
-        )
-        email.fail_silently = False
-        email.send()
         messages.success(request, "Müraciətiniz göndərildi")
 
         return redirect("course:detailtrainers", id=id)
