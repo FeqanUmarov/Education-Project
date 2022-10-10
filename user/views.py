@@ -46,6 +46,11 @@ def loginUser(request):
             messages.success(request, "İstifadəçi mövcud deyil")
 
             return render(request, "login.html", context)
+        else:
+            messages.success(request, "Parol doğru deyil")
+
+            return render(request, "login.html", context)
+            
         
 
         messages.success(request, "Uğurla giriş etdiniz")
