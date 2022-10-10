@@ -41,6 +41,8 @@ def loginUser(request):
         if user.exists() and password:
             user = authenticate(
                 username=user.first().username, password=password)
+            login(request, user)
+            return redirect("index")
 
         elif not user.exists():
             messages.success(request, "İstifadəçi mövcud deyil")
@@ -56,8 +58,7 @@ def loginUser(request):
         messages.success(request, "Uğurla giriş etdiniz")
         
 
-        login(request, user)
-        return redirect("index")
+        
 
     return render(request, "login.html", context)
 
