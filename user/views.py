@@ -38,7 +38,7 @@ def loginUser(request):
         password = form.cleaned_data.get("password")
 
         user = User.objects.filter(email=email)
-        if user.exists():
+        if user.exists() and password:
             user = authenticate(
                 username=user.first().username, password=password)
 
@@ -46,8 +46,10 @@ def loginUser(request):
             messages.success(request, "İstifadəçi mövcud deyil")
 
             return render(request, "login.html", context)
+        
 
         messages.success(request, "Uğurla giriş etdiniz")
+        
 
         login(request, user)
         return redirect("index")
