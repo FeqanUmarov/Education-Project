@@ -45,8 +45,11 @@ def loginUser(request):
                 login(request, user)
                 messages.success(request, "Uğurla giriş etdiniz")
                 return redirect("index")
+            elif not user.exists():
+                messages.success(request, "Email yanlışdır")
+                return render(request, "login.html", context)
             else:
-                messages.success(request, "Istifadəçi adı və ya parol yanlışdır")
+                messages.success(request, "Parol yanlışdır")
 
                 return render(request, "login.html", context)
                 
