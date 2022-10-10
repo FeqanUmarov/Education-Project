@@ -38,12 +38,13 @@ def loginUser(request):
         password = form.cleaned_data.get("password")
 
         user = User.objects.filter(email=email)
-        if user.exists() and password==password :
-            user = authenticate(
-                username=user.first().username, password=password)
-            login(request, user)
-            messages.success(request, "Uğurla giriş etdiniz")
-            return redirect("index")
+        if user.exists():
+            if password == password:
+                user = authenticate(
+                    username=user.first().username, password=password)
+                login(request, user)
+                messages.success(request, "Uğurla giriş etdiniz")
+                return redirect("index")
 
         elif not user.exists():
             messages.success(request, "İstifadəçi mövcud deyil")
