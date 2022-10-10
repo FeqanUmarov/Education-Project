@@ -41,18 +41,16 @@ def loginUser(request):
         if user.exists():
             user = authenticate(
                 username=user.first().username, password=password)
-            login(request, user)
-            messages.success(request, "Uğurla giriş etdiniz")
-            return redirect("index")
+            if user:
+                login(request, user)
+                messages.success(request, "Uğurla giriş etdiniz")
+                return redirect("index")
+            else:
+                messages.success(request, "Istifadəçi adı və ya parol yanlışdır")
 
-        elif not user.exists():
-            messages.success(request, "İstifadəçi mövcud deyil")
-
-            return render(request, "login.html", context)
-        else:
-            messages.success(request, "Parol doğru deyil")
-
-            return render(request, "login.html", context)
+                return render(request, "login.html", context)
+                
+            
             
         
 
