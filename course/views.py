@@ -140,6 +140,17 @@ def courseapply(request, id):
         apply.user = request.user
         apply.course = CourseBoss.objects.filter(id=id).first()
         apply.save()
+        userid=CourseBoss.objects.get(id=id).user_id
+        email = User.objects.get(id=userid).email
+        email = EmailMessage(
+        'Kurshub',
+        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olan və müraciətlər qutusunu yoxlayın',
+        settings.EMAIL_HOST_USER,
+        [str(email)]   
+        )
+        email.fail_silently = False
+        email.send()
+        
         messages.success(request, "Müraciətiniz göndərildi")
 
         return redirect("course:detailcourse", id=id)
@@ -162,10 +173,9 @@ def applytrainer(request, id):
         trainer_apply.save()
         userid=Trainer.objects.get(id=id).user_id
         email = User.objects.get(id=userid).email
-        trainer_apply.save()
         email = EmailMessage(
-        'Müraciət',
-        'Yeni bir tələbə müraciət etdi',
+        'Kurshub',
+        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olan və müraciətlər qutusunu yoxlayın',
         settings.EMAIL_HOST_USER,
         [str(email)]   
         )
