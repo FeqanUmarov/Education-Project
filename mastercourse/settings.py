@@ -34,7 +34,7 @@ SECRET_KEY = 'django-insecure-p@lkj5sl=e8tjb473kdswo8s4+p$1d6&b9o62+@5p(%#0n)=i_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(env('DEBUG'))
 
-ALLOWED_HOSTS = ['*', '139.59.31.199']
+ALLOWED_HOSTS = ['kurshub', '139.59.31.199']
 
 AUTH_USER_MODEL = 'user.User'
 
