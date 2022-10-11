@@ -13,7 +13,7 @@
               data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
               <span>
                 <i class="fa-solid fa-circle-info"></i>
-                Platfoma haqqında
+                Platfomanın məqsədi nədir?
               </span>
               <i id="accordion-open1" class="fa-solid fa-chevron-down"></i>
             </button>
@@ -33,7 +33,7 @@
               aria-controls="collapseTwo">
               <span>
                 <i class="fa-solid fa-circle-info"></i>
-                İstifadəçi rolu
+                İstifadəçi sistemi necədir?
               </span>
               <i id="accordion-open2" class="fa-solid fa-chevron-down"></i>
             </button>
@@ -41,8 +41,10 @@
           <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                Platformada "istifadəçi" eyni zamanda 3 formada çıxış edə bilir. Yəni bir user həm adi user kimi, həm təlimçi kimi,
-                həm də kurs kimi çıxış edə bilir.
+                Siz platformada qeydiyyatdan keçdikdə adi bir user olursunuz. Siz öz kursunuzu bura daxil edə bilərsiniz.
+                Kursunuzu daxil etdikdə kurs üçün ayrıca bir profil yaranmış olur. Ancaq sizin adi istifadəçi statusunuz özünüzdə qalır.
+                Yəni kurs sizə bağlı ayrı bir obyekt olmuş olur. Təlimçi profilində də vəziyyət eyni olur. Siz eyni zamanda 3 formada
+                platformada iştirak edə bilirsiniz. Həm adi istifadəçi, həm kurs, həm də təlimçi.
             </div>
           </div>
         </div>
@@ -54,7 +56,7 @@
                 aria-controls="collapsefour">
                 <span>
                     <i class="fa-solid fa-circle-info"></i>
-                  Təlimçi olmaq
+                  Necə Təlimçi ola bilərəm?
                 </span>
                 <i id="accordion-open2" class="fa-solid fa-chevron-down"></i>
               </button>
@@ -63,6 +65,7 @@
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
                 Təlimçi profili yaratmaq üçün "Profilim" bölməsinə daxil olub "Treyner ol" butonuna klik edib formu doldurun.
+                Təlimçi profiliniz 2-24 saat ərazində admin tərəfindən təsdiqlənir
                 Təlimçi profili yaratdıqda təlimçi dərs planı və özü haqqında ətraflı məlumatları daxil edə bilər. Eyni zamanda
                 təlimçi tədbir başlata bilər. Gələcək funksionallıqlarda premium təlimçi əlavə ediləcək.
               </div>
@@ -76,7 +79,7 @@
                 aria-controls="collapsefive">
                 <span>
                     <i class="fa-solid fa-circle-info"></i>
-                  Kurs olmaq
+                  Kursumu platformaya necə daxil edə bilərəm?
                 </span>
                 <i id="accordion-open2" class="fa-solid fa-chevron-down"></i>
               </button>
@@ -84,10 +87,34 @@
             <div id="collapsefive" class="accordion-collapse collapse" aria-labelledby="headingTwo"
               data-bs-parent="#accordionExample">
               <div class="accordion-body">
+                Öz kursunuzu platformaya daxil etmək üçün əvvəlcə qeydiyyatdan keçməlisiniz. Qeydiyyatdan keçdikdən
+                sonra "Profilim" bölməsinə daxil olursunuz və "Kurs Əlavə Et" butonuna sıxıb lazımı kurs məlumatlarını daxil edirsiniz.
+                Daha sonra daxil etdiyiniz məlumatlar admin tərəfindən yoxlanılır və 2-24 saat ərzində kursunuz təsdirlənir
                 Kurs profili yaratdıqda kurs dərs planını və filiallarını daxil edə bilər. Eyni zamanda
                 kurslar imtahanlarını əlavə edə bilirlər. Gələcək funksionallıqlarda premium kurs əlavə ediləcək.
               </div>
             </div>
+        </div>
+
+        <div id="accordion-item" class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button id="accordion-button3" class="accordion-button collapsed" type="button"
+              data-bs-toggle="collapse" data-bs-target="#collapsesix" aria-expanded="false"
+              aria-controls="collapsesix">
+              <span>
+                  <i class="fa-solid fa-circle-info"></i>
+                Bildiriş sistemi necədir
+              </span>
+              <i id="accordion-open2" class="fa-solid fa-chevron-down"></i>
+            </button>
+          </h2>
+          <div id="collapsesix" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              Hər hansı kursa və ya təlimçiyə müraciət edildikdə avtomatik olaraq həmin kursun və ya təlimçinin email
+              ünvanına bildiriş göndərilir.
+            </div>
+          </div>
         </div>
     </div>
 </div>

@@ -144,7 +144,7 @@ def courseapply(request, id):
         email = User.objects.get(id=userid).email
         email = EmailMessage(
         'Kurshub',
-        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olan və müraciətlər qutusunu yoxlayın',
+        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olun və müraciətlər qutusunu yoxlayın',
         settings.EMAIL_HOST_USER,
         [str(email)]   
         )
@@ -175,7 +175,7 @@ def applytrainer(request, id):
         email = User.objects.get(id=userid).email
         email = EmailMessage(
         'Kurshub',
-        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olan və müraciətlər qutusunu yoxlayın',
+        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olun və müraciətlər qutusunu yoxlayın',
         settings.EMAIL_HOST_USER,
         [str(email)]   
         )
