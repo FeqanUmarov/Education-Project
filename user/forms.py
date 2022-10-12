@@ -19,6 +19,14 @@ class TutorSignUp(UserCreationForm):
     class Meta:
         model = User
         fields = ["name", "surname", "username", "email", "user_profile"]
+        
+        
+class Approve(forms.Form):
+    approvecode = forms.CharField(label ="Tesdiq kodu")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['approvecode'].widget.attrs.update({'class': 'form-control'})
 
 
 class LoginForm(forms.Form):
