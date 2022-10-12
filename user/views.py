@@ -1,12 +1,15 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import LoginForm, UserProfile, UserSignUp
+from .forms import LoginForm, UserProfile, UserSignUp, Approve
 from .models import User
 from course.models import CourseApply
+from django.core.mail import EmailMessage
+import random
 
 
 # Create your views here.
@@ -16,15 +19,44 @@ def register(request):
     form = UserSignUp(request.POST or None, request.FILES or None)
     if form.is_valid():
         user = form.save(commit=False)
-        user.save()
-        messages.success(request, "Uğurla qeydiyyatdan keçdiniz!")
-
-        return redirect("index")
+        number = random.randint(1111,9999)
+        email = EmailMessage(
+        'Dogrulama',
+        str(number),
+        settings.EMAIL_HOST_USER,
+        [str(user.email)]   
+        )
+        email.fail_silently = False
+        email.send()
+        global user_val
+        def user_val():
+            return user
+        global val
+        def val():
+            return number
+        messages.success(request,"Email-ə 4 rəqəmli kod göndərilmişdir")
+        return redirect("user:applyregister")
 
     contex = {
         "form": form
     }
     return render(request, "register.html", contex)
+
+def applyregister(request):
+    form = Approve(request.POST or None)
+    context ={
+        "form":form
+     }
+    if form.is_valid():
+        code = form.cleaned_data.get("approvecode")
+        if code == str(val()):
+            user_val().save()
+            messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
+            return redirect("index")
+            
+        else:
+            messages.success(request,"Email yoxlayın. Yanlış kod")
+    return render(request,"approve.html", context)
 
 
 def loginUser(request):
