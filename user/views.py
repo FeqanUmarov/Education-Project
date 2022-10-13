@@ -1,15 +1,12 @@
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import LoginForm, UserProfile, UserSignUp,Approve
+from .forms import LoginForm, UserProfile, UserSignUp
 from .models import User
 from course.models import CourseApply
-from django.core.mail import EmailMessage
-import random
 
 
 # Create your views here.
@@ -18,47 +15,16 @@ def register(request):
 
     form = UserSignUp(request.POST or None, request.FILES or None)
     if form.is_valid():
-        global user
-        global number
         user = form.save(commit=False)
-        print("men user tip:",type(user))
-        number = random.randint(1111,9999)
-        email = EmailMessage(
-        'Dogrulama',
-        str(number),
-        settings.EMAIL_HOST_USER,
-        [str(user.email)]   
-        )
-        email.fail_silently = False
-        email.send()
-       
-        #messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
-        return redirect("user:applyregister") 
-        #return redirect("user:applyregister", request,number,user)
+        user.save()
+        messages.success(request, "Uğurla qeydiyyatdan keçdiniz!")
+
+        return redirect("index")
 
     contex = {
         "form": form
     }
     return render(request, "register.html", contex)
-
-def applyregister(request):
-    global number
-    form = Approve(request.POST or None)
-    if form.is_valid():
-        code = form.cleaned_data.get("approvecode")
-        if str(code)==str(number):
-            user.save()
-            messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
-            return redirect("index")
-            
-        else:
-            messages.success(request,"Dogru kodu daxil edin")
-
-    
-    contex = {
-        "form": form
-        }
-    return render(request,"approve.html",contex)
 
 
 def loginUser(request):
