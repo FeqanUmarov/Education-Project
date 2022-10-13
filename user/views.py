@@ -50,7 +50,7 @@ def applyregister(request):
             messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
             return redirect("index")
             
-        else:
+        elif str(number)!=str(code):
             messages.success(request,"Dogru kodu daxil edin")
 
     
