@@ -141,7 +141,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-USE_S3 = False
+USE_S3 = True
 
 if USE_S3:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
