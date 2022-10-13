@@ -42,6 +42,7 @@ def register(request):
     return render(request, "register.html", contex)
 
 def applyregister(request):
+    global number
     form = Approve(request.POST or None)
     if form.is_valid():
         code = form.cleaned_data.get("approvecode")
