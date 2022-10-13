@@ -109,8 +109,8 @@ class CourseApply(models.Model):
     cancel = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseBoss,  on_delete=models.CASCADE)
-    apply_title = models.CharField(max_length=30)
-    apply_content = models.CharField(max_length=100)
+    apply_title = models.CharField(max_length=30,verbose_name =_("Müraciət başlığı"))
+    apply_content = models.CharField(max_length=100,verbose_name =_("Müraciət mövzusu"))
     apply_date = models.DateTimeField(auto_now_add=True)
 
 
@@ -119,8 +119,8 @@ class TrainerApply(models.Model):
     pending = models.BooleanField(default=True)
     cancel = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    apply_title = models.CharField(max_length=30)
-    apply_content = models.CharField(max_length=100)
+    apply_title = models.CharField(max_length=30,verbose_name =_("Müraciət başlığı"))
+    apply_content = models.CharField(max_length=255,verbose_name =_("Müraciət mövzusu"))
     apply_date = models.DateTimeField(auto_now_add=True)
     trainer = models.ForeignKey(Trainer, on_delete=models.CASCADE)
 
@@ -149,7 +149,7 @@ class EventApply(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     trainer = models.IntegerField()
-    apply_case = models.CharField(max_length=200)
+    apply_case = models.CharField(max_length=200, verbose_name =_("Müraciət səbəbi"))
     date = models.DateTimeField(auto_now_add=True)
     
     

@@ -48,7 +48,7 @@
             </li>
   
             {% elif request.user.is_authenticated and user.is_teacher %}
-            <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
+            <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs əlavə et</a></li>
             <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
             <li>
               <div class="gradient-button"><a id="modal_trigger"
@@ -57,7 +57,7 @@
   
   
             {% else %}
-            <li class="scroll-to-section"><a href="{% url 'user:login' %}">Kurs elave et</a></li>
+            <li class="scroll-to-section"><a href="{% url 'user:login' %}">Kurs əlavə et</a></li>
             <li class="scroll-to-section"><a href="{% url 'user:login' %}">Daxil ol</a></li>
             <li>
               <div class="gradient-button"><a id="modal_trigger" href="{% url 'user:register' %}"><i
