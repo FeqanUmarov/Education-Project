@@ -45,12 +45,12 @@ def applyregister(request):
     form = Approve(request.POST or None)
     if form.is_valid():
         code = form.cleaned_data.get("approvecode")
-        if str(number)==str(code):
+        if str(code)==str(number):
             user.save()
             messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
             return redirect("index")
             
-        elif str(number)!=str(code):
+        else:
             messages.success(request,"Dogru kodu daxil edin")
 
     
