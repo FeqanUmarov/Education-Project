@@ -694,6 +694,14 @@ def commonarticledetails(request,id):
 def updatearticle(request,id):
     blog = get_object_or_404(CreateBlog,user_id=id)
     form = AddBlog(request.POST or None, request.FILES or None , instance=blog)
+    if form.is_valid():
+        article = form.save(commit=False)
+        article.user = request.user
+        article.save()
+
+        messages.success(request, "Məqalə yeniləndi")
+
+        return redirect("course:articles")
     
     contex = {
         "form": form,
