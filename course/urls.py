@@ -56,6 +56,8 @@ urlpatterns = [
     path('createblog', views.createblog, name="createblog"),
     path('articles', views.articles, name="articles"),
     path('commonarticledetails/<int:id>', views.commonarticledetails, name="commonarticledetails"),
+    path('updatearticle/<int:id>', views.updatearticle, name="updatearticle"),
+    path('deletearticle/<int:id>', views.deletearticle, name="deletearticle"),
     path('eventapplynotification/<int:id>',
          views.eventapplynotification, name="eventapplynotification"),
 
