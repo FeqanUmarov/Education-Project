@@ -682,11 +682,27 @@ def articles(request):
 
 def commonarticledetails(request,id):
     
-    article = CreateBlog.objects.filter(user_id=id)
+    article = CreateBlog.objects.filter(user_id=id).first()
     
     contex = {
         "article": article,
 
     }
     return render (request,"commonblogdetail.html", contex)
+
+
+def updatearticle(request,id):
+    blog = get_object_or_404(CreateBlog,user_id=id)
+    form = AddBlog(request.POST or None, request.FILES or None , instance=blog)
+    
+    contex = {
+        "form": form,
+
+    }
+    return render (request,"updatearticle.html", contex)
+
+def deletearticle(request,id):
+    blog = get_object_or_404(CreateBlog,user_id=id)
+    blog.delete()
+    return redirect("course:articles")
     
