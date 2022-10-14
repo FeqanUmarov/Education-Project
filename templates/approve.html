@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+
+<div class="row">
+    <div class="container">
+
+        <div class="col-md-6 login-form-1">
+            <div class="login__form-title">
+                <h3>Doğrulama</h3>
+            </div>
+            <form class="login__form-inner" action="" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    {{form.approvecode|as_crispy_field}}
+                </div>
+                <div class="form-group btnSubmit-box">
+                    <input type="submit" class="btnSubmit" value="Təsdiq" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
