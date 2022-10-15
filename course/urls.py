@@ -8,6 +8,7 @@ app_name = "course"
 
 urlpatterns = [
     path('courses', views.courses, name = "courses"),
+    path('premuimcourse/<int:id>', views.premuimcourse, name = "premuimcourse"),
     path('aboutus', views.aboutus, name = "aboutus"),
     path('addcourse', views.addcourse, name = "addcourse"),
     path('addtrainer', views.addtrainer, name = "addtrainer"),
@@ -27,9 +28,10 @@ urlpatterns = [
     path('courseexam/<int:id>', views.courseexam, name = "courseexam"),
     path('courseapply/<int:id>', views.courseapply, name = "courseapply"),
     path('applytrainer/<int:id>', views.applytrainer, name = "applytrainer"),
-    path('addlessonplan/<int:id>', views.addlessonplan, name = "addlessonplan"),
-    path('updatelessonplan/<int:id>', views.updatelessonplan, name = "updatelessonplan"),
-    path('deletelessonplan/<int:id>', views.deletelessonplan, name = "deletelessonplan"),
+    path('addservice/<int:id>', views.addservice, name = "addservice"),
+    path('updateservice/<int:id>', views.updateservice, name = "updateservice"),
+    path('deleteservice/<int:id>', views.deleteservice, name = "deleteservice"),
+    path('detailservice/<int:id>', views.detailservice, name = "detailservice"),
     path('coursenotification/<int:id>', views.coursenotification, name = "coursenotification"),
     path('courseapplynotification/<int:id>', views.courseapplynotification, name = "courseapplynotification"),
     path('commonnotification/', views.commonnotification, name = "commonnotification"),
@@ -47,6 +49,10 @@ urlpatterns = [
     path('deletetrainer/<int:id>',views.deletetrainer, name="deletetrainer"),
     path('updateevent/<int:id>',views.updateevent, name="updateevent"),
     path('applyevent/<int:id>',views.applyevent, name="applyevent"),
+    path('createblog', views.createblog, name="createblog"),
+    path('articles', views.articles, name="articles"),
+    path('commonarticledetails/<int:id>', views.commonarticledetails, name="commonarticledetails"),
+    path('updatearticle/<int:id>', views.updatearticle, name="updatearticle"),
+    path('deletearticle/<int:id>', views.deletearticle, name="deletearticle"),
     path('eventapplynotification/<int:id>',views.eventapplynotification, name="eventapplynotification"),
-    
 ]

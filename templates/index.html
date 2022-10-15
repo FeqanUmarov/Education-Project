@@ -34,6 +34,45 @@
     </div>
   </div>
 </div>
+<br><br>
+<div class="container">
+  {% if course_values %}
+    <h3>Premium kurslar</h3>
+    <hr>
+    {% for course_value in course_values%}
+    {% if course_value.is_premium %}
+    <div class="row courses-wrapper">
+      
+      {% if course_value.is_course %}
+      <a href="{% url 'course:detailcourse' course_value.id %}">
+      {% endif  %}
+        <div class="courses service-item first-service">
+          {% if course_value.course_logo %}
+          <div class="service-item__icon">
+            <img src="{{course_value.course_logo.url}}" alt="{{course_value.course_name}}">
+          </div>
+          {% endif %}
+          <h4>{{course_value.course_name}}</h4>
+          <p>{{course_value.course_type}}</p>
+          <p>Istifadeci: {{course_value.user}}</p>
+          <span>{{course_value.course_slogan}}</span>
+          {% if course_value.is_course %}
+          <div class="text-button">
+            <a href="{% url 'course:detailcourse' course_value.id %}">Etrafli <i class="fa fa-arrow-right"></i></a>
+          </div>
+          {% else %}
+          <div class="text-button">
+            <a href="#">Kursunuz təsdiqlənmə gözləyir<i class="fa fa-arrow-right"></i></a>
+          </div>
+          {% endif %}
+        </div>
+      </a>
+      
+    </div>
+    {% endif %}
+    {% endfor %}
+  {% endif %}
+</div>
 
 
 <div id="about" class="about-us section">

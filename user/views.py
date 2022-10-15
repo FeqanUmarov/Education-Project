@@ -1,31 +1,66 @@
 import email
 from django import forms
 import django
+from django.conf import settings
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import UserSignUp, LoginForm, UserProfile
+from .forms import UserSignUp, LoginForm, UserProfile, Approve
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.db import transaction
 from .models import User
 from course.models import CourseApply, CourseBoss
+from django.core.mail import EmailMessage
+import random
 
 # Create your views here.
 @transaction.atomic
 def register(request):
+    
 
     form = UserSignUp(request.POST or None, request.FILES or None)
     if form.is_valid():
+        global user
+        global number
         user = form.save(commit=False)
-        user.save()
-        messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
-
-        return redirect("index")
+        number = random.randint(1111,9999)
+        email = EmailMessage(
+        'Dogrulama',
+        str(number),
+        settings.EMAIL_HOST_USER,
+        [str(user.email)]   
+        )
+        email.fail_silently = False
+        email.send()
+       
+        #messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
+        return redirect("user:applyregister") 
+        #return redirect("user:applyregister", request,number,user)
+        
+       
 
     contex = {
         "form": form
         }
     return render(request,"register.html", contex)
+
+def applyregister(request):
+    form = Approve(request.POST or None)
+    if form.is_valid():
+        code = form.cleaned_data.get("approvecode")
+        if str(number)==str(code):
+            user.save()
+            messages.success(request,"Uğurla qeydiyyatdan keçdiniz!")
+            return redirect("index")
+            
+        else:
+            messages.success(request,"Dogru kodu daxil edin")
+
+    
+    contex = {
+        "form": form
+        }
+    return render(request,"approve.html",contex)
 
 def loginUser(request):
     form = LoginForm(request.POST or None)
@@ -37,23 +72,24 @@ def loginUser(request):
         email = form.cleaned_data.get("email")
         password = form.cleaned_data.get("password")
 
-        user = User.objects.get(email=email).username
+        user = User.objects.filter(email=email)
+        if user.exists():
+            user = authenticate(
+                username=user.first().username, password=password)
+            login(request, user)
+            messages.success(request, "Uğurla giriş etdiniz")
+            return redirect("index")
 
-        user = authenticate(username = user,password = password)
-
-        if user is None:
-            messages.success(request,"İstifadəçi mövcud deyil")
+        elif not user.exists():
+            messages.success(request, "İstifadəçi mövcud deyil")
 
             return render(request, "login.html", context)
+        else:
+            messages.success(request, "Parol doğru deyil")
 
-
-
-        messages.success(request,"Uğurla giriş etdiniz")
-       
-        login(request, user)
-        return redirect("index")
-
-    return render(request,"login.html",context)
+            return render(request, "login.html", context)
+        
+    return render(request ,"login.html", context)
 
 
 

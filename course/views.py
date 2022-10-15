@@ -4,18 +4,23 @@ from pyexpat.errors import messages
 from tkinter.messagebox import NO
 from urllib import request, response
 import datetime
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from course.models import CourseBoss, Branchs, CourseType,Comment,CoursePhoto, CourseApply, Exam, ExamApply, LessonPlan, Trainer, TrainerApply, Event, EventApply
+from course.models import CourseBoss, Branchs, CourseType,Comment,CoursePhoto, CourseApply, Exam, ExamApply, CourseService, Trainer, TrainerApply, Event, EventApply,CreateBlog
 from user.models import User
-from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateLessonPlan, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm, ApplyEventForm
-
+from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateService, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm, ApplyEventForm,AddBlog
+from django.shortcuts import render
+from django.http import HttpResponseNotFound  
+from django.core.mail import EmailMessage
 # Create your views here.
 
 
 def courses(request):
+    
+    
 
     keyword = request.GET.get("keyword")
     if keyword:
@@ -35,6 +40,22 @@ def courses(request):
     }
 
     return render(request,"courses.html",contex)
+
+
+
+
+def premuimcourse(request,id):
+    course = get_object_or_404(CourseBoss,id=id)
+    if request.method == "POST":
+        print(id)
+        print("Method post" )
+        course.is_premium = True
+        return redirect ("course:courses")
+    
+    return render(request,"premiumcourse.html")
+
+
+
 
 def aboutus(request):
     return render(request,"aboutus.html")
@@ -156,7 +177,20 @@ def applytrainer(request,id):
         trainer_apply = form.save(commit=False)
         trainer_apply.user = request.user
         trainer_apply.trainer = Trainer.objects.filter(id=id).first()
+        userid=Trainer.objects.get(id=id).user_id
+        email = User.objects.get(id=userid).email
+        
         trainer_apply.save()
+        email = EmailMessage(
+        'Müraciət',
+        'Yeni bir tələbə müraciət etdi',
+        settings.EMAIL_HOST_USER,
+        [str(email)]   
+        )
+        email.fail_silently = False
+        email.send()
+        
+        
         
         return redirect("course:detailtrainers",id=id)
     
@@ -276,27 +310,27 @@ def blogdetails(request, id):
 
 
 
-@login_required(login_url='course/addlessonplan')
-def addlessonplan(request, id):
-    form = CreateLessonPlan(request.POST or None)
+@login_required(login_url='course/addservice')
+def addservice(request, id):
+    form = CreateService(request.POST or None)
     if form.is_valid():
-        courseplan = form.save(commit=False)
-        courseplan.user = request.user
-        courseplan.course = CourseBoss.objects.filter(id=id).first()
-        courseplan.save()
+        course_service = form.save(commit=False)
+        course_service.user = request.user
+        course_service.course = CourseBoss.objects.filter(id=id).first()
+        course_service.save()
         return redirect("course:detailcourse",id=id)
     
     contex = {
         "form":form,
     }
     
-    return render (request, "lessonplan.html", contex)
+    return render (request, "service.html", contex)
 
-@login_required(login_url='course/updatelessonplan')
-def updatelessonplan(request, id):
-    lessonplan = get_object_or_404(LessonPlan,id=id)
-    courseid = LessonPlan.objects.get(id=id).course_id
-    form = CreateLessonPlan(request.POST or None, instance=lessonplan)
+@login_required(login_url='course/updateservice')
+def updateservice(request, id):
+    course_service = get_object_or_404(CourseService,id=id)
+    courseid = CourseService.objects.get(id=id).course_id
+    form = CreateService(request.POST or None, instance=course_service)
     if form.is_valid():
         plan = form.save(commit=False)
         plan.user = request.user
@@ -313,11 +347,23 @@ def updatelessonplan(request, id):
     return render(request, "updatelessonplan.html",contex)
 
 
-@login_required(login_url='course/deletelessonplan')
-def deletelessonplan(request,id):
+def detailservice(request,id):
+    service = CourseService.objects.filter(id=id).first()
     
-    lessonplan = get_object_or_404(LessonPlan,id=id)
-    courseid=LessonPlan.objects.get(id=id).course_id
+    contex = {
+        "service":service,
+
+    }
+    return render(request, "detailsservice.html",contex)
+    
+    
+
+
+@login_required(login_url='course/deleteservice')
+def deleteservice(request,id):
+    
+    lessonplan = get_object_or_404(CourseService,id=id)
+    courseid=CourseService.objects.get(id=id).course_id
     lessonplan.delete()
     return redirect ("course:detailcourse", id=courseid)
     
@@ -328,7 +374,7 @@ def detailcourse(request,id):
     course_branch = Branchs.objects.filter(branch_id=id)
     course_apply = CourseApply.objects.filter(course_id = id)
     course_type = CourseType.objects.filter(id=id)
-    lesson_plan = LessonPlan.objects.filter(course_id=id)
+    services = CourseService.objects.filter(course_id=id)
     form = AddComment()
     
     contex = {
@@ -336,7 +382,7 @@ def detailcourse(request,id):
         "course_branch":course_branch,
         "course_type":course_type,
         "courseapply":course_apply,
-        "lessonplans":lesson_plan,
+        "services":services,
         "form":form,
     }
     return render(request, "detailcourse.html",contex)
@@ -438,7 +484,7 @@ def updateevent(request,id):
 
 
 
-@login_required(login_url='course/applyevent') 
+@login_required(login_url='/user/login') 
 def applyevent(request,id):
     form = ApplyEventForm(request.POST or None)
     if form.is_valid():
@@ -655,6 +701,63 @@ def cancel(request,id):
     status.cancel = 1
     status.save()
     return redirect("course:coursenotification",id=courseid)
+
+
+def createblog(request):
+    
+    form = AddBlog(request.POST or None,
+                       request.FILES or None)
+
+    if form.is_valid():
+        blog = form.save(commit=False)
+        blog.user = request.user
+        blog.save()
+
+        messages.success(request, "Məqaləniz əlavə edildi")
+
+        return redirect("course:articles")
+
+    contex = {
+        "form": form,
+
+    }
+
+    return render(request, "addblog.html", contex)
+
+def articles(request):
+    article = CreateBlog.objects.all()
+    
+    contex = {
+        "articles": article,
+
+    }
+    return render (request,"articles.html", contex)
+
+def commonarticledetails(request,id):
+    
+    article = CreateBlog.objects.filter(user_id=id).first()
+    
+    contex = {
+        "article": article,
+
+    }
+    return render (request,"commonblogdetail.html", contex)
+
+def updatearticle(request,id):
+    blog = get_object_or_404(CreateBlog,user_id=id)
+    form = AddBlog(request.POST or None, request.FILES or None , instance=blog)
+    
+    contex = {
+        "form": form,
+
+    }
+    return render (request,"updatearticle.html", contex)
+
+def deletearticle(request,id):
+    blog = get_object_or_404(CreateBlog,user_id=id)
+    blog.delete()
+    return redirect("course:articles")
+ 
 
 
 

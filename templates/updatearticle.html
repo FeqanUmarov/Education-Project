@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="container">
+        <div class="control-group course-apply" id="fields">
+            <h3 class="course-apply__title">Məqaləni yenilə</h3>
+            <div class="controls" id="profs">
+                <form method="POST" class="input-append course-apply__form" enctype="multipart/form-data">{% csrf_token %}
+                    <div id="field">
+                        {{form.blog_title|as_crispy_field}}
+                        {{form.media}}
+                        {{form.blog_content|as_crispy_field}}
+                        {{form.photo|as_crispy_field}}
+                    </div>
+                    <div class="course-apply__submit">
+                        <button type="submit" class="course-apply__submit-btn">Yenilə</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

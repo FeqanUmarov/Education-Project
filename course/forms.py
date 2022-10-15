@@ -8,7 +8,7 @@ from .models import CourseBoss
 from django.forms import ModelForm
 from django import forms
 
-from course.models import CourseBoss, Branchs,Comment, CoursePhoto, Exam, CourseApply, ExamApply, LessonPlan, Trainer, TrainerApply, Event, EventApply
+from course.models import CourseBoss, Branchs,Comment, CoursePhoto, Exam, CourseApply, ExamApply, CourseService, Trainer, TrainerApply, Event, EventApply,CreateBlog
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, EmailInput
 from user.models import User
@@ -29,10 +29,10 @@ class CourseInfo(forms.ModelForm):
         }
 
 
-class CreateLessonPlan(forms.ModelForm):
+class CreateService(forms.ModelForm):
     class Meta:
-        model = LessonPlan
-        fields  =["lessonplan"]
+        model = CourseService
+        fields  =["service_name","group_price","prsonal_price","about_service"]
 
 
 class TrainerInfo(forms.ModelForm):
@@ -95,6 +95,12 @@ class ApplyEventForm(forms.ModelForm):
     class Meta:
         model = EventApply
         fields = ["apply_case"]
+        
+        
+class AddBlog(forms.ModelForm):
+    class Meta:
+        model = CreateBlog
+        fields = ["blog_title","blog_content","photo"]
 
 
 
