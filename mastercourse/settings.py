@@ -143,15 +143,15 @@ USE_TZ = True
 
 USE_S3 = False
 
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get(
+    'AWS_STORAGE_BUCKET_NAME', 'kurshub')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
 if USE_S3:
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get(
-        'AWS_STORAGE_BUCKET_NAME', 'kurshub')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
 
     STATICFILES_STORAGE = 'mastercourse.storage_backends.StaticStorage'
@@ -166,9 +166,6 @@ else:
 
     # MEDIA_URL = '/media/'
     # MEDIA_ROOT = BASE_DIR / 'media'
-    AWS_STORAGE_BUCKET_NAME = os.environ.get(
-        'AWS_STORAGE_BUCKET_NAME', 'kurshub')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
     MEDIA_ROOT = MEDIA_URL
 
