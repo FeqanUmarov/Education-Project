@@ -164,9 +164,15 @@ else:
     STATIC_URL = '/static/'
     STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-    MEDIA_URL = '/media/'.0
-    MEDIA_ROOT = BASE_DIR / 'media'
+    # MEDIA_URL = '/media/'
+    # MEDIA_ROOT = BASE_DIR / 'media'
+    AWS_STORAGE_BUCKET_NAME = os.environ.get(
+        'AWS_STORAGE_BUCKET_NAME', 'kurshub')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    MEDIA_ROOT = MEDIA_URL
 
+    DEFAULT_FILE_STORAGE = 'mastercourse.storage_backends.PublicMediaStorage'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
