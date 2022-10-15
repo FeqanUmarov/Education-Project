@@ -1,6 +1,11 @@
 from django.shortcuts import render, redirect
 
+from course.models import CourseBoss
+
 
 def index(request):
-
-    return render(request, "index.html")
+    value = CourseBoss.objects.all()
+    contex = {
+        "course_values":value,
+    }
+    return render(request,"index.html",contex)
