@@ -6,10 +6,10 @@ from user.models import User
 
 from course.forms import (AddComment, ApplyEventForm, AskCourse, AskTrainer,
                           CourseBranch, CourseExam, CourseGallery, CourseInfo,
-                          CreateEvent, CreateService, TrainerInfo, AddBlog)
+                          CreateEvent, CreateLessonPlan, TrainerInfo, AddBlog)
 from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
                            CourseType, Event, EventApply, Exam, ExamApply,
-                           CourseService, Trainer, TrainerApply, CreateBlog)
+                           LessonPlan, Trainer, TrainerApply, CreateBlog)
 from django.core.mail import EmailMessage
 
 # Create your views here.
@@ -284,67 +284,53 @@ def blogdetails(request, id):
     return render(request, "blogdetails.html", contex)
 
 
-
-
-@login_required(login_url='course/addservice')
-def addservice(request, id):
-    form = CreateService(request.POST or None)
+@login_required(login_url='course/addlessonplan')
+def addlessonplan(request, id):
+    form = CreateLessonPlan(request.POST or None)
     if form.is_valid():
-        course_service = form.save(commit=False)
-        course_service.user = request.user
-        course_service.course = CourseBoss.objects.filter(id=id).first()
-        course_service.save()
-        messages.success(request,"Xidmət uğurla yaradıldı")
-        return redirect("course:detailcourse",id=id)
-        
-    
-    contex = {
-        "form":form,
-    }
-    
-    return render (request, "service.html", contex)
+        courseplan = form.save(commit=False)
+        courseplan.user = request.user
+        courseplan.course = CourseBoss.objects.filter(id=id).first()
+        courseplan.save()
+        messages.success(request, "Dərs planı əlavə edildi")
+        return redirect("course:detailcourse", id=id)
 
-@login_required(login_url='course/updateservice')
-def updateservice(request, id):
-    course_service = get_object_or_404(CourseService,id=id)
-    courseid = CourseService.objects.get(id=id).course_id
-    form = CreateService(request.POST or None, instance=course_service)
+    contex = {
+        "form": form,
+    }
+
+    return render(request, "lessonplan.html", contex)
+
+
+@login_required(login_url='course/updatelessonplan')
+def updatelessonplan(request, id):
+    lessonplan = get_object_or_404(LessonPlan, id=id)
+    courseid = LessonPlan.objects.get(id=id).course_id
+    form = CreateLessonPlan(request.POST or None, instance=lessonplan)
     if form.is_valid():
-        service = form.save(commit=False)
-        service.user = request.user
-        service.save()
+        plan = form.save(commit=False)
+        plan.user = request.user
+        plan.save()
 
-        messages.success(request,"Xidmət uğurla yeniləndi")
+        messages.success(request, "Dərs planı uğurla yeniləndi")
 
-        return redirect ("course:detailcourse", id=courseid)
-    
+        return redirect("course:detailcourse", id=courseid)
+
     contex = {
-        "form":form,
+        "form": form,
 
     }
-    return render(request, "updateservice.html",contex)
+    return render(request, "updatelessonplan.html", contex)
 
 
-def detailservice(request,id):
-    service = CourseService.objects.filter(id=id).first()
-    
-    contex = {
-        "service":service,
+@login_required(login_url='course/deletelessonplan')
+def deletelessonplan(request, id):
 
-    }
-    return render(request, "detailsservice.html",contex)
-    
-    
-
-
-@login_required(login_url='course/deleteservice')
-def deleteservice(request,id):
-    
-    courseservice = get_object_or_404(CourseService,id=id)
-    courseid=CourseService.objects.get(id=id).course_id
-    courseservice.delete()
-    messages.success(request,"Xidmət uğurla silindi")
-    return redirect ("course:detailcourse", id=courseid)
+    lessonplan = get_object_or_404(LessonPlan, id=id)
+    courseid = LessonPlan.objects.get(id=id).course_id
+    lessonplan.delete()
+    messages.success(request, "Dərs planı silindi")
+    return redirect("course:detailcourse", id=courseid)
 
 
 def detailcourse(request, id):
@@ -352,7 +338,7 @@ def detailcourse(request, id):
     course_branch = Branchs.objects.filter(branch_id=id)
     course_apply = CourseApply.objects.filter(course_id=id)
     course_type = CourseType.objects.filter(id=id)
-    services = CourseService.objects.filter(course_id=id)
+    lesson_plan = LessonPlan.objects.filter(course_id=id)
     form = AddComment()
 
     contex = {
@@ -360,7 +346,7 @@ def detailcourse(request, id):
         "course_branch": course_branch,
         "course_type": course_type,
         "courseapply": course_apply,
-        "services":services,
+        "lessonplans": lesson_plan,
         "form": form,
     }
     return render(request, "detailcourse.html", contex)
