@@ -1,7 +1,7 @@
 from django import forms
 from course.models import (Branchs, Comment, CourseApply, CourseBoss,
                            CoursePhoto, Event, EventApply, Exam,
-                           CourseService, Trainer, TrainerApply, CreateBlog)
+                           LessonPlan, Trainer, TrainerApply, CreateBlog)
 
 from .models import CourseBoss
 
@@ -19,10 +19,10 @@ class CourseInfo(forms.ModelForm):
         }
 
 
-class CreateService(forms.ModelForm):
+class CreateLessonPlan(forms.ModelForm):
     class Meta:
-        model = CourseService
-        fields  =["service_name","group_price","prsonal_price","about_service"]
+        model = LessonPlan
+        fields = ["lessonplan"]
 
 
 class TrainerInfo(forms.ModelForm):

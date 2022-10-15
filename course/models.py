@@ -24,7 +24,6 @@ class Location(models.Model):
 
 
 class CourseBoss(models.Model):
-    is_premium = models.BooleanField(default=False)
     is_course = models.BooleanField(default=False)
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     course_name = models.CharField(max_length=30, verbose_name =_("Kurs adı"))
@@ -127,13 +126,10 @@ class TrainerApply(models.Model):
 
 
 
-class CourseService(models.Model):
+class LessonPlan(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(CourseBoss, on_delete=models.CASCADE)
-    service_name = models.CharField(max_length = 100)
-    group_price = models.CharField(max_length = 50)
-    prsonal_price = models.CharField(max_length = 50)
-    about_service = RichTextField()
+    lessonplan = RichTextField()
 
 
 class Event(models.Model):
