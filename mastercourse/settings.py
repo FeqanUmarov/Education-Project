@@ -141,7 +141,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-USE_S3 = False
+USE_S3 = True
 
 if USE_S3:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -164,7 +164,7 @@ else:
     STATIC_URL = '/static/'
     STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-    MEDIA_URL = '/media/'
+    MEDIA_URL = '/media/'.0
     MEDIA_ROOT = BASE_DIR / 'media'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
