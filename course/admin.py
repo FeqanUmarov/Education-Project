@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CourseBoss ,CourseType, Branchs, Comment, CourseApply, Exam, ExamApply,CourseService, CreateBlog, Trainer, TrainerApply, Event, EventApply, Location, CoursePhoto, CreateBlog
+from .models import CourseBoss ,CourseType, Branchs, Comment, CourseApply, Exam, ExamApply, CreateBlog, Trainer, TrainerApply, Event, EventApply, Location, CoursePhoto, CreateBlog
 # Register your models here.
 
 admin.site.register(CourseBoss)
@@ -10,7 +10,6 @@ admin.site.register(Comment)
 admin.site.register(CourseApply)
 admin.site.register(Exam)
 admin.site.register(ExamApply)
-admin.site.register(CourseService)
 admin.site.register(Trainer)
 admin.site.register(TrainerApply)
 admin.site.register(Event)
