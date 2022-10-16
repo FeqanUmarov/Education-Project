@@ -3,6 +3,7 @@ from .models import CourseBoss ,CourseType, Branchs, Comment, CourseApply, Exam,
 # Register your models here.
 
 admin.site.register(CourseBoss)
+admin.site.register(CreateBlog)
 admin.site.register(CourseType)
 admin.site.register(Branchs)
 admin.site.register(Comment)
