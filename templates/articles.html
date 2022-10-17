@@ -18,10 +18,10 @@
                 </div>
                 <div class="detail-course__event-btns">
                     {% if request.user == article.user%}
-                        <a href="{% url 'course:deletearticle' article.user.id %}" class="detail-course__event-btns--delete">Sil</a>
-                        <a href="{% url 'course:updatearticle' article.user.id %}" class="articles__item-btn">Yenilə</a>
+                        <a href="{% url 'course:deletearticle' article.id %}" class="detail-course__event-btns--delete">Sil</a>
+                        <a href="{% url 'course:updatearticle' article.id %}" class="articles__item-btn">Yenilə</a>
                     {% endif %}
-                        <a href="{% url 'course:commonarticledetails' article.user.id %}" class="articles__item-btn">Ətraflı</a>
+                        <a href="{% url 'course:commonarticledetails' article.id %}" class="articles__item-btn">Ətraflı</a>
                 </div>
             </div>
             {% endfor %}
