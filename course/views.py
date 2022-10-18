@@ -823,7 +823,7 @@ def deletestudentanswer(request,id):
 
 
 def showcoursequestions(request,id):
-    questionid = UserAnswer.objects.filter(id=id).answercourse_id
+    questionid = UserAnswer.objects.get(id=id).answercourse
     question = CourseAnswer.objects.filter(id=questionid)
     contex = {
         "question": question,
