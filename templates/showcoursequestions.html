@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<div class="row">
+  <div class="container common-notification">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="notification-table">
+      <table class="table table-striped">
+        {% if user %}
+        <thead notification-table__head>
+          <tr>
+            <th scope="col">Kursun sualı</th>
+            <th scope="col">Tarix</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{question.answer}}</td>
+            <td>{{answer.date}}</td>
+          </tr>
+        </tbody>
+        {% endif %}
+
+      </table>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
