@@ -13,6 +13,7 @@
         {% if user %}
         <thead notification-table__head>
           <tr>
+            <th scope="col">Kursun sualları</th>
             <th scope="col">Ad</th>
             <th scope="col">Soyad</th>
             <th scope="col">Email</th>
@@ -26,6 +27,7 @@
         {% for answer in answers %}
         <tbody>
           <tr>
+            <td><a href="{% url 'course:showcoursequestions' answer.id %}">Kursun sualına bax</a></td>
             <td>{{answer.user.name}}</td>
             <td>{{answer.user.surname}}</td>
             <td>{{answer.user.email}}</td>

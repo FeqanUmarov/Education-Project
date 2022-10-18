@@ -820,4 +820,16 @@ def deletestudentanswer(request,id):
     answer = get_object_or_404(UserAnswer,id=id)
     answer.delete()
     return redirect("course:courses")
+
+
+def showcoursequestions(request,id):
+    questionid = UserAnswer.objects.filter(id=id).answercourse
+    question = CourseAnswer.objects.filter(id=questionid)
+    contex = {
+        "question": question,
+
+    }
+    return render (request,"answerstudent.html", contex)
+    
+    
     

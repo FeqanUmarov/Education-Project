@@ -67,5 +67,6 @@ urlpatterns = [
     path('courseanswertwo/<int:id>',views.courseanswertwo, name="courseanswertwo"),
     path('answershowstudent/<int:id>',views.answershowstudent, name="answershowstudent"),
     path('deletestudentanswer/<int:id>',views.deletestudentanswer, name="deletestudentanswer"),
+    path('showcoursequestions/<int:id>',views.showcoursequestions, name="showcoursequestions"),
 
 ]
