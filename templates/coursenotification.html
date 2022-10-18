@@ -54,6 +54,12 @@
               <a type="button" href="{% url 'course:cancel' student_info.id %}"
                 class="common-notification__btn">İmtina</a>
             </td>
+            {% if student_info.confirm == 1 %}
+            <td>
+              <a type="button" href="{% url 'course:courseanswer' student_info.id %}"
+                class="common-notification__btn">Cavab yaz</a>
+            </td>
+            {% endif %}
           </tr>
           {% endif %}
           {% endfor %}
