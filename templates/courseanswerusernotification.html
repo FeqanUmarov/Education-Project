@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+{% load static %}
+<div class="row">
+  <div class="container common-notification">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="notification-table">
+      <table class="table table-striped">
+        {% if user %}
+        <thead notification-table__head>
+          <tr>
+            <th scope="col">Kursun adı</th>
+            <th scope="col">Nömrəsi</th>
+            <th scope="col">Email</th>
+            <th scope="col">Sayt</th>
+            <th scope="col">Cavab</th>
+            <th scope="col">Tarix</th>
+          </tr>
+        </thead>
+
+
+        {% for answer in answers %}
+        <tbody>
+          <tr>
+            <td>{{answer.course.course_name}}</td>
+            <td>{{answer.course.course_phone}}</td>
+            <td>{{answer.course.course_email}}</td>
+            <td>{{answer.course.website}}</td>
+            <td>{{answer.answer}}</td>
+            <td>{{answer.date}}</td>
+            <td>
+                <a type="button" href="{% url 'course:useranswer' answer.id %}"
+                  class="common-notification__btn">Cavab yaz</a>
+            </td>
+          </tr>
+        </tbody>
+        {% endfor %}
+        {% endif %}
+
+      </table>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

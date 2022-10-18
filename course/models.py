@@ -162,3 +162,20 @@ class CreateBlog(models.Model):
     blog_title = models.CharField(max_length=200,verbose_name =_("Məqalə başlığı"))
     blog_content = RichTextField(verbose_name =_("Məqalə Mövzusu"))
     photo = models.ImageField(max_length=50, verbose_name =_("Şəkil"))
+    
+    
+    
+class CourseAnswer(models.Model):
+    course = models.ForeignKey(CourseBoss, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    answer = models.TextField()
+    
+    
+class UserAnswer(models.Model):
+    answercourse = models.ForeignKey(CourseAnswer, on_delete = models.CASCADE)
+    course = models.ForeignKey(CourseBoss, on_delete = models.CASCADE)
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    answer = models.TextField()
+
