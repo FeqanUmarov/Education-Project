@@ -10,7 +10,7 @@
     </button>
     <div class="notification-table">
       <table class="table table-striped">
-        {% if user %}
+   
         <thead notification-table__head>
           <tr>
             <th scope="col">Kursun sualı</th>
@@ -20,10 +20,9 @@
         <tbody>
           <tr>
             <td>{{question.answer}}</td>
-            <td>{{answer.date}}</td>
+            <td>{{question.date}}</td>
           </tr>
         </tbody>
-        {% endif %}
 
       </table>
     </div>
