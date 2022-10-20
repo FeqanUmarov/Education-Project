@@ -165,17 +165,4 @@ class CreateBlog(models.Model):
     
     
     
-class CourseAnswer(models.Model):
-    course = models.ForeignKey(CourseBoss, on_delete = models.CASCADE)
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
-    answer = models.TextField()
-    
-    
-class UserAnswer(models.Model):
-    answercourse = models.ForeignKey(CourseAnswer, on_delete = models.CASCADE)
-    course = models.ForeignKey(CourseBoss, on_delete = models.CASCADE)
-    user = models.ForeignKey(User, on_delete = models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
-    answer = models.TextField()
 
