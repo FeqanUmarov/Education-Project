@@ -6,18 +6,18 @@
         <div class="control-group course-apply">
             <h3 class="course-apply__title">Mesajlaşma</h3>
             <div class="controls" id="profs">
-                {% for message in messages %}
-                {% if message.course == courseid and message.course_message == True %}
+                {% for messages_chat in messages_chats %}
+                {% if messages_chat.course == courseid and messages_chat.course_message == True %}
                 <br>
                 <hr>
-                <label for=""><span class = "label label-default">{{message.course.course_name}} | {{message.date}}</span>
-                              <p>{{message.message}}</p>
+                <label for=""><span class = "label label-default">{{messages_chat.course.course_name}} | {{messages_chat.date}}</span>
+                              <p>{{messages_chat.message}}</p>
                 </label>
-                {% elif message.course == courseid and message.course_message == False %}
+                {% elif messages_chat.course == courseid and messages_chat.course_message == False %}
                 <br>
                 <hr>
-                <label for=""><span class = "label label-default">{{message.user.name}}  | {{message.date}}</span>
-                              <p>{{message.message}}</p>
+                <label for=""><span class = "label label-default">{{messages_chat.user.name}}  | {{messages_chat.date}}</span>
+                              <p>{{messages_chat.message}}</p>
                 </label>
                 {% endif %}
                 {% endfor %}

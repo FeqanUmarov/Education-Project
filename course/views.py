@@ -744,7 +744,7 @@ def coursemessage(request,id):
     
     contex = {
         "courseid":courseid,
-        "messages": messages_,
+        "messages_chats": messages_,
         "form":form
 
     }
