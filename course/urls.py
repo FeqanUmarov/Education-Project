@@ -59,14 +59,4 @@ urlpatterns = [
     path('deletearticle/<int:id>', views.deletearticle, name="deletearticle"),
     path('eventapplynotification/<int:id>',
          views.eventapplynotification, name="eventapplynotification"),
-    path('courseanswer/<int:id>',views.courseanswer, name="courseanswer"),
-    path('courseanswernotification/<int:id>',views.courseanswernotification, name="courseanswernotification"),
-    path('courseanswerusernotification/<int:id>',views.courseanswerusernotification, name="courseanswerusernotification"),
-    path('useranswer/<int:id>',views.useranswer, name="useranswer"),
-    path('answerstudent/<int:id>',views.answerstudent, name="answerstudent"),
-    path('courseanswertwo/<int:id>',views.courseanswertwo, name="courseanswertwo"),
-    path('answershowstudent/<int:id>',views.answershowstudent, name="answershowstudent"),
-    path('deletestudentanswer/<int:id>',views.deletestudentanswer, name="deletestudentanswer"),
-    path('showcoursequestions/<int:id>',views.showcoursequestions, name="showcoursequestions"),
-
 ]

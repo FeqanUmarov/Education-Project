@@ -6,10 +6,10 @@ from user.models import User
 
 from course.forms import (AddComment, ApplyEventForm, AskCourse, AskTrainer,
                           CourseBranch, CourseExam, CourseGallery, CourseInfo,
-                          CreateEvent, CreateService, TrainerInfo, AddBlog,AnswerCourse,AnswerUser)
+                          CreateEvent, CreateService, TrainerInfo, AddBlog)
 from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
                            CourseType, Event, EventApply, Exam, ExamApply,
-                           CourseService, Trainer, TrainerApply, CreateBlog,CourseAnswer,UserAnswer)
+                           CourseService, Trainer, TrainerApply, CreateBlog)
 from django.core.mail import EmailMessage
 
 # Create your views here.
@@ -723,113 +723,5 @@ def deletearticle(request,id):
     blog.delete()
     return redirect("course:articles")
 
-
-def courseanswer(request,id):
-    form = AnswerCourse(request.POST or None)
-    
-    if form.is_valid():
-        answer = form.save(commit=False)
-        answer.course = CourseApply.objects.get(id=id).course
-        answer.user = CourseApply.objects.get(id=id).user
-        answer.save()
-        return redirect("course:courses")
-        
-    
-
-    contex = {
-        "form": form,
-
-    }
-    return render (request,"courseanswer.html", contex)
-
-def courseanswertwo(request,id):
-    form = AnswerCourse(request.POST or None)
-    
-    if form.is_valid():
-        answer = form.save(commit=False)
-        answer.course = UserAnswer.objects.get(id=id).course
-        answer.user = UserAnswer.objects.get(id=id).user
-        answer.save()
-        return redirect("course:courses")
-        
-    
-
-    contex = {
-        "form": form,
-
-    }
-    return render (request,"courseanswer.html", contex)
-
-
-def courseanswernotification(request,id):
-    answers = CourseAnswer.objects.filter(course_id=id)
-    
-    contex = {
-        "answers": answers,
-
-    }
-    return render (request,"courseanswernotification.html", contex)
-
-
-def courseanswerusernotification(request,id):
-    answers = CourseAnswer.objects.filter(user_id=request.user)
-    contex = {
-        "answers": answers,
-
-    }
-    return render (request,"courseanswerusernotification.html", contex)
-
-
-def useranswer(request,id):
-    form = AnswerUser(request.POST or None)
-    
-    if form.is_valid():
-        answer = form.save(commit=False)
-        answer.answercourse = CourseAnswer.objects.get(id=id)
-        answer.course = CourseAnswer.objects.get(id=id).course
-        answer.user = CourseAnswer.objects.get(id=id).user
-        answer.save()
-        return redirect("course:courses")
-        
-    
-
-    contex = {
-        "form": form,
-
-    }
-    return render (request,"useranswer.html", contex)
-
-def answerstudent(request,id):
-    answers = UserAnswer.objects.filter(course_id=id)
-    contex = {
-        "answers": answers,
-
-    }
-    return render (request,"answerstudent.html", contex)
-
-def answershowstudent(request,id):
-    answers = UserAnswer.objects.filter(user_id=request.user)
-    contex = {
-        "answers": answers,
-
-    }
-    return render (request,"answerstudent.html", contex)
-
-
-def deletestudentanswer(request,id):
-    answer = get_object_or_404(UserAnswer,id=id)
-    answer.delete()
-    return redirect("course:courses")
-
-
-def showcoursequestions(request,id):
-    questionid = UserAnswer.objects.get(id=id).answercourse_id
-    question = CourseAnswer.objects.filter(id=questionid)
-    contex = {
-        "question": question,
-
-    }
-    return render (request,"answerstudent.html", contex)
-    
     
     
