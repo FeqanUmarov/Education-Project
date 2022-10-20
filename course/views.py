@@ -730,7 +730,7 @@ def coursemessage(request,id):
     courseid = CourseApply.objects.get(id=id).course
     user_id = CourseApply.objects.get(id=id).user
     
-    messages = Messages.objects.filter(user=user_id)
+    messages_ = Messages.objects.filter(user=user_id)
     form = ChatMessages(request.POST or None)
     if form.is_valid():
         answer = form.save(commit=False)
@@ -744,7 +744,7 @@ def coursemessage(request,id):
     
     contex = {
         "courseid":courseid,
-        "messages": messages,
+        "messages": messages_,
         "form":form
 
     }
@@ -755,7 +755,7 @@ def usermessage(request,id):
     courseid = CourseApply.objects.get(id=id).course
     user_id = CourseApply.objects.get(id=id).user
     
-    messages = Messages.objects.filter(user=user_id)
+    messages_ = Messages.objects.filter(user=user_id)
     form = ChatMessages(request.POST or None)
     if form.is_valid():
         answer = form.save(commit=False)
@@ -769,7 +769,7 @@ def usermessage(request,id):
     
     contex = {
         "courseid":courseid,
-        "messages": messages,
+        "messages": messages_,
         "form":form
 
     }
