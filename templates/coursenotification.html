@@ -56,8 +56,8 @@
             </td>
             {% if student_info.confirm == 1 %}
             <td>
-              <a type="button" href="{% url 'course:courseanswer' student_info.id %}"
-                class="common-notification__btn">Cavab yaz</a>
+              <a type="button" href="{% url 'course:coursemessage' student_info.id %}"
+                class="common-notification__btn">Mesaj</a>
             </td>
             {% endif %}
           </tr>
