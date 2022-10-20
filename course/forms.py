@@ -1,7 +1,7 @@
 from django import forms
 from course.models import (Branchs, Comment, CourseApply, CourseBoss,
                            CoursePhoto, Event, EventApply, Exam,
-                           CourseService, Trainer, TrainerApply, CreateBlog)
+                           CourseService, Trainer, TrainerApply, CreateBlog,Messages)
 
 from .models import CourseBoss
 
@@ -104,6 +104,12 @@ class AddBlog(forms.ModelForm):
     class Meta:
         model = CreateBlog
         fields = ["blog_title","blog_content","photo"]
+        
+        
+class ChatMessages(forms.ModelForm):
+    class Meta:
+        model = Messages
+        fields = ["message"]
         
         
 
