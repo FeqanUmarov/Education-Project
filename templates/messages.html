@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% load crispy_forms_tags %}
+{% block body %}
+<div class="row">
+    <div class="container " id="fields">
+        <div class="control-group course-apply">
+            <h3 class="course-apply__title">Mesajlaşma</h3>
+            <div class="controls" id="profs">
+                {% for message in messages %}
+                {% if message.course == courseid and message.course_message == True %}
+                <br>
+                <hr>
+                <label for=""><span>{{message.course.course_name}} | {{message.date}}</span>
+                              <p>{{message.message}}</p>
+                </label>
+                <hr>
+                {% elif message.course == courseid and message.course_message == False %}
+                <br>
+                <hr>
+                <label for=""><span>{{message.user.name}}  | {{message.date}}</span>
+                              <p>{{message.message}}</p>
+                </label>
+                <hr>
+                {% endif %}
+                {% endfor %}
+                <form method="POST" class="input-append course-apply__form">{% csrf_token %}
+                    <div id="field">{{form|crispy}}</div>
+                    <div class="course-apply__submit">
+                        <button type="submit" class="course-apply__submit-btn">Mesaj göndər</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

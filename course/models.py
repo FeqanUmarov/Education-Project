@@ -164,5 +164,13 @@ class CreateBlog(models.Model):
     photo = models.ImageField(max_length=50, verbose_name =_("Şəkil"))
     
     
+class Messages(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    course = models.ForeignKey(CourseBoss, on_delete = models.CASCADE)
+    course_message = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+    message = models.TextField(verbose_name =_("Mesaj yaz"))
+    
+    
     
 

@@ -6,10 +6,10 @@ from user.models import User
 
 from course.forms import (AddComment, ApplyEventForm, AskCourse, AskTrainer,
                           CourseBranch, CourseExam, CourseGallery, CourseInfo,
-                          CreateEvent, CreateService, TrainerInfo, AddBlog)
+                          CreateEvent, CreateService, TrainerInfo, AddBlog,ChatMessages)
 from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
                            CourseType, Event, EventApply, Exam, ExamApply,
-                           CourseService, Trainer, TrainerApply, CreateBlog)
+                           CourseService, Trainer, TrainerApply, CreateBlog,Messages)
 from django.core.mail import EmailMessage
 
 # Create your views here.
@@ -722,6 +722,58 @@ def deletearticle(request,id):
     blog = get_object_or_404(CreateBlog,id=id)
     blog.delete()
     return redirect("course:articles")
+
+
+
+
+def coursemessage(request,id):
+    courseid = CourseApply.objects.get(id=id).course
+    user_id = CourseApply.objects.get(id=id).user
+    
+    messages = Messages.objects.filter(user=user_id)
+    form = ChatMessages(request.POST or None)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.course = courseid
+        answer.user = user_id
+        answer.course_message = True
+        answer.save()
+        messages.success(request, "Mesaj göndərildi")
+        
+        
+    
+    contex = {
+        "courseid":courseid,
+        "messages": messages,
+        "form":form
+
+    }
+    return render (request,"messages.html", contex)
+
+
+def usermessage(request,id):
+    courseid = CourseApply.objects.get(id=id).course
+    user_id = CourseApply.objects.get(id=id).user
+    
+    messages = Messages.objects.filter(user=user_id)
+    form = ChatMessages(request.POST or None)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.course = courseid
+        answer.user = user_id
+        answer.course_message = False
+        answer.save()
+        messages.success(request, "Mesaj göndərildi")
+        
+        
+    
+    contex = {
+        "courseid":courseid,
+        "messages": messages,
+        "form":form
+
+    }
+    return render (request,"messages.html", contex)
 
     
     
