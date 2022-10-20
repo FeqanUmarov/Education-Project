@@ -10,14 +10,14 @@
                 {% if message.course == courseid and message.course_message == True %}
                 <br>
                 <hr>
-                <label for=""><span>{{message.course.course_name}} | {{message.date}}</span>
+                <label for=""><span class = "label label-default">{{message.course.course_name}} | {{message.date}}</span>
                               <p>{{message.message}}</p>
                 </label>
                 <hr>
                 {% elif message.course == courseid and message.course_message == False %}
                 <br>
                 <hr>
-                <label for=""><span>{{message.user.name}}  | {{message.date}}</span>
+                <label for=""><span class = "label label-default">{{message.user.name}}  | {{message.date}}</span>
                               <p>{{message.message}}</p>
                 </label>
                 <hr>
