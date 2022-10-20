@@ -13,14 +13,12 @@
                 <label for=""><span class = "label label-default">{{message.course.course_name}} | {{message.date}}</span>
                               <p>{{message.message}}</p>
                 </label>
-                <hr>
                 {% elif message.course == courseid and message.course_message == False %}
                 <br>
                 <hr>
                 <label for=""><span class = "label label-default">{{message.user.name}}  | {{message.date}}</span>
                               <p>{{message.message}}</p>
                 </label>
-                <hr>
                 {% endif %}
                 {% endfor %}
                 <form method="POST" class="input-append course-apply__form">{% csrf_token %}
