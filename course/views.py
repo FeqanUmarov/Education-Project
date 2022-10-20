@@ -738,7 +738,7 @@ def coursemessage(request,id):
         answer.user = user_id
         answer.course_message = True
         answer.save()
-        messages.success(request, "Mesaj göndərildi")
+
         
         
     
@@ -763,7 +763,7 @@ def usermessage(request,id):
         answer.user = user_id
         answer.course_message = False
         answer.save()
-        messages.success(request, "Mesaj göndərildi")
+        
         
         
     
