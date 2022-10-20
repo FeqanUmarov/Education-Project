@@ -40,14 +40,6 @@
             href="{% url 'course:coursenotification' course_values.id %}">Müraciətlər</a>
         </li>
         <li>
-          <a class="detail-course__tab-item"
-            href="{% url 'course:courseanswernotification' course_values.id %}">Kursun cavabı</a>
-        </li>
-        <li>
-          <a class="detail-course__tab-item"
-            href="{% url 'course:answerstudent' course_values.id %}">Tələbənin cavabı</a>
-        </li>
-        <li>
           <a class="detail-course__tab-item" data-toggle="modal" data-target="#deleteModal" href="">Kursu sil</a>
         </li>
         {% elif request.user.is_authenticated %}
@@ -58,13 +50,6 @@
           href="{% url 'course:courseapply' course_values.id %}">Kursa muraciet et</a>
         <a class="nav-item nav-link detail-course__tab-item"
           href="{% url 'course:courseapplynotification' course_values.id %}">Müraciətlərim</a>
-
-        <a class="nav-item nav-link detail-course__tab-item"
-          href="{% url 'course:courseanswerusernotification' course_values.id %}">Kursun cavablari</a>
-
-        <a class="nav-item nav-link detail-course__tab-item"
-          href="{% url 'course:answershowstudent' course_values.id %}">Mənim cavablarim</a>
-
         {% endif %}
       </ol>
     </nav>
