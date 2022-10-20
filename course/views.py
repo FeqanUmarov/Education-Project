@@ -506,7 +506,7 @@ def updatetrainer(request, id):
         trainer.user = request.user
         trainer.save()
 
-        messages.success(request, "Treyner melumatları yenilendi")
+        messages.success(request, "Təlimçi melumatları yenilendi")
 
         return redirect("course:detailtrainers", id=id)
 
