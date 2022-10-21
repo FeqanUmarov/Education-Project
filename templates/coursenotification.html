@@ -58,6 +58,12 @@
               <a type="button" data-toggle="modal" data-target="#deleteModal" href=""
                 class="common-notification__btn">İmtina</a>
             </td>
+            {% if student_info.confirm == 1 %}
+            <td>
+              <a type="button" href="{% url 'course:coursemessage' student_info.id %}"
+                class="common-notification__btn">Mesaj</a>
+            </td>
+            {% endif %}
           </tr>
           {% endif %}
           {% endfor %}

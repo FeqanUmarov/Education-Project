@@ -1,6 +1,7 @@
 from email import message
 from email.policy import default
 from pyexpat.errors import messages
+from re import I
 from tkinter.messagebox import NO
 from urllib import request, response
 import datetime
@@ -9,9 +10,9 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from course.models import CourseBoss, Branchs, CourseType,Comment,CoursePhoto, CourseApply, Exam, ExamApply, CourseService, Trainer, TrainerApply, Event, EventApply,CreateBlog
+from course.models import CourseBoss, Branchs, CourseType,Comment,CoursePhoto, CourseApply, Exam, ExamApply, CourseService, Trainer, TrainerApply, Event, EventApply,CreateBlog,Messages
 from user.models import User
-from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateService, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm, ApplyEventForm,AddBlog
+from .forms import CourseInfo, CourseBranch, AddComment, CourseGallery, CourseExam, AskCourse, CreateService, TrainerInfo, AskTrainer, CreateEvent, ApplyEventForm, ApplyEventForm,AddBlog,ChatMessages
 from django.shortcuts import render
 from django.http import HttpResponseNotFound  
 from django.core.mail import EmailMessage
@@ -757,6 +758,80 @@ def deletearticle(request,id):
     blog = get_object_or_404(CreateBlog,user_id=id)
     blog.delete()
     return redirect("course:articles")
+
+
+
+# def courseanswer(request,id):
+#     form = AnswerCourse(request.POST or None)
+    
+#     if form.is_valid():
+#         answer = form.save(commit=False)
+#         answer.course = CourseApply.objects.get(id=id).course
+#         answer.user = CourseApply.objects.get(id=id).user
+#         answer.save()
+#         return redirect("course:courses")
+        
+    
+
+#     contex = {
+#         "form": form,
+
+#     }
+#     return render (request,"courseanswer.html", contex)
+
+
+def coursemessage(request,id):
+    courseid = CourseApply.objects.get(id=id).course
+    user_id = CourseApply.objects.get(id=id).user
+    
+    messages = Messages.objects.filter(user=user_id)
+    form = ChatMessages(request.POST or None)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.course = courseid
+        answer.user = user_id
+        answer.course_message = True
+        answer.save()
+        
+        
+    
+    contex = {
+        "courseid":courseid,
+        "messages": messages,
+        "form":form
+
+    }
+    return render (request,"messages.html", contex)
+
+
+def usermessage(request,id):
+    courseid = CourseApply.objects.get(id=id).course
+    user_id = CourseApply.objects.get(id=id).user
+    
+    messages = Messages.objects.filter(user=user_id)
+    form = ChatMessages(request.POST or None)
+    if form.is_valid():
+        answer = form.save(commit=False)
+        answer.course = courseid
+        answer.user = user_id
+        answer.course_message = False
+        answer.save()
+        
+        
+    
+    contex = {
+        "courseid":courseid,
+        "messages": messages,
+        "form":form
+
+    }
+    return render (request,"messages.html", contex)
+    
+    
+    
+    
+    
+    
  
 
 

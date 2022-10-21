@@ -30,6 +30,10 @@
             {% elif student_info.cancel == 1 %}
             <td>Imtina edildi</td>
             {% endif %}
+            <td>
+              <a type="button" href="{% url 'course:usermessage' student_info.id %}"
+                class="common-notification__btn">Mesaj</a>
+            </td>
           </tr>
           {% endif %}
 

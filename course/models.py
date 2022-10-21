@@ -1,6 +1,6 @@
+from email.policy import default
 from pyexpat import model
 from statistics import mode
-from tkinter import CASCADE
 from tokenize import blank_re
 from urllib import request
 from django.db import DatabaseError, models
@@ -170,3 +170,15 @@ class CreateBlog(models.Model):
     blog_title = models.CharField(max_length=200)
     blog_content = RichTextField()
     photo = models.ImageField(max_length=50)
+    
+    
+    
+class Messages(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE)
+    course = models.ForeignKey(CourseBoss, on_delete = models.CASCADE)
+    course_message = models.BooleanField(default=False)
+    date = models.DateTimeField(auto_now_add=True)
+    message = models.TextField()
+    
+    
+    

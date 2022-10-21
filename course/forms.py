@@ -1,4 +1,6 @@
 # from msilib.schema import Class
+from dataclasses import fields
+from msilib.schema import Class
 from multiprocessing.sharedctypes import Value
 from pyexpat import model
 from urllib import request
@@ -8,7 +10,7 @@ from .models import CourseBoss
 from django.forms import ModelForm
 from django import forms
 
-from course.models import CourseBoss, Branchs,Comment, CoursePhoto, Exam, CourseApply, ExamApply, CourseService, Trainer, TrainerApply, Event, EventApply,CreateBlog
+from course.models import CourseBoss, Branchs,Comment, CoursePhoto, Exam, CourseApply, ExamApply, CourseService, Trainer, TrainerApply, Event, EventApply,CreateBlog,Messages
 from django.contrib.auth.models import User
 from django.forms import ModelForm, TextInput, EmailInput
 from user.models import User
@@ -101,6 +103,25 @@ class AddBlog(forms.ModelForm):
     class Meta:
         model = CreateBlog
         fields = ["blog_title","blog_content","photo"]
+        
+        
+        
+class ChatMessages(forms.ModelForm):
+    class Meta:
+        model = Messages
+        fields = ["message"]
+        
+        widgets = {
+            'message': forms.Textarea(attrs={'class': 'form-control'}),
+            
+        }
+
+        
+
+
+        
+        
+
 
 
 

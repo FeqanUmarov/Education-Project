@@ -55,4 +55,6 @@ urlpatterns = [
     path('updatearticle/<int:id>', views.updatearticle, name="updatearticle"),
     path('deletearticle/<int:id>', views.deletearticle, name="deletearticle"),
     path('eventapplynotification/<int:id>',views.eventapplynotification, name="eventapplynotification"),
+    path('coursemessage/<int:id>',views.coursemessage, name="coursemessage"),
+    path('usermessage/<int:id>',views.usermessage, name="usermessage"),
 ]

@@ -6,16 +6,15 @@
 
 <div class="container">
     <div class="card" style="width: 18rem;">
-      {% if user.is_student %}
-        {% if tests %}
-          {% for test in tests %}
+        {% if course_exams %}
+          {% for course_exam in course_exams %}
           <div class="card-body">
-            <h5 class="card-title">Kurs: {{test.course}} {{test.exam_title}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Məqsəd: {{test.exam_content}}</h6>
-            <h6 class="card-subtitle mb-2 text-muted">Filial: {{test.branch}}</h6>
-            <p class="card-text">Boş yerlər: {{test.empty_space}}</p>
+            <h5 class="card-title">Kurs: {{course_exam.course}} {{course_exam.exam_title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Məqsəd: {{course_exam.exam_content}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Filial: {{course_exam.branch}}</h6>
+            <p class="card-text">Boş yerlər: {{course_exam.empty_space}}</p>
             <a href="#" class="card-link">Etrafli</a>
-            <a href="{% url 'course:applyexam' test.course_id %}" class="card-link">Muraciet et</a>
+            <a href="{% url 'course:applyexam' course_exam.course_id %}" class="card-link">Muraciet et</a>
           </div>
           {% endfor %}
         {% else %}
@@ -28,19 +27,7 @@
 
         {% endif %}
 
-      {% elif user.is_course %}
-        {% for course_exam in course_exams %}
-      <div class="card-body">
-        <h5 class="card-title">Kurs: {{course_exam.course}} {{course_exam.exam_title}}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">Məqsəd: {{course_exam.exam_content}}</h6>
-        <h6 class="card-subtitle mb-2 text-muted">Filial: {{course_exam.branch}}</h6>
-        <p class="card-text">Boş yerlər: {{course_exam.empty_space}}</p>
-        <a href="#" class="card-link">Yenile</a>
-        <a href="#" class="card-link">Imtahani sil</a>
-      </div>
-      {% endfor %}
-      {% endif %}
-    </div>
+     
 
 </div>
 {% endblock %}
