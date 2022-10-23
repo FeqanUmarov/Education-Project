@@ -1,6 +1,5 @@
 # from msilib.schema import Class
 from dataclasses import fields
-from msilib.schema import Class
 from multiprocessing.sharedctypes import Value
 from pyexpat import model
 from urllib import request
@@ -97,30 +96,30 @@ class ApplyEventForm(forms.ModelForm):
     class Meta:
         model = EventApply
         fields = ["apply_case"]
-        
-        
+
+
 class AddBlog(forms.ModelForm):
     class Meta:
         model = CreateBlog
         fields = ["blog_title","blog_content","photo"]
-        
-        
-        
+
+
+
 class ChatMessages(forms.ModelForm):
     class Meta:
         model = Messages
         fields = ["message"]
-        
+
         widgets = {
             'message': forms.Textarea(attrs={'class': 'form-control'}),
-            
+
         }
 
-        
 
 
-        
-        
+
+
+
 
 
 

@@ -5,3 +5,10 @@ pip install django-ckeditor
 
 samir@gmail.com
 qafqaz123
+
+python3 -m venv e-course
+source e-course/bin/activate
+pip install -r /path/to/requirement.txt
+python manage.py makemigrations
+python manage.py migrate
+python manage.py runserver
