@@ -739,6 +739,7 @@ def coursemessage(request,id):
         answer.course_message = True
         answer.save()
         form = ChatMessages()
+        return redirect("course:coursemessage",id=id)
 
         
         
@@ -765,6 +766,7 @@ def usermessage(request,id):
         answer.course_message = False
         answer.save()
         form = ChatMessages()
+        return redirect("course:usermessage",id=id)
         
         
         
