@@ -752,7 +752,7 @@ def coursemessage(request,id):
     }
     return render (request,"messages.html", contex)
 
-
+@login_required(login_url='/user/login')
 def usermessage(request,id):
     courseid = CourseApply.objects.get(id=id).course
     user_id = CourseApply.objects.get(id=id).user
