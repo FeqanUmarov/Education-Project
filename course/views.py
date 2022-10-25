@@ -766,7 +766,7 @@ def usermessage(request,id):
         answer.course_message = False
         answer.save()
         form = ChatMessages()
-        courseemail = CourseBoss.objects.get(id=courseid).course_email
+        courseemail = CourseBoss.objects.get(id=courseid.id).course_email
         email = EmailMessage(
         'Kurshub',
         """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
