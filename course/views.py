@@ -774,7 +774,7 @@ def usermessage(request,id):
         settings.EMAIL_HOST_USER,
         [str(courseemail)]   
         )
-        email.fail_silently = False
+        email.fail_silently = True
         email.send()
         return redirect("course:usermessage",id=id)
         
