@@ -739,6 +739,16 @@ def coursemessage(request,id):
         answer.course_message = True
         answer.save()
         form = ChatMessages()
+        email = CourseBoss.objects.get(id=courseid).course_email
+        email = EmailMessage(
+        'Kurshub',
+        """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
+        https://kurshub.az/course/coursemessage/{}""".format(id),
+        settings.EMAIL_HOST_USER,
+        [str(email)]   
+        )
+        email.fail_silently = False
+        email.send()
         return redirect("course:coursemessage",id=id)
 
         
