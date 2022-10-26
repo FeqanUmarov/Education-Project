@@ -728,17 +728,27 @@ def deletearticle(request,id):
 
 def coursemessage(request,id):
     courseid = CourseApply.objects.get(id=id).course
-    user_id = CourseApply.objects.get(id=id).user
+    userid = CourseApply.objects.get(id=id).user
     
-    messages_ = Messages.objects.filter(user=user_id)
+    messages_ = Messages.objects.filter(user=userid)
     form = ChatMessages(request.POST or None)
     if form.is_valid():
         answer = form.save(commit=False)
         answer.course = courseid
-        answer.user = user_id
+        answer.user = userid
         answer.course_message = True
         answer.save()
         form = ChatMessages()
+        useramil = User.objects.get(id=userid.id).email
+        email = EmailMessage(
+        'Kurshub',
+        """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
+        https://kurshub.az/course/coursemessage/{}""".format(id),
+        settings.EMAIL_HOST_USER,
+        [str(useramil)]   
+        )
+        email.fail_silently = True
+        email.send()
         return redirect("course:coursemessage",id=id)
 
         
