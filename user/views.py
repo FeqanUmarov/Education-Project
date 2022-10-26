@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.db import transaction
@@ -71,7 +72,7 @@ def logoutUser(request):
     messages.success(request, "Uğurla çıxış etdiniz")
     return redirect("index")
 
-
+@login_required(login_url='/user/login')
 def myprofile(request, id):
     profile = get_object_or_404(User, id=id)
 
