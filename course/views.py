@@ -725,7 +725,7 @@ def deletearticle(request,id):
 
 
 
-
+@login_required(login_url='/user/login')
 def coursemessage(request,id):
     courseid = CourseApply.objects.get(id=id).course
     userid = CourseApply.objects.get(id=id).user
