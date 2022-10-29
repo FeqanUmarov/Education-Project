@@ -23,7 +23,7 @@
             <!-- <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
                 <li>
                   <div class="gradient-button"><a id="modal_trigger"
-                      href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
+                      href="{% url 'user:myprofile' %}">{{request.user.name}} {{request.user.surname}}</a></div>
                 </li> -->
             <div class="dropdown show">
               <a class="btn nav-btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -32,7 +32,7 @@
               </a>
   
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" href="{% url 'user:myprofile' user.id %}">Profilim</a>
+                <a class="dropdown-item" href="{% url 'user:myprofile' %}">Profilim</a>
                 <a class="dropdown-item" href="{% url 'user:logout' %}">Çıxış</a>
               </div>
             </div>
@@ -42,7 +42,7 @@
             <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
             <li>
               <div class="gradient-button">
-                <a id="modal_trigger" href="{% url 'user:myprofile' user.id %}">{{request.user.name}}
+                <a id="modal_trigger" href="{% url 'user:myprofile' %}">{{request.user.name}}
                   {{request.user.surname}}</a>
               </div>
             </li>
@@ -52,7 +52,7 @@
             <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
             <li>
               <div class="gradient-button"><a id="modal_trigger"
-                  href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
+                  href="{% url 'user:myprofile' %}">{{request.user.name}} {{request.user.surname}}</a></div>
             </li>
   
   
