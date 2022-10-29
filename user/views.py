@@ -73,8 +73,8 @@ def logoutUser(request):
     return redirect("index")
 
 @login_required(login_url='/user/login')
-def myprofile(request, id):
-    profile = get_object_or_404(User, id=id)
+def myprofile(request):
+    profile = get_object_or_404(User, id=request.user.id)
 
     course_apply = CourseApply.objects.filter(user_id=id).first()
 
