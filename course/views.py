@@ -780,7 +780,7 @@ def usermessage(request,id):
         email = EmailMessage(
         'Kurshub',
         """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
-        https://kurshub.az/course/coursemessage/{}""".format(id),
+        https://kurshub.az/course/usermessage/{}""".format(id),
         settings.EMAIL_HOST_USER,
         [str(courseemail)]   
         )
