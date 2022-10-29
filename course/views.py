@@ -700,19 +700,24 @@ def commonarticledetails(request, id):
 
     article = CreateBlog.objects.filter(id=id).first()
 
-    if request.method == "POST" and "like" in request.POST:
-        if not article.dislikes.filter(id=request.user.id).exists():
-            if article.likes.filter(id=request.user.id).exists():
-                article.likes.remove(request.user)
-            else:
-                article.likes.add(request.user)
-        
-    elif request.method == "POST" and "dislike" in request.POST:
-        if not article.likes.filter(id=request.user.id).exists():
-            if article.dislikes.filter(id=request.user.id).exists():
-                article.dislikes.remove(request.user)
-            else:
-                article.dislikes.add(request.user)
+    if request.user.is_authenticated:
+        if request.method == "POST" and "like" in request.POST:
+            if not article.dislikes.filter(id=request.user.id).exists():
+                if article.likes.filter(id=request.user.id).exists():
+                    article.likes.remove(request.user)
+                else:
+                    article.likes.add(request.user)
+
+            
+        elif request.method == "POST" and "dislike" in request.POST:
+            if not article.likes.filter(id=request.user.id).exists():
+                if article.dislikes.filter(id=request.user.id).exists():
+                    article.dislikes.remove(request.user)
+                else:
+                    article.dislikes.add(request.user)
+    else:
+        messages.success(request, "Məqaləni bəyənmək üçün giriş edin.")
+
     contex = {
         "article": article,
 
