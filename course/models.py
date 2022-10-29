@@ -183,8 +183,8 @@ class CreateBlog(models.Model):
         max_length=200, verbose_name=_("Məqalə başlığı"))
     blog_content = RichTextField(verbose_name=_("Məqalə Mövzusu"))
     photo = models.ImageField(max_length=50, verbose_name=_("Şəkil"))
-    likes = models.ManyToManyField(User, related_name="liked_blogs")
-    dislikes = models.ManyToManyField(User, related_name="disliked_blogs")
+    likes = models.ManyToManyField(User, related_name="liked_blogs", null=True, blank=True)
+    dislikes = models.ManyToManyField(User, related_name="disliked_blogs", null=True, blank=True)
 
 
 class Messages(models.Model):
