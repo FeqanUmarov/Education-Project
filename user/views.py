@@ -76,7 +76,7 @@ def logoutUser(request):
 def myprofile(request):
     profile = get_object_or_404(User, id=request.user.id)
 
-    course_apply = CourseApply.objects.filter(user_id=id).first()
+    course_apply = CourseApply.objects.filter(user_id=request.user.id).first()
 
     form = UserProfile(request.POST or None,
                        request.FILES or None, instance=profile)
@@ -85,7 +85,7 @@ def myprofile(request):
         profile = form.save(commit=False)
         profile.save()
 
-        return redirect("user:myprofile", id=id)
+        return redirect("user:myprofile")
 
     contex = {
         "form": form,
