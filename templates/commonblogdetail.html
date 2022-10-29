@@ -10,6 +10,22 @@
             {% endif %}
             <h3 class="blog-details__title">{{article.blog_title}}</h3>
             <div class="blog-details__content">{{article.blog_content|safe}}</div>
+            <div>
+                <span>
+                    <form method="post">
+                        <input type="hidden" name="like">
+                        {% csrf_token %}
+                        <button type="submit">like {{article.likes.all.count}}</button>
+                    </form>
+                </span>
+                <span>
+                    <form method="post">
+                        <input type="hidden" name="dislike">
+                        {% csrf_token %}
+                        <button type="submit">dislike {{article.dislikes.all.count}}</button>
+                    </form>
+                </span>
+            </div>
         </div>
     </div>
 </div>

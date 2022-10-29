@@ -1,16 +1,18 @@
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect, render
-from user.models import User
-
-from course.forms import (AddComment, ApplyEventForm, AskCourse, AskTrainer,
-                          CourseBranch, CourseExam, CourseGallery, CourseInfo,
-                          CreateEvent, CreateService, TrainerInfo, AddBlog,ChatMessages)
-from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
-                           CourseType, Event, EventApply, Exam, ExamApply,
-                           CourseService, Trainer, TrainerApply, CreateBlog,Messages)
 from django.core.mail import EmailMessage
+from django.shortcuts import get_object_or_404, redirect, render
+
+from course.forms import (AddBlog, AddComment, ApplyEventForm, AskCourse,
+                          AskTrainer, ChatMessages, CourseBranch, CourseExam,
+                          CourseGallery, CourseInfo, CreateEvent,
+                          CreateService, TrainerInfo)
+from course.models import (Branchs, CourseApply, CourseBoss, CoursePhoto,
+                           CourseService, CourseType, CreateBlog, Event,
+                           EventApply, Exam, ExamApply, Messages, Trainer,
+                           TrainerApply)
+from user.models import User
 
 # Create your views here.
 
@@ -30,7 +32,7 @@ def courses(request):
     contex = {
         "course_values": value,
         "trainer_values": trainer_value,
-        "events_values":events,
+        "events_values": events,
     }
 
     return render(request, "courses.html", contex)
@@ -47,7 +49,8 @@ def addcourse(request):
         course = form.save(commit=False)
         course.user = request.user
         form.save()
-        messages.success(request, "Kurs uğurla əlavə edildi. Gün ərzində yoxlanılıb təsdiq ediləcək")
+        messages.success(
+            request, "Kurs uğurla əlavə edildi. Gün ərzində yoxlanılıb təsdiq ediləcək")
 
         return redirect("course:courses")
 
@@ -65,7 +68,8 @@ def addtrainer(request):
         trainer = form.save(commit=False)
         trainer.user = request.user
         form.save()
-        messages.success(request, "Treyner olaraq qeydiyyatdan keçdiniz. Gün ərzində yoxlanılıb təsdiq ediləcək")
+        messages.success(
+            request, "Treyner olaraq qeydiyyatdan keçdiniz. Gün ərzində yoxlanılıb təsdiq ediləcək")
 
         return redirect("course:courses")
 
@@ -140,17 +144,17 @@ def courseapply(request, id):
         apply.user = request.user
         apply.course = CourseBoss.objects.filter(id=id).first()
         apply.save()
-        userid=CourseBoss.objects.get(id=id).user_id
+        userid = CourseBoss.objects.get(id=id).user_id
         email = User.objects.get(id=userid).email
         email = EmailMessage(
-        'Kurshub',
-        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olun və müraciətlər qutusunu yoxlayın',
-        settings.EMAIL_HOST_USER,
-        [str(email)]   
+            'Kurshub',
+            'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olun və müraciətlər qutusunu yoxlayın',
+            settings.EMAIL_HOST_USER,
+            [str(email)]
         )
         email.fail_silently = False
         email.send()
-        
+
         messages.success(request, "Müraciətiniz göndərildi")
 
         return redirect("course:detailcourse", id=id)
@@ -171,13 +175,13 @@ def applytrainer(request, id):
         trainer_apply.user = request.user
         trainer_apply.trainer = Trainer.objects.filter(id=id).first()
         trainer_apply.save()
-        userid=Trainer.objects.get(id=id).user_id
+        userid = Trainer.objects.get(id=id).user_id
         email = User.objects.get(id=userid).email
         email = EmailMessage(
-        'Kurshub',
-        'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olun və müraciətlər qutusunu yoxlayın',
-        settings.EMAIL_HOST_USER,
-        [str(email)]   
+            'Kurshub',
+            'Yeni bir tələbə sizə müraciət etdi. Sayta daxil olun və müraciətlər qutusunu yoxlayın',
+            settings.EMAIL_HOST_USER,
+            [str(email)]
         )
         email.fail_silently = False
         email.send()
@@ -292,17 +296,18 @@ def addservice(request, id):
         course_service.user = request.user
         course_service.course = CourseBoss.objects.filter(id=id).first()
         course_service.save()
-        return redirect("course:detailcourse",id=id)
-    
+        return redirect("course:detailcourse", id=id)
+
     contex = {
-        "form":form,
+        "form": form,
     }
-    
-    return render (request, "service.html", contex)
+
+    return render(request, "service.html", contex)
+
 
 @login_required(login_url='course/updateservice')
 def updateservice(request, id):
-    course_service = get_object_or_404(CourseService,id=id)
+    course_service = get_object_or_404(CourseService, id=id)
     courseid = CourseService.objects.get(id=id).course_id
     form = CreateService(request.POST or None, instance=course_service)
     if form.is_valid():
@@ -310,36 +315,34 @@ def updateservice(request, id):
         plan.user = request.user
         plan.save()
 
-        messages.success(request,"Dərs planı uğurla yeniləndi")
+        messages.success(request, "Dərs planı uğurla yeniləndi")
 
-        return redirect ("course:detailcourse", id=courseid)
-    
+        return redirect("course:detailcourse", id=courseid)
+
     contex = {
-        "form":form,
+        "form": form,
 
     }
-    return render(request, "updatelessonplan.html",contex)
+    return render(request, "updatelessonplan.html", contex)
 
 
-def detailservice(request,id):
+def detailservice(request, id):
     service = CourseService.objects.filter(id=id).first()
-    
+
     contex = {
-        "service":service,
+        "service": service,
 
     }
-    return render(request, "detailsservice.html",contex)
-    
-    
+    return render(request, "detailsservice.html", contex)
 
 
 @login_required(login_url='course/deleteservice')
-def deleteservice(request,id):
-    
-    lessonplan = get_object_or_404(CourseService,id=id)
-    courseid=CourseService.objects.get(id=id).course_id
+def deleteservice(request, id):
+
+    lessonplan = get_object_or_404(CourseService, id=id)
+    courseid = CourseService.objects.get(id=id).course_id
     lessonplan.delete()
-    return redirect ("course:detailcourse", id=courseid)
+    return redirect("course:detailcourse", id=courseid)
 
 
 def detailcourse(request, id):
@@ -355,7 +358,7 @@ def detailcourse(request, id):
         "course_branch": course_branch,
         "course_type": course_type,
         "courseapply": course_apply,
-        "services":services,
+        "services": services,
         "form": form,
     }
     return render(request, "detailcourse.html", contex)
@@ -399,7 +402,8 @@ def eventapplynotification(request, id):
 
     keyword = request.GET.get("name")
     if keyword:
-        eventapplyinfos = EventApply.objects.filter(user__name__icontains=keyword)
+        eventapplyinfos = EventApply.objects.filter(
+            user__name__icontains=keyword)
         return render(request, "eventnotification.html", {"eventapplyinfos": eventapplyinfos})
 
     contex = {
@@ -655,14 +659,15 @@ def cancel(request, id):
     messages.success(request, "Müraciətdən imtina edildi")
     return redirect("course:coursenotification", id=courseid)
 
+
 def faq(request):
-    return render (request,"faq.html")
+    return render(request, "faq.html")
 
 
 def createblog(request):
-    
+
     form = AddBlog(request.POST or None,
-                       request.FILES or None)
+                   request.FILES or None)
 
     if form.is_valid():
         blog = form.save(commit=False)
@@ -680,29 +685,44 @@ def createblog(request):
 
     return render(request, "addblog.html", contex)
 
+
 def articles(request):
     article = CreateBlog.objects.all()
-    
+
     contex = {
         "articles": article,
 
     }
-    return render (request,"articles.html", contex)
+    return render(request, "articles.html", contex)
 
-def commonarticledetails(request,id):
-    
+
+def commonarticledetails(request, id):
+
     article = CreateBlog.objects.filter(id=id).first()
-    
+
+    if request.method == "POST" and "like" in request.POST:
+        if not article.dislikes.filter(id=request.user.id).exists():
+            if article.likes.filter(id=request.user.id).exists():
+                article.likes.remove(request.user)
+            else:
+                article.likes.add(request.user)
+        
+    elif request.method == "POST" and "dislike" in request.POST:
+        if not article.likes.filter(id=request.user.id).exists():
+            if article.dislikes.filter(id=request.user.id).exists():
+                article.dislikes.remove(request.user)
+            else:
+                article.dislikes.add(request.user)
     contex = {
         "article": article,
 
     }
-    return render (request,"commonblogdetail.html", contex)
+    return render(request, "commonblogdetail.html", contex)
 
 
-def updatearticle(request,id):
-    blog = get_object_or_404(CreateBlog,id=id)
-    form = AddBlog(request.POST or None, request.FILES or None , instance=blog)
+def updatearticle(request, id):
+    blog = get_object_or_404(CreateBlog, id=id)
+    form = AddBlog(request.POST or None, request.FILES or None, instance=blog)
     if form.is_valid():
         article = form.save(commit=False)
         article.user = request.user
@@ -711,25 +731,25 @@ def updatearticle(request,id):
         messages.success(request, "Məqalə yeniləndi")
 
         return redirect("course:articles")
-    
+
     contex = {
         "form": form,
 
     }
-    return render (request,"updatearticle.html", contex)
+    return render(request, "updatearticle.html", contex)
 
-def deletearticle(request,id):
-    blog = get_object_or_404(CreateBlog,id=id)
+
+def deletearticle(request, id):
+    blog = get_object_or_404(CreateBlog, id=id)
     blog.delete()
     return redirect("course:articles")
 
 
-
 @login_required(login_url='/user/login')
-def coursemessage(request,id):
+def coursemessage(request, id):
     courseid = CourseApply.objects.get(id=id).course
     userid = CourseApply.objects.get(id=id).user
-    
+
     messages_ = Messages.objects.filter(user=userid)
     form = ChatMessages(request.POST or None)
     if form.is_valid():
@@ -741,32 +761,30 @@ def coursemessage(request,id):
         form = ChatMessages()
         useramil = User.objects.get(id=userid.id).email
         email = EmailMessage(
-        'Kurshub',
-        """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
+            'Kurshub',
+            """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
         https://kurshub.az/course/coursemessage/{}""".format(id),
-        settings.EMAIL_HOST_USER,
-        [str(useramil)]   
+            settings.EMAIL_HOST_USER,
+            [str(useramil)]
         )
         email.fail_silently = True
         email.send()
-        return redirect("course:coursemessage",id=id)
+        return redirect("course:coursemessage", id=id)
 
-        
-        
-    
     contex = {
-        "courseid":courseid,
+        "courseid": courseid,
         "messages_chats": messages_,
-        "form":form
+        "form": form
 
     }
-    return render (request,"messages.html", contex)
+    return render(request, "messages.html", contex)
+
 
 @login_required(login_url='/user/login')
-def usermessage(request,id):
+def usermessage(request, id):
     courseid = CourseApply.objects.get(id=id).course
     user_id = CourseApply.objects.get(id=id).user
-    
+
     messages_ = Messages.objects.filter(user=user_id)
     form = ChatMessages(request.POST or None)
     if form.is_valid():
@@ -778,26 +796,20 @@ def usermessage(request,id):
         form = ChatMessages()
         courseemail = CourseBoss.objects.get(id=courseid.id).course_email
         email = EmailMessage(
-        'Kurshub',
-        """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
+            'Kurshub',
+            """Yeni bir mesaj göndərildi. Aşağıdakı linkə daxil olaraq mesaja baxa bilərsiniz:
         https://kurshub.az/course/usermessage/{}""".format(id),
-        settings.EMAIL_HOST_USER,
-        [str(courseemail)]   
+            settings.EMAIL_HOST_USER,
+            [str(courseemail)]
         )
         email.fail_silently = True
         email.send()
-        return redirect("course:usermessage",id=id)
-        
-        
-        
-    
+        return redirect("course:usermessage", id=id)
+
     contex = {
-        "courseid":courseid,
+        "courseid": courseid,
         "messages_chats": messages_,
-        "form":form
+        "form": form
 
     }
-    return render (request,"messages.html", contex)
-
-    
-    
+    return render(request, "messages.html", contex)
