@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'course',
+    'exam',
     'user',
     'inquiry',
     'crispy_forms',
