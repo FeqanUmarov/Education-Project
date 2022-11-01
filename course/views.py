@@ -97,7 +97,10 @@ def addbranch(request, id):
         "form": form,
     }
 
-    return render(request, "addbranch.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        return render(request,"addbranch.html", contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 @login_required(login_url='course/addexam')
