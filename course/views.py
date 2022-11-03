@@ -118,7 +118,10 @@ def addexam(request, id):
         "form": form,
     }
 
-    return render(request, "addexam.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        return render(request,"addexam.html", contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 @login_required(login_url='course/courseexam')
@@ -208,7 +211,10 @@ def trainernotification(request, id):
         "student_applys": student_apply,
     }
 
-    return render(request, "trainernotification.html", contex)
+    if request.user.id == Trainer.objects.get(id=id).user_id:
+        return render(request, "trainernotification.html", contex)
+    else:
+        return redirect("course:detailtrainers",id=id)
 
 
 @login_required(login_url='course/trainerapplynotification')
@@ -232,7 +238,10 @@ def coursenotification(request, id):
         "student_infos": student_info,
     }
 
-    return render(request, "coursenotification.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        return render(request,"coursenotification.html",contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 @login_required(login_url='course/courseapplynotification')
@@ -278,7 +287,10 @@ def addphoto(request, id):
         "form": form,
     }
 
-    return render(request, "addphoto.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        return render(request,"addphoto.html", contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 @login_required(login_url='course/blogdetails')
@@ -306,7 +318,10 @@ def addservice(request, id):
         "form": form,
     }
 
-    return render(request, "service.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        return render (request, "service.html", contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 @login_required(login_url='course/updateservice')
@@ -327,7 +342,10 @@ def updateservice(request, id):
         "form": form,
 
     }
-    return render(request, "updatelessonplan.html", contex)
+    if request.user.id == CourseService.objects.get(id=id).user_id:
+        return render(request, "updatelessonplan.html",contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 def detailservice(request, id):
@@ -345,8 +363,12 @@ def deleteservice(request, id):
 
     lessonplan = get_object_or_404(CourseService, id=id)
     courseid = CourseService.objects.get(id=id).course_id
-    lessonplan.delete()
-    return redirect("course:detailcourse", id=courseid)
+    if request.user.id == CourseService.objects.get(id=id).user_id:
+        lessonplan.delete()
+        messages.success(request, "Xidmət silindi")
+        return redirect ("course:detailcourse", id=courseid)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 def detailcourse(request, id):
@@ -385,7 +407,10 @@ def addevent(request, id):
         "form": form,
     }
 
-    return render(request, "addevent.html", contex)
+    if request.user.id == Trainer.objects.get(id=id).user_id:
+        return render (request, "addevent.html", contex)
+    else:
+        return redirect("course:detailtrainers",id=id)
 
 
 @login_required(login_url='course/eventdetails')
@@ -422,9 +447,12 @@ def eventapplynotification(request, id):
 @login_required(login_url='course/deleteevent')
 def deleteevent(request, id):
     event = get_object_or_404(Event, trainer=id)
-    event.delete()
-    messages.success(request, "Event silindi")
-    return redirect("course:detailtrainers", id=id)
+    if request.user.id == Trainer.objects.get(id=id).user_id:
+        event.delete()
+        messages.success(request, "Event silindi")
+        return redirect("course:detailtrainers",id=id)
+    else:
+        return redirect("course:detailtrainers",id=id)
 
 
 @login_required(login_url='course/updateevent')
@@ -448,7 +476,10 @@ def updateevent(request, id):
 
     }
 
-    return render(request, "updateevent.html", contex)
+    if request.user.id == Trainer.objects.get(id=id).user_id:
+        return render(request, "updateevent.html",contex)
+    else:
+        return redirect ("course:detailtrainers",id=id)
 
 
 @login_required(login_url='/user/login')
@@ -500,7 +531,10 @@ def updatecourse(request, id):
 
     }
 
-    return render(request, "updatecourse.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        return render(request, "updatecourse.html",contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 @login_required(login_url='course/updatetrainer')
@@ -523,7 +557,10 @@ def updatetrainer(request, id):
 
     }
 
-    return render(request, "updatetrainer.html", contex)
+    if request.user.id == Trainer.objects.get(id=id).user_id:
+        return render(request, "updatetrainer.html",contex)
+    else:
+        return redirect("course:detailtrainers",id=id)
 
 
 @login_required(login_url='course/applyexam')
@@ -548,17 +585,23 @@ def applyexam(request, id):
 @login_required(login_url='course/deletecourse')
 def deletecourse(request, id):
     course = get_object_or_404(CourseBoss, id=id)
-    course.delete()
-    messages.success(request, "Kurs silindi")
-    return redirect("course:courses")
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        course.delete()
+        messages.success(request, "Kurs silindi")
+        return redirect("course:courses")
+    else:
+        return redirect("course:courses")
 
 
 @login_required(login_url='course/deletetrainer')
 def deletetrainer(request, id):
     trainer = get_object_or_404(Trainer, id=id)
-    trainer.delete()
-    messages.success(request, "Təlimçi silindi")
-    return redirect("course:courses")
+    if request.user.id == Trainer.objects.get(id=id).user_id:
+        trainer.delete()
+        messages.success(request, "Təlimçi silindi")
+        return redirect("course:courses")
+    else:
+        return redirect("course:courses")
 
 
 @login_required(login_url='course/updatebranch')
@@ -579,16 +622,22 @@ def updatebranch(request, id):
 
     }
 
-    return render(request, "updatebranch.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=courseid).user_id:
+        return render(request, "updatebranch.html",contex)
+    else:
+        return redirect("course:detailcourse", id=courseid)
 
 
 @login_required(login_url='course/deletebranch')
 def deletebranch(request, id):
     branch = get_object_or_404(Branchs, id=id)
     courseid = Branchs.objects.get(id=id).branch_id
-    branch.delete()
-    messages.success(request, "Filial silindi")
-    return redirect("course:detailcourse", id=courseid)
+    if request.user.id == CourseBoss.objects.get(id=courseid).user_id:
+        branch.delete()
+        messages.success(request, "Filial silindi")
+        return redirect("course:detailcourse", id=courseid)
+    else:
+        return redirect("course:detailcourse", id=courseid)
 
 
 @login_required(login_url='course/comment')
@@ -621,47 +670,60 @@ def gallery(request, id):
 def confirm(request, id):
     status = CourseApply.objects.filter(id=id).first()
     courseid = CourseApply.objects.get(id=id).course_id
-    status.confirm = 1
-    status.pending = 0
-    status.cancel = 0
-    status.save()
-    messages.success(request, "Müraciət təsdiqləndi")
-    return redirect("course:coursenotification", id=courseid)
+    if request.user.id == CourseBoss.objects.get(id=courseid).user_id:
+        status.confirm = 1
+        status.pending = 0
+        status.cancel = 0
+        status.save()
+        messages.success(request, "Müraciət təsdiqləndi")
+        return redirect("course:coursenotification",id=courseid)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 
 @login_required(login_url='course/confirmtrainer')
 def confirmtrainer(request, id):
     status = TrainerApply.objects.filter(id=id).first()
     trainerid = TrainerApply.objects.get(id=id).trainer_id
-    status.confirm = 1
-    status.pending = 0
-    status.cancel = 0
-    status.save()
-    messages.success(request, "Müraciət təsdiqləndi")
-    return redirect("course:trainernotification", id=trainerid)
+    if request.user.id == Trainer.objects.get(id=trainerid).user_id:
+        status.confirm = 1
+        status.pending = 0
+        status.cancel = 0
+        status.save()
+        messages.success(request, "Müraciət təsdiqləndi")
+        return redirect("course:trainernotification",id=trainerid)
+    else:
+        return redirect("course:detailtrainers",id=trainerid)
 
 
 @login_required(login_url='course/canceltrainer')
 def canceltrainer(request, id):
     status = TrainerApply.objects.filter(id=id).first()
-    status.confirm = 0
-    status.pending = 0
-    status.cancel = 1
-    status.save()
-    messages.success(request, "Müraciətdən imtina edildi")
-    return redirect("course:trainernotification", id=id)
+    trainerid = TrainerApply.objects.get(id=id).trainer_id
+    if request.user.id == Trainer.objects.get(id=trainerid).user_id:
+        status.confirm = 0
+        status.pending = 0
+        status.cancel = 1
+        status.save()
+        messages.success(request, "Müraciətdən imtina edildi")
+        return redirect("course:trainernotification",id=id)
+    else:
+        return redirect("course:detailtrainers",id=trainerid)
 
 
 @login_required(login_url='course/cancel')
 def cancel(request, id):
     courseid = CourseApply.objects.get(id=id).course_id
     status = CourseApply.objects.filter(id=id).first()
-    status.confirm = 0
-    status.pending = 0
-    status.cancel = 1
-    status.save()
-    messages.success(request, "Müraciətdən imtina edildi")
-    return redirect("course:coursenotification", id=courseid)
+    if request.user.id == CourseApply.objects.get(id=courseid).user_id:
+        status.confirm = 0
+        status.pending = 0
+        status.cancel = 1
+        status.save()
+        messages.success(request, "Müraciətdən imtina edildi")
+        return redirect("course:coursenotification",id=courseid)
+    else:
+        return redirect("course:detailcourse",id=courseid)
 
 
 def faq(request):
@@ -745,13 +807,20 @@ def updatearticle(request, id):
         "form": form,
 
     }
-    return render(request, "updatearticle.html", contex)
+    if request.user.id == get_object_or_404(CreateBlog,user_id=id):
+        return render (request,"updatearticle.html", contex)
+    else:
+        return redirect("course:articles")
 
 
 def deletearticle(request, id):
     blog = get_object_or_404(CreateBlog, id=id)
-    blog.delete()
-    return redirect("course:articles")
+    if request.user.id == get_object_or_404(CreateBlog,user_id=id):
+        blog.delete()
+        messages.success(request, "Məqalə silindi")
+        return redirect("course:articles")
+    else:
+        return redirect("course:articles")
 
 
 @login_required(login_url='/user/login')
@@ -786,7 +855,11 @@ def coursemessage(request, id):
         "form": form
 
     }
-    return render(request, "messages.html", contex)
+    course_id = CourseApply.objects.get(id=id).course_id
+    if request.user.id == CourseBoss.objects.get(id=course_id).user_id:
+        return render (request,"messages.html", contex)
+    else:
+        return redirect("course:detailcourse", id=course_id)
 
 
 @login_required(login_url='/user/login')
@@ -821,4 +894,9 @@ def usermessage(request, id):
         "form": form
 
     }
-    return render(request, "messages.html", contex)
+    userid = CourseApply.objects.get(id=id).user_id
+    course_id = CourseApply.objects.get(id=id).course_id
+    if request.user.id == userid:
+        return render (request,"messages.html", contex)
+    else:
+        return redirect("course:detailcourse", id=course_id)
