@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'course',
     'user',
     'inquiry',
+    'exam',
     'crispy_forms',
     'multiselectfield',
     'django_cleanup',
