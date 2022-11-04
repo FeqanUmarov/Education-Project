@@ -29,8 +29,8 @@ class Exam(TrackingModel):
     retake_count = models.PositiveIntegerField(
         "limit yoxdursa boş buraxın", null=True, blank=True)
 
-    def __str__(self) -> str:
-        return self.course if self.course else self.trainer
+    def __str__(self):
+        return '%s' % (self.course) 
 
 
 class Question(TrackingModel):

@@ -115,8 +115,10 @@ def addbranch(request,id):
         "form": form,
     }
         
-
-    return render(request,"addbranch.html", contex)
+    if request.user.id == CourseBoss.objects.get(id=id).user_id:
+        return render(request,"addbranch.html", contex)
+    else:
+        return redirect("course:detailcourse",id=id)
 
 @login_required(login_url='course/addexam')
 def addexam(request,id):
@@ -185,16 +187,17 @@ def applytrainer(request,id):
         trainer_apply.trainer = Trainer.objects.filter(id=id).first()
         userid=Trainer.objects.get(id=id).user_id
         email = User.objects.get(id=userid).email
-
+        noti = User.objects.get(id=userid).email_notification
         trainer_apply.save()
-        email = EmailMessage(
-        'Müraciət',
-        'Yeni bir tələbə müraciət etdi',
-        settings.EMAIL_HOST_USER,
-        [str(email)]
-        )
-        email.fail_silently = False
-        email.send()
+        if noti:
+            email = EmailMessage(
+            'Müraciət',
+            'Yeni bir tələbə müraciət etdi',
+            settings.EMAIL_HOST_USER,
+            [str(email)]
+            )
+            email.fail_silently = False
+            email.send()
 
 
 

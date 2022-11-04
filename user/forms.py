@@ -46,7 +46,7 @@ class LoginForm(forms.Form):
 class UserProfile(forms.ModelForm):
     class Meta:
         model = User
-        fields = ["name","surname","username","email","user_profile","phone"]
+        fields = ["email_notification","name","surname","username","email","user_profile","phone"]
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'surname': forms.TextInput(attrs={'class': 'form-control'}),

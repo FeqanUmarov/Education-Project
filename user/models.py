@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class User(AbstractUser):
+    email_notification = models.BooleanField(default=True)
     name = models.CharField(max_length=30, verbose_name=_("Full name"))
     surname = models.CharField(max_length=30, verbose_name="Surname")
     username = models.CharField(max_length=50, unique=True , verbose_name="Username")
