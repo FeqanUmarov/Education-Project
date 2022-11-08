@@ -7,11 +7,11 @@
         <nav class="main-nav">
           <!-- ***** Logo Start ***** -->
           <a href="{% url 'index'%}" class="logo">
-            <h3>Kurshub</h3>
+            <img class="main-nav-logo" src="{% static 'assets/images/logo/kurshub-logo.png' %}" alt="">
           </a>
           <!-- ***** Logo End ***** -->
           <!-- ***** Menu Start ***** -->
-          <ul class="nav">
+          <ul class=" nav">
             <li class="scroll-to-section"><a href="{% url 'index'%}" class="active">Ana səhifə</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:aboutus' %}">Haqqımızda</a></li>
             <li class="scroll-to-section"><a href="{% url 'course:courses'%}">Kurslar</a></li>
@@ -24,11 +24,11 @@
                       href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
                 </li> -->
             <div class="dropdown show">
-              <a class="btn nav-btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a class="btn nav-btn  dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 {{request.user.name}} {{request.user.surname}}
               </a>
-  
+
               <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'user:myprofile' user.id %}">Profilim</a>
                 <a class="dropdown-item" href="{% url 'user:logout' %}">Çıxış</a>
@@ -36,7 +36,7 @@
             </div>
             {% elif request.user.is_authenticated %}
             <li class="scroll-to-section"><a href="{% url 'course:tests' %}">Sinaqlar</a></li>
-  
+
             <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
             <li>
               <div class="gradient-button">
@@ -44,7 +44,7 @@
                   {{request.user.surname}}</a>
               </div>
             </li>
-  
+
             {% elif request.user.is_authenticated and user.is_teacher %}
             <li class="scroll-to-section"><a href="{% url 'course:addcourse' %}">Kurs elave et</a></li>
             <li class="scroll-to-section"><a href="{% url 'user:logout' %}">Cixis</a></li>
@@ -52,8 +52,8 @@
               <div class="gradient-button"><a id="modal_trigger"
                   href="{% url 'user:myprofile' user.id %}">{{request.user.name}} {{request.user.surname}}</a></div>
             </li>
-  
-  
+
+
             {% else %}
             <li class="scroll-to-section"><a href="{% url 'user:login' %}">Kurs elave et</a></li>
             <li class="scroll-to-section"><a href="{% url 'user:login' %}">Giris</a></li>
@@ -62,7 +62,7 @@
                     class="fa fa-sign-in-alt"></i> Hesab Yarat</a></div>
             </li>
             {% endif %}
-  
+
           </ul>
           <a class='menu-trigger'>
             <span>Menu</span>
@@ -72,6 +72,6 @@
       </div>
     </div>
   </div>
-  
+
 </header>
 <!-- ***** Header Area End ***** -->
