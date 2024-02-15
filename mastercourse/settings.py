@@ -141,7 +141,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-USE_S3 = True
+USE_S3 = False
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
