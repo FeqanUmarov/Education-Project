@@ -40,7 +40,7 @@ featureclasses = arcpy.ListFeatureClasses()
 
 for fc in featureclasses:
     if fc == "History_intersect_Auxilary":
-        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Auxilary" ,'str(!Username!) + "_intersect_Auxilary"', 'PYTHON3')
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Auxilary" ,'str(!USERNAME!) + "_intersect_Auxilary"', 'PYTHON3')
 
         arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Auxilary_Dissolve","intersect_Auxilary")
 
@@ -48,14 +48,14 @@ for fc in featureclasses:
 
 
     if fc == "History_intersect_Building":
-        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Building" ,'str(!Username!) + "_intersect_Building"', 'PYTHON3')
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Building" ,'str(!USERNAME!) + "_intersect_Building"', 'PYTHON3')
 
         arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Building_Dissolve","intersect_Building")
 
         arcpy.analysis.Split(Output+"/History_intersect_Building_Dissolve", Output+"/History_intersect_Building_Dissolve", 'intersect_Building',Error)
 
     if fc == "History_intersect_Occupation":
-        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Occupation" ,'str(!Username!) + "_intersect_Occupation"', 'PYTHON3')
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Occupation" ,'str(!USERNAME!) + "_intersect_Occupation"', 'PYTHON3')
 
         arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Occupation_Dissolve","intersect_Occupation")
 
@@ -63,28 +63,28 @@ for fc in featureclasses:
 
 
     if fc == "History_intersect_Parcel":
-        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Parcel" ,'str(!Username!) + "_intersect_Parcel"', 'PYTHON3')
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Parcel" ,'str(!USERNAME!) + "_intersect_Parcel"', 'PYTHON3')
 
         arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Parcel_Dissolve","intersect_Parcel")
 
         arcpy.analysis.Split(Output+"/History_intersect_Parcel_Dissolve", Output+"/History_intersect_Parcel_Dissolve", 'intersect_Parcel',Error)
 
     if fc == "History_intersect_Pay":
-        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Pay" ,'str(!Username!) + "_intersect_Pay"', 'PYTHON3')
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Pay" ,'str(!USERNAME!) + "_intersect_Pay"', 'PYTHON3')
 
         arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Pay_Dissolve","intersect_Pay")
 
         arcpy.analysis.Split(Output+"/History_intersect_Pay_Dissolve", Output+"/History_intersect_Pay_Dissolve", 'intersect_Pay',Error)
 
     if fc == "History_Building_Aux_Intersect":
-        arcpy.management.CalculateField(Output + "/" +fc, "Building_Aux_Intersect" ,'str(!Username!) + "_Building_Aux_Intersect"', 'PYTHON3')
+        arcpy.management.CalculateField(Output + "/" +fc, "Building_Aux_Intersect" ,'str(!USERNAME!) + "_Building_Aux_Intersect"', 'PYTHON3')
 
         arcpy.management.Dissolve(Output + "/" +fc,Output+"/History_Building_Aux_Intersect_Dissolve","Building_Aux_Intersect")
 
         arcpy.analysis.Split(Output+"/History_Building_Aux_Intersect_Dissolve", Output+"/History_Building_Aux_Intersect_Dissolve", 'Building_Aux_Intersect',Error)
 
     if fc == "History_Pay_Zebt_Intersect":
-        arcpy.management.CalculateField(Output + "/" +fc, "Pay_Zebt_Intersect" ,'str(!Username!) + "_Pay_Zebt_Intersect"', 'PYTHON3')
+        arcpy.management.CalculateField(Output + "/" +fc, "Pay_Zebt_Intersect" ,'str(!USERNAME!) + "_Pay_Zebt_Intersect"', 'PYTHON3')
 
         arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_Pay_Zebt_Intersect_Dissolve","Pay_Zebt_Intersect")
 
