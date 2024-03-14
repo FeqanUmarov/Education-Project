@@ -1,83 +1,104 @@
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.db import transaction
-from django.shortcuts import get_object_or_404, redirect, render
+import arcpy
 
-from .forms import LoginForm, UserProfile, UserSignUp
-from .models import User
-from course.models import CourseApply, CourseBoss
+input_database = r"C:\Users\FeqanU\Desktop\Yoxlama_AZCAD\ggggggggg.gdb"
+Output = r"C:\Users\FeqanU\Desktop\Yoxlama_AZCAD\tttttt.gdb"
+Error = r"C:\Users\FeqanU\Desktop\Yoxlama_AZCAD\Xetalar.gdb"
 
+layer_List = ["Auxiliary_Building","Building","Occupation","Parcel","Pay"]
+Intersect_Output = ["intersect_Auxilary","intersect_Building","intersect_Occupation","intersect_Parcel","intersect_Pay"]
 
-# Create your views here.
-@transaction.atomic
-def register(request):
-
-    form = UserSignUp(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        user.save()
-        messages.success(request, "Uğurla qeydiyyatdan keçdiniz!")
-
-        return redirect("index")
-
-    contex = {
-        "form": form
-    }
-    return render(request, "register.html", contex)
+intersect_layer_and_field = ["intersect_Auxilary","intersect_Building","intersect_Occupation","intersect_Parcel","intersect_Pay",
+                     "Building_Aux_Intersect","Pay_Zebt_Intersect"]
 
 
-def loginUser(request):
-    form = LoginForm(request.POST or None)
-    context = {
-        "form": form
-    }
 
-    if form.is_valid():
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
+n = 0
+while n<5:
+    arcpy.analysis.Intersect([input_database+"/" + layer_List[n]],Output+"/"+Intersect_Output[n], 'ALL')
 
-        user = User.objects.get(email=email).username
-
-        user = authenticate(username=user, password=password)
-
-        if user is None:
-            messages.success(request, "İstifadəçi mövcud deyil")
-
-            return render(request, "login.html", context)
-
-        messages.success(request, "Uğurla giriş etdiniz")
-
-        login(request, user)
-        return redirect("index")
-
-    return render(request, "login.html", context)
+    n+=1
 
 
-def logoutUser(request):
-    logout(request)
-    messages.success(request, "Uğurla çıxış etdiniz")
-    return redirect("index")
+arcpy.analysis.Intersect([input_database+"/Auxiliary_Building",input_database+"/Building"],Output+"/Building_Aux_Intersect", 'ALL')
+
+arcpy.analysis.Intersect([input_database+"/Pay",input_database+"/Occupation"],Output+"/Pay_Zebt_Intersect", 'ALL')
+
+arcpy.management.CopyFeatures(input_database+"\History_Parcel",Output+"\History_Parcel_copy")
+
+n = 0
+for field_name in intersect_layer_and_field:
+    
+    arcpy.analysis.Intersect([Output+"/"+intersect_layer_and_field[n],Output+"/History_Parcel_copy"],Output+"/History_{}".format(intersect_layer_and_field[n]), 'ALL')
+    arcpy.management.AddField(Output+"/History_{}".format(intersect_layer_and_field[n]),field_name, 'TEXT')
 
 
-def myprofile(request, id):
-    profile = get_object_or_404(User, id=id)
+    n+=1
 
-    course_apply = CourseApply.objects.filter(user_id=id).first()
+arcpy.env.workspace = Output
+        
+featureclasses = arcpy.ListFeatureClasses()
 
-    form = UserProfile(request.POST or None,
-                       request.FILES or None, instance=profile)
+for fc in featureclasses:
+    if fc == "History_intersect_Auxilary":
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Auxilary" ,'str(!Username!) + "_intersect_Auxilary"', 'PYTHON3')
 
-    if form.is_valid():
-        profile = form.save(commit=False)
-        profile.save()
+        arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Auxilary_Dissolve","intersect_Auxilary")
 
-        return redirect("user:myprofile", id=id)
+        arcpy.analysis.Split(Output+"/History_intersect_Auxilary_Dissolve", Output+"/History_intersect_Auxilary_Dissolve", 'intersect_Auxilary',Error)
 
-    contex = {
-        "form": form,
-        "userprofile": profile,
-        "course_apply": course_apply,
-    }
 
-    return render(request, "myprofile.html", contex)
+    if fc == "History_intersect_Building":
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Building" ,'str(!Username!) + "_intersect_Building"', 'PYTHON3')
+
+        arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Building_Dissolve","intersect_Building")
+
+        arcpy.analysis.Split(Output+"/History_intersect_Building_Dissolve", Output+"/History_intersect_Building_Dissolve", 'intersect_Building',Error)
+
+    if fc == "History_intersect_Occupation":
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Occupation" ,'str(!Username!) + "_intersect_Occupation"', 'PYTHON3')
+
+        arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Occupation_Dissolve","intersect_Occupation")
+
+        arcpy.analysis.Split(Output+"/History_intersect_Occupation_Dissolve", Output+"/History_intersect_Occupation_Dissolve", 'intersect_Occupation',Error)
+
+
+    if fc == "History_intersect_Parcel":
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Parcel" ,'str(!Username!) + "_intersect_Parcel"', 'PYTHON3')
+
+        arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Parcel_Dissolve","intersect_Parcel")
+
+        arcpy.analysis.Split(Output+"/History_intersect_Parcel_Dissolve", Output+"/History_intersect_Parcel_Dissolve", 'intersect_Parcel',Error)
+
+    if fc == "History_intersect_Pay":
+        arcpy.management.CalculateField(Output + "/" +fc, "intersect_Pay" ,'str(!Username!) + "_intersect_Pay"', 'PYTHON3')
+
+        arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_intersect_Pay_Dissolve","intersect_Pay")
+
+        arcpy.analysis.Split(Output+"/History_intersect_Pay_Dissolve", Output+"/History_intersect_Pay_Dissolve", 'intersect_Pay',Error)
+
+    if fc == "History_Building_Aux_Intersect":
+        arcpy.management.CalculateField(Output + "/" +fc, "Building_Aux_Intersect" ,'str(!Username!) + "_Building_Aux_Intersect"', 'PYTHON3')
+
+        arcpy.management.Dissolve(Output + "/" +fc,Output+"/History_Building_Aux_Intersect_Dissolve","Building_Aux_Intersect")
+
+        arcpy.analysis.Split(Output+"/History_Building_Aux_Intersect_Dissolve", Output+"/History_Building_Aux_Intersect_Dissolve", 'Building_Aux_Intersect',Error)
+
+    if fc == "History_Pay_Zebt_Intersect":
+        arcpy.management.CalculateField(Output + "/" +fc, "Pay_Zebt_Intersect" ,'str(!Username!) + "_Pay_Zebt_Intersect"', 'PYTHON3')
+
+        arcpy.management.Dissolve(Output + "/" +fc, Output+"/History_Pay_Zebt_Intersect_Dissolve","Pay_Zebt_Intersect")
+
+        arcpy.analysis.Split(Output+"/History_Pay_Zebt_Intersect_Dissolve", Output+"/History_Pay_Zebt_Intersect_Dissolve", 'Pay_Zebt_Intersect',Error)
+
+
+
+
+
+
+
+
+
+
+
+
+
